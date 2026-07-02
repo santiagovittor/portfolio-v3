@@ -45,23 +45,25 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
       >
         SV
       </a>
+      {/* Concentric pill: uniform 4px inset all around (p-1), so the hover
+          pill reads as the same shape as its container */}
       <nav
         aria-label="Main"
-        className={`${glass} absolute left-1/2 -translate-x-1/2 px-2 py-1 transition-colors duration-300`}
+        className={`${glass} absolute left-1/2 -translate-x-1/2 p-1 transition-colors duration-300`}
       >
         <ul className={`flex items-center text-sm font-medium transition-colors duration-300 ${text}`}>
           <li>
-            <a href={`${base}#work`} className={`rounded-full px-4 py-2 transition-colors ${hover}`}>
+            <a href={`${base}#work`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
               Work
             </a>
           </li>
           <li>
-            <a href={`${base}#about`} className={`rounded-full px-4 py-2 transition-colors ${hover}`}>
+            <a href={`${base}#about`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
               About
             </a>
           </li>
           <li>
-            <a href={`${base}#contact`} className={`rounded-full px-4 py-2 transition-colors ${hover}`}>
+            <a href={`${base}#contact`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
               Contact
             </a>
           </li>

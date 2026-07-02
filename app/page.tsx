@@ -1,8 +1,11 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import { Hero } from "./components/hero";
 import { Nav } from "./components/nav";
 import { Work } from "./components/work";
-import portrait from "@/public/images/about/_MG_9444Europa2025.jpg";
+import { Reveal } from "./components/reveal";
+import { LocalTime } from "./components/local-time";
+import portrait from "@/public/images/about/portrait-4x5.jpg";
 
 // TODO(sv): confirm email and WhatsApp (SPEC.md → Content inventory)
 const links = {
@@ -12,6 +15,14 @@ const links = {
   whatsapp: "https://wa.me/000000000000",
   linkedin: "https://www.linkedin.com/in/santiago-vittor/",
 };
+
+const contactIndex = [
+  // TODO(sv): real WhatsApp number
+  { label: "WhatsApp", note: "fastest for projects", href: links.whatsapp },
+  { label: "LinkedIn", note: "roles and referrals", href: links.linkedin },
+  { label: "GitHub", note: "the code, including this site", href: links.github },
+  { label: "Services site", note: "for business projects", href: links.store },
+];
 
 export default function Home() {
   return (
@@ -30,9 +41,9 @@ export default function Home() {
           <Work />
 
           <section id="about" aria-label="About" className="px-5 py-16 md:px-16 md:py-32">
-            <div className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
-              <div className="md:col-span-4">
-                <div className="overflow-hidden rounded-card">
+            <Reveal className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
+              <figure className="reveal-item md:col-span-4">
+                <div className="plate overflow-hidden">
                   <Image
                     src={portrait}
                     alt="Santiago Vittor, portrait in a museum gallery"
@@ -40,8 +51,14 @@ export default function Home() {
                     className="aspect-[4/5] object-cover"
                   />
                 </div>
-              </div>
-              <div className="md:col-span-7 md:col-start-6">
+                <figcaption className="mt-3 font-serif italic text-shadow-ink">
+                  Somewhere in Europe, 2025.
+                </figcaption>
+              </figure>
+              <div
+                className="reveal-item md:col-span-7 md:col-start-6"
+                style={{ "--reveal-delay": "120ms" } as CSSProperties}
+              >
                 <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight">
                   About
                 </h2>
@@ -60,43 +77,65 @@ export default function Home() {
                   <li>Chatbots &amp; automation</li>
                 </ul>
                 <p className="mt-10">
-                  <a
-                    href={links.store}
-                    className="font-medium underline decoration-poppy decoration-2 underline-offset-4"
-                  >
+                  <a href={links.store} className="link-draw font-medium">
                     Hiring for a business project? → my services site
                   </a>
                 </p>
               </div>
-            </div>
+            </Reveal>
           </section>
 
-          <section id="contact" aria-label="Contact" className="px-5 py-16 md:px-16 md:py-32">
-            <h2 className="text-[clamp(3rem,10vw,9rem)] font-medium leading-none tracking-[-0.03em]">
-              Let&apos;s talk
-            </h2>
-            <p className="mt-8 max-w-md text-lg text-shadow-ink">
-              A project, a role, or a question about how I built something.
-              Email gets answered first.
-            </p>
-            <a
-              href={links.email}
-              className="mt-6 inline-block text-xl font-medium underline decoration-poppy decoration-2 underline-offset-4 md:text-2xl"
-            >
-              svittordev@gmail.com
-            </a>
-            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium uppercase tracking-[0.08em]">
-              <li>
-                {/* TODO(sv): real WhatsApp number */}
-                <a href={links.whatsapp} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">WhatsApp</a>
-              </li>
-              <li>
-                <a href={links.github} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">GitHub</a>
-              </li>
-              <li>
-                <a href={links.linkedin} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">LinkedIn</a>
-              </li>
-            </ul>
+          <section
+            id="contact"
+            aria-label="Contact"
+            className="border-t border-shadow-ink/20 px-5 py-16 md:px-16 md:py-32"
+          >
+            <Reveal>
+              <h2 className="reveal-item text-[clamp(3rem,10vw,9rem)] font-medium leading-none tracking-[-0.03em]">
+                Let&apos;s talk
+              </h2>
+            </Reveal>
+            <Reveal className="mt-10 grid gap-12 md:mt-16 md:grid-cols-12 md:gap-6">
+              <div className="reveal-item md:col-span-5">
+                <p className="max-w-md text-lg text-shadow-ink">
+                  A project, a role, or a question about how I built
+                  something. Email gets answered first.
+                </p>
+                <a
+                  href={links.email}
+                  className="link-draw mt-6 inline-block text-xl font-medium md:text-2xl"
+                >
+                  svittordev@gmail.com
+                </a>
+                <p className="mt-12 font-serif italic text-shadow-ink">
+                  It&apos;s <LocalTime />
+                  {" in Buenos Aires. If I'm awake, I'm probably online."}
+                </p>
+              </div>
+              <ul
+                className="reveal-item md:col-span-6 md:col-start-7"
+                style={{ "--reveal-delay": "120ms" } as CSSProperties}
+              >
+                {contactIndex.map((item) => (
+                  <li key={item.label}>
+                    <a
+                      href={item.href}
+                      className="index-row flex items-baseline justify-between gap-4 border-t border-shadow-ink/20 py-5"
+                    >
+                      <span className="text-lg font-medium md:text-xl">
+                        {item.label}
+                        <span aria-hidden className="tile-arrow ml-2">
+                          →
+                        </span>
+                      </span>
+                      <span className="text-right font-serif italic text-shadow-ink">
+                        {item.note}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
           </section>
 
           <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-shadow-ink/20 px-5 py-8 md:px-16">
@@ -106,7 +145,7 @@ export default function Home() {
               {" "}· Designed and built by me ·{" "}
               <a
                 href="https://github.com/santiagovittor/portfolio-v3"
-                className="underline"
+                className="link-draw"
               >
                 View source
               </a>

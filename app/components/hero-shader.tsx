@@ -44,7 +44,7 @@ export function HeroShader({ image }: { image: string }) {
   if (!ready) return null;
 
   return (
-    <div aria-hidden className="absolute inset-0">
+    <div aria-hidden className="shader-develop absolute inset-0">
       <PaperTextureLazy
         image={image}
         // "Details" preset (transparent colors = pure image filter), toned down

@@ -49,8 +49,11 @@ decoration — the only gradient-adjacent thing on the site is the shader.
 - Alignment is the ornament: hero headline starts at column 1; hero paragraph
   block occupies columns 9–12; work cards span 4 columns each (12 ÷ 3);
   case study text spans columns 4–10. When in doubt, align left, rag right.
-- Radii: pills (nav, buttons) = 999px; cards = 12px; images inside cards = 8px.
-  Nothing else is rounded.
+- Radii: exactly two shapes site-wide. Print surfaces (photos, covers,
+  plates) are square-cornered with a 1px ink/15% hairline (`.plate`), like
+  plates mounted on a magazine page; interactive elements (nav, buttons,
+  tags) are full pills (999px). Nothing in between. Nested pills keep a
+  uniform inset (nav container `p-1`) so curvature reads concentric.
 
 ## The grain (site-wide signature texture)
 
@@ -98,7 +101,14 @@ scroll-jacking, native scroll always works.
 ## Motion rules
 
 - Durations 200–500ms, ease-out (`cubic-bezier(0.22, 1, 0.36, 1)`).
-- Hover: cards lift 4px + shadow deepens; links get poppy underline sliding in.
+  Exceptions: cover-photo creep on work tiles (900ms scale 1.045, rostrum-
+  camera slow) and the shader fade-in (1.6s, a print developing).
+- Hover: work tiles = cover creep + poppy arrow slides in beside the title;
+  links have a resting ink/30 hairline and a poppy underline draws over it;
+  contact index rows shift 12px and their hairline warms to poppy.
+- Sections rise 24px once on first view (IntersectionObserver + CSS,
+  `reveal.tsx`); the ticker strip between hero and work loops at 36s,
+  static under reduced motion.
 - Page load: headline lines reveal with a 60ms stagger (clip-path or
   translateY), once, under 900ms total. Nothing else animates on load.
 - If any animation needs a comment to justify it, delete it.

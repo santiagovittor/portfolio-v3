@@ -50,6 +50,11 @@ export default function RootLayout({
       <body>
         {children}
         <Grain />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `console.log("%cSantiago Vittor%c\\nDesigned and built by hand. The repo is part of the portfolio:\\nhttps://github.com/santiagovittor/portfolio-v3","font:600 16px Archivo,sans-serif;color:#e86a17","font:14px Archivo,sans-serif;color:#2a2e33")`,
+          }}
+        />
       </body>
     </html>
   );

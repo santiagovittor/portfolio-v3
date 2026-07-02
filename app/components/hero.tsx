@@ -36,13 +36,13 @@ export function Hero() {
           <div className="mt-6 flex gap-3">
             <a
               href="#work"
-              className="rounded-full bg-poppy px-6 py-3 font-medium text-ink transition-colors hover:bg-poppy/90"
+              className="btn rounded-full bg-poppy px-6 py-3 font-medium text-ink hover:bg-poppy/90"
             >
               See the work
             </a>
             <a
               href="#contact"
-              className="rounded-full border border-white/25 bg-white/12 px-6 py-3 font-medium text-white backdrop-blur-md transition-colors hover:bg-white/20"
+              className="btn rounded-full border border-white/25 bg-white/12 px-6 py-3 font-medium text-white backdrop-blur-md hover:bg-white/20"
             >
               Get in touch
             </a>
