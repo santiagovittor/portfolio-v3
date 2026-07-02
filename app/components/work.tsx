@@ -56,7 +56,7 @@ export function Work() {
       {/* Letterpress proof strip: marks the switch from photo to paper */}
       <div
         aria-hidden
-        className="ticker border-b border-shadow-ink/20 py-3 font-serif text-lg italic text-shadow-ink/80"
+        className="ticker relative border-b border-shadow-ink/20 py-3 font-serif text-lg italic text-shadow-ink/80"
       >
         <div className="ticker-track">
           <span className="pr-2">{TICKER_RUN.repeat(3)}</span>
@@ -64,7 +64,7 @@ export function Work() {
         </div>
       </div>
 
-      <section id="work" aria-label="Work" className="px-5 py-16 md:px-16 md:py-32">
+      <section id="work" aria-label="Work" className="relative px-5 py-16 md:px-16 md:py-32">
         <Reveal className="flex items-baseline justify-between">
           <h2 className="reveal-item text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight">
             Selected work

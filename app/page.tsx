@@ -6,6 +6,7 @@ import { Work } from "./components/work";
 import { Reveal } from "./components/reveal";
 import { LocalTime } from "./components/local-time";
 import { CircularText } from "./components/circular-text";
+import { PaperArtifacts } from "./components/paper-artifacts";
 import portrait from "@/public/images/about/portrait-4x5.jpg";
 
 // TODO(sv): confirm email and WhatsApp (SPEC.md → Content inventory)
@@ -39,9 +40,15 @@ export default function Home() {
 
         {/* The paper sheet that slides up over the pinned hero */}
         <div className="work-sheet relative z-10 -mt-[100svh] bg-paper">
+          <PaperArtifacts />
           <Work />
 
-          <section id="about" aria-label="About" className="px-5 py-16 md:px-16 md:py-32">
+          {/* Second paper stock: the tonal break between work and contact */}
+          <section
+            id="about"
+            aria-label="About"
+            className="relative border-y border-shadow-ink/15 bg-paper-shade px-5 py-16 md:px-16 md:py-32"
+          >
             <Reveal className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
               <figure className="reveal-item relative md:col-span-4">
                 <div className="plate overflow-hidden">
@@ -93,7 +100,7 @@ export default function Home() {
           <section
             id="contact"
             aria-label="Contact"
-            className="border-t border-shadow-ink/20 px-5 py-16 md:px-16 md:py-32"
+            className="relative px-5 py-16 md:px-16 md:py-32"
           >
             <Reveal>
               <h2 className="reveal-item text-[clamp(3rem,10vw,9rem)] font-medium leading-none tracking-[-0.03em]">
@@ -143,7 +150,7 @@ export default function Home() {
             </Reveal>
           </section>
 
-          <footer className="flex flex-wrap items-center justify-between gap-4 border-t border-shadow-ink/20 px-5 py-8 md:px-16">
+          <footer className="relative flex flex-wrap items-center justify-between gap-4 border-t border-shadow-ink/20 px-5 py-8 md:px-16">
             <p className="font-medium">Santiago Vittor</p>
             <p className="text-sm text-shadow-ink">
               <span className="font-serif italic">{new Date().getFullYear()}</span>

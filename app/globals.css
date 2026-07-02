@@ -8,6 +8,8 @@
   --color-ink: #141210;
   --color-white: #fafaf7;
   --color-shadow-ink: #2a2e33;
+  /* Sun-faded second paper stock: sky ink mixed into the page */
+  --color-paper-shade: color-mix(in srgb, #3d8bd9 7%, #efeae1);
 
   /* DESIGN.md → Typography */
   --font-sans: var(--font-archivo), system-ui, sans-serif;
@@ -41,6 +43,62 @@ body {
    like a plate mounted on the page. */
 .plate {
   border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+}
+
+/* Paper artifacts (paper-artifacts.tsx). The 12-column layout grid as
+   hairlines, and two brand inks bleeding through the stock. */
+.grid-lines {
+  background-image: repeating-linear-gradient(
+    to right,
+    color-mix(in srgb, var(--color-ink) 5%, transparent) 0 1px,
+    transparent 1px calc(100% / 12)
+  );
+  border-right: 1px solid color-mix(in srgb, var(--color-ink) 5%, transparent);
+}
+@media (max-width: 767px) {
+  /* 4 columns on mobile; 12 reads as ruled notebook paper */
+  .grid-lines {
+    background-image: repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-ink) 5%, transparent) 0 1px,
+      transparent 1px calc(100% / 4)
+    );
+  }
+}
+.artifact-wash {
+  position: absolute;
+}
+.wash-sky {
+  background: radial-gradient(
+    circle closest-side,
+    color-mix(in srgb, var(--color-sky) 11%, transparent),
+    transparent 72%
+  );
+}
+.wash-poppy {
+  background: radial-gradient(
+    circle closest-side,
+    color-mix(in srgb, var(--color-poppy) 10%, transparent),
+    transparent 72%
+  );
+}
+/* The inks drift as the page scrolls past them. Guarded: without
+   scroll-driven animation support they simply sit still. */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .artifact-wash {
+      animation: wash-drift linear both;
+      animation-timeline: view();
+    }
+  }
+}
+@keyframes wash-drift {
+  from {
+    transform: translateY(-5rem);
+  }
+  to {
+    transform: translateY(7rem);
+  }
 }
 
 /* Editorial link: resting hairline, poppy underline draws over it on hover. */
