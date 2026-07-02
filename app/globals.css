@@ -26,6 +26,46 @@ body {
   font-family: var(--font-sans);
 }
 
+/* DESIGN.md → Scroll transition: hero pinned in a 200vh stage, the work
+   sheet (-mt-[100svh], z-10) slides up over it. Cover completes exactly
+   when the hero unpins. */
+.hero-stage {
+  height: 200svh;
+}
+
+/* Hero scales down and dims while covered. Guarded: without timeline
+   support a time-based animation would jump straight to the end state. */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-pin > section {
+      animation: hero-exit linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100svh;
+    }
+  }
+}
+
+@keyframes hero-exit {
+  to {
+    transform: scale(0.96);
+    filter: brightness(0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No pin, no overlap: normal document flow */
+  .hero-stage {
+    height: auto;
+  }
+  .hero-pin {
+    position: static;
+    height: auto;
+  }
+  .work-sheet {
+    margin-top: 0;
+  }
+}
+
 /* DESIGN.md → Motion rules: headline lines reveal once on load */
 .hero-headline span {
   display: block;

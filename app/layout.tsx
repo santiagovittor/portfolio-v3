@@ -16,7 +16,7 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  title: "Santiago Vittor — designer-engineer",
+  title: "Santiago Vittor, designer-engineer",
   description:
     "Designer-engineer in Buenos Aires. Product design, frontend engineering, and AI integration.",
 };
