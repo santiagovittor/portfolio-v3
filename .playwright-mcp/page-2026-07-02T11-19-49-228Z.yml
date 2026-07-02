@@ -1,0 +1,82 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - link "Santiago Vittor — home" [ref=f8e3] [cursor=pointer]:
+      - /url: "#top"
+      - text: SV
+    - navigation "Main" [ref=f8e4]:
+      - list [ref=f8e5]:
+        - listitem [ref=f8e6]:
+          - link "Work" [ref=f8e7] [cursor=pointer]:
+            - /url: "#work"
+        - listitem [ref=f8e8]:
+          - link "About" [ref=f8e9] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=f8e10]:
+          - link "Contact" [ref=f8e11] [cursor=pointer]:
+            - /url: "#contact"
+    - link "Get in touch" [ref=f8e12] [cursor=pointer]:
+      - /url: "#contact"
+  - main [ref=f8e13]:
+    - region "Intro" [ref=f8e14]:
+      - img "Field of orange poppies against a blue sky" [ref=f8e15]
+      - generic [ref=f8e20]:
+        - heading "Designing interfaces. Engineering the rest." [level=1] [ref=f8e21]:
+          - generic [ref=f8e22]: Designing interfaces.
+          - generic [ref=f8e23]: Engineering the rest.
+        - generic [ref=f8e24]:
+          - paragraph [ref=f8e25]: "I design products and build them: interfaces, frontends, and the AI behind them. Buenos Aires, working US hours."
+          - generic [ref=f8e26]:
+            - link "See the work" [ref=f8e27] [cursor=pointer]:
+              - /url: "#work"
+            - link "Get in touch" [ref=f8e28] [cursor=pointer]:
+              - /url: "#contact"
+    - region "Work" [ref=f8e29]:
+      - heading "Selected work" [level=2] [ref=f8e30]
+      - list [ref=f8e31]:
+        - listitem [ref=f8e32]:
+          - heading "santiagovittor.store" [level=3] [ref=f8e33]
+          - paragraph [ref=f8e34]: "Services site: positioning, conversion copy, WhatsApp funnel."
+          - paragraph [ref=f8e35]: Next.js · Copywriting · WhatsApp API
+        - listitem [ref=f8e36]:
+          - heading "dubanronald.com" [level=3] [ref=f8e37]
+          - paragraph [ref=f8e38]: Client site designed and shipped end to end.
+          - paragraph [ref=f8e39]: Design · Frontend
+        - listitem [ref=f8e40]:
+          - heading "Portfolio AI assistant" [level=3] [ref=f8e41]
+          - paragraph [ref=f8e42]: RAG chatbot that answers questions about my work.
+          - paragraph [ref=f8e43]: RAG · LLM · TypeScript
+    - region "About" [ref=f8e44]:
+      - heading "About" [level=2] [ref=f8e45]
+      - paragraph [ref=f8e46]: "I'm Santiago Vittor, a designer-engineer in Buenos Aires. I take products from first sketch to deployed code: design systems, frontends that hold up in production, and AI features that earn their place. Before this I built sites and funnels for small businesses, which taught me to care about outcomes, not deliverables."
+      - list [ref=f8e47]:
+        - listitem [ref=f8e48]: Product design
+        - listitem [ref=f8e49]: Frontend engineering
+        - listitem [ref=f8e50]: AI integration
+        - listitem [ref=f8e51]: Chatbots & automation
+      - paragraph [ref=f8e52]:
+        - link "Hiring for a business project? → my services site" [ref=f8e53] [cursor=pointer]:
+          - /url: https://santiagovittor.store
+    - region "Contact" [ref=f8e54]:
+      - heading "Let's talk" [level=2] [ref=f8e55]
+      - list [ref=f8e56]:
+        - listitem [ref=f8e57]:
+          - link "Email" [ref=f8e58] [cursor=pointer]:
+            - /url: mailto:svittordev@gmail.com
+        - listitem [ref=f8e59]:
+          - link "WhatsApp" [ref=f8e60] [cursor=pointer]:
+            - /url: https://wa.me/000000000000
+        - listitem [ref=f8e61]:
+          - link "GitHub" [ref=f8e62] [cursor=pointer]:
+            - /url: https://github.com/santiagovittor
+        - listitem [ref=f8e63]:
+          - link "LinkedIn" [ref=f8e64] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/santiagovittor
+  - contentinfo [ref=f8e65]:
+    - paragraph [ref=f8e66]: Santiago Vittor
+    - paragraph [ref=f8e67]:
+      - text: 2026 — Designed & built by me.
+      - link "View source" [ref=f8e68] [cursor=pointer]:
+        - /url: https://github.com/santiagovittor/portfolio-v3
+  - button "Open Next.js Dev Tools" [ref=f8e74] [cursor=pointer]:
+    - img [ref=f8e75]
+  - alert [ref=f8e78]
