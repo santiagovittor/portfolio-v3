@@ -41,7 +41,7 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
       <a
         href={`${base}#top`}
         className={`font-medium tracking-tight transition-colors duration-300 ${text}`}
-        aria-label="Santiago Vittor — home"
+        aria-label="SV, Santiago Vittor, home"
       >
         SV
       </a>

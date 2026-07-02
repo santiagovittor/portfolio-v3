@@ -2,7 +2,7 @@
 
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import { motion, MotionConfig } from "motion/react";
+import { useEffect, useRef } from "react";
 import store from "@/public/images/projects/store.png";
 import dubanronald from "@/public/images/projects/dubanronald.png";
 // TODO(sv): real cover for the AI assistant case study
@@ -44,26 +44,36 @@ const projects: Project[] = [
   },
 ];
 
-const entrance = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-};
-
 export function Work() {
+  const listRef = useRef<HTMLUListElement>(null);
+
+  // Once-only stagger entrance (DESIGN.md → Motion rules). CSS handles the
+  // animation and reduced-motion; this only flips a class at 20% visibility.
+  useEffect(() => {
+    const list = listRef.current;
+    if (!list) return;
+    list.classList.add("will-enter");
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          list.classList.add("in-view");
+          io.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(list);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section id="work" aria-label="Work" className="px-5 py-16 md:px-16 md:py-32">
       <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight">
         Selected work
       </h2>
-      <MotionConfig reducedMotion="user">
-      <ul className="mt-12 grid gap-6 md:grid-cols-3">
+      <ul ref={listRef} className="card-entrance mt-12 grid gap-6 md:grid-cols-3">
         {projects.map((p, i) => (
-          <motion.li
-            key={p.slug}
-            {...entrance}
-            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }}
-          >
+          <li key={p.slug} style={{ transitionDelay: `${i * 120}ms` }}>
             <Link
               href={`/work/${p.slug}`}
               className="group block rounded-card border border-shadow-ink/20 bg-white/40 p-4 transition-[box-shadow,translate] duration-300 hover:-translate-y-1 hover:shadow-lg focus-visible:-translate-y-1 focus-visible:shadow-lg"
@@ -84,10 +94,9 @@ export function Work() {
                 {p.tags.join(" · ")}
               </p>
             </Link>
-          </motion.li>
+          </li>
         ))}
       </ul>
-      </MotionConfig>
     </section>
   );
 }
