@@ -13,9 +13,10 @@
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-serif: var(--font-newsreader), georgia, serif;
 
-  /* DESIGN.md → Grid & spacing (8pt baseline: use even steps of the 4px scale) */
-  --radius-card: 12px;
-  --radius-image: 8px;
+  /* Radius system: exactly two shapes on the whole site.
+     Print surfaces (photos, covers, plates) are square-cornered like a
+     magazine spread; everything interactive is a full pill. */
+  --radius-pill: 999px;
 
   --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -26,9 +27,50 @@ body {
   font-family: var(--font-sans);
 }
 
+::selection {
+  background: var(--color-poppy);
+  color: var(--color-white);
+}
+
 :focus-visible {
   outline: 2px solid var(--color-poppy);
   outline-offset: 2px;
+}
+
+/* Print plate: the frame every photo sits in. Square corners + hairline,
+   like a plate mounted on the page. */
+.plate {
+  border: 1px solid color-mix(in srgb, var(--color-ink) 15%, transparent);
+}
+
+/* Editorial link: resting hairline, poppy underline draws over it on hover. */
+.link-draw {
+  background-image:
+    linear-gradient(var(--color-poppy), var(--color-poppy)),
+    linear-gradient(
+      color-mix(in srgb, var(--color-ink) 30%, transparent),
+      color-mix(in srgb, var(--color-ink) 30%, transparent)
+    );
+  background-repeat: no-repeat;
+  background-position:
+    0 100%,
+    0 100%;
+  background-size:
+    0% 2px,
+    100% 1px;
+  transition: background-size 300ms var(--ease-out-quart);
+  padding-bottom: 2px;
+  /* Each wrapped line fragment gets its own underline */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.link-draw:hover,
+.link-draw:focus-visible,
+.group:hover .link-draw,
+.group:focus-visible .link-draw {
+  background-size:
+    100% 2px,
+    100% 1px;
 }
 
 /* DESIGN.md → Scroll transition: hero pinned in a 200vh stage, the work
@@ -71,18 +113,34 @@ body {
   }
 }
 
-/* DESIGN.md → Motion rules: cards enter once, staggered via inline delay */
+/* Shader arrives like a print developing, not a light switch. */
+.shader-develop {
+  animation: shader-develop 1600ms var(--ease-out-quart) both;
+}
+@keyframes shader-develop {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shader-develop {
+    animation: none;
+  }
+}
+
+/* Scroll reveal: sections rise onto the sheet once (see reveal.tsx).
+   Hidden state only exists after JS adds .will-enter, so content renders
+   normally without JS or before hydration. */
 @media (prefers-reduced-motion: no-preference) {
-  /* Hidden state only exists once JS adds .will-enter, so cards render
-     normally without JS or before hydration */
-  .card-entrance.will-enter > li {
+  .will-enter .reveal-item {
     opacity: 0;
     transform: translateY(24px);
     transition:
-      opacity 400ms var(--ease-out-quart),
-      transform 400ms var(--ease-out-quart);
+      opacity 600ms var(--ease-out-quart),
+      transform 600ms var(--ease-out-quart);
+    transition-delay: var(--reveal-delay, 0ms);
   }
-  .card-entrance.will-enter.in-view > li {
+  .will-enter.in-view .reveal-item {
     opacity: 1;
     transform: none;
   }
@@ -112,5 +170,103 @@ body {
     opacity: 1;
     transform: none;
     animation: none;
+  }
+}
+
+/* Ticker: a slow letterpress proof strip between hero and work.
+   Two copies of the same run of text; the track loops one copy's width. */
+.ticker {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  animation: ticker-scroll 36s linear infinite;
+}
+@keyframes ticker-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* Work tiles: cover photo creeps like a slow rostrum camera on hover. */
+.tile-cover img {
+  transition: transform 900ms var(--ease-out-quart);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .tile:hover .tile-cover img,
+  .tile:focus-visible .tile-cover img {
+    transform: scale(1.045);
+  }
+}
+
+/* Arrow that slides in beside a hovered title. */
+.tile-arrow {
+  display: inline-block;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition:
+    opacity 300ms var(--ease-out-quart),
+    transform 300ms var(--ease-out-quart);
+  color: var(--color-poppy);
+}
+.tile:hover .tile-arrow,
+.tile:focus-visible .tile-arrow {
+  opacity: 1;
+  transform: none;
+}
+
+/* Contact index rows: label shifts, arrow surfaces, hairline warms. */
+.index-row {
+  transition:
+    border-color 300ms var(--ease-out-quart),
+    padding-left 300ms var(--ease-out-quart);
+}
+.index-row:hover,
+.index-row:focus-visible {
+  border-color: var(--color-poppy);
+  padding-left: 12px;
+}
+.index-row .tile-arrow {
+  color: var(--color-poppy);
+}
+.index-row:hover .tile-arrow,
+.index-row:focus-visible .tile-arrow {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .index-row,
+  .tile-arrow,
+  .tile-cover img,
+  .link-draw {
+    transition: none;
+  }
+}
+
+/* Buttons settle under the finger. */
+.btn {
+  transition:
+    transform 200ms var(--ease-out-quart),
+    background-color 200ms var(--ease-out-quart),
+    border-color 200ms var(--ease-out-quart);
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+.btn:active {
+  transform: translateY(0);
+  transition-duration: 80ms;
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn:active {
+    transform: none;
   }
 }

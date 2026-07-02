@@ -61,7 +61,7 @@ export default async function CaseStudyPage({
           </dl>
         </header>
 
-        <div className="mt-12 overflow-hidden rounded-card">
+        <div className="plate mt-12 overflow-hidden">
           <Image
             src={cs.cover.src}
             alt={cs.cover.alt}
@@ -93,7 +93,7 @@ export default async function CaseStudyPage({
                 </h3>
                 <p className="mt-3 leading-relaxed">{d.body}</p>
                 {d.image && (
-                  <figure className="mt-6 overflow-hidden rounded-image">
+                  <figure className="plate mt-6 overflow-hidden">
                     <Image
                       src={d.image.src}
                       alt={d.image.alt}
@@ -122,16 +122,16 @@ export default async function CaseStudyPage({
             <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-shadow-ink">
               Previous
             </span>
-            <span className="mt-1 block font-medium group-hover:underline">
-              {prev.name}
+            <span className="mt-1 block font-medium">
+              <span className="link-draw">{prev.name}</span>
             </span>
           </Link>
           <Link href={`/work/${next.slug}`} className="group max-w-[45%] text-right">
             <span className="text-[11px] font-medium uppercase tracking-[0.08em] text-shadow-ink">
               Next
             </span>
-            <span className="mt-1 block font-medium group-hover:underline">
-              {next.name}
+            <span className="mt-1 block font-medium">
+              <span className="link-draw">{next.name}</span>
             </span>
           </Link>
         </nav>
