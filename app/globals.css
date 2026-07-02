@@ -146,31 +146,54 @@ body {
   }
 }
 
-/* DESIGN.md → Motion rules: headline lines reveal once on load */
-.hero-headline span {
-  display: block;
+/* DESIGN.md → Motion rules: headline reveals once on load.
+   Reactbits BlurText: words develop from blur like ink drying,
+   70ms apart, whole run under 900ms. */
+.hero-word {
+  display: inline-block;
   opacity: 0;
-  transform: translateY(0.4em);
-  animation: headline-reveal 600ms var(--ease-out-quart) forwards;
+  filter: blur(10px);
+  transform: translateY(0.25em);
+  animation: word-develop 600ms var(--ease-out-quart) forwards;
 }
 
-.hero-headline span:nth-child(2) {
-  animation-delay: 60ms;
-}
-
-@keyframes headline-reveal {
+@keyframes word-develop {
   to {
     opacity: 1;
+    filter: blur(0);
     transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-headline span {
+  .hero-word {
     opacity: 1;
+    filter: none;
     transform: none;
     animation: none;
   }
+}
+
+/* Reactbits CircularText: letterpress seal, one slow revolution per 40s. */
+.seal svg {
+  animation: seal-spin 40s linear infinite;
+}
+@keyframes seal-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seal svg {
+    animation: none;
+  }
+}
+
+/* Reactbits Magnet: wrapper leans toward the cursor (magnet.tsx sets the
+   transform), this only makes the lean and the spring-back smooth. */
+.magnet {
+  transition: transform 200ms var(--ease-out-quart);
+  will-change: transform;
 }
 
 /* Ticker: a slow letterpress proof strip between hero and work.

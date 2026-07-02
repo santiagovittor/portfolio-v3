@@ -5,6 +5,7 @@ import { Nav } from "./components/nav";
 import { Work } from "./components/work";
 import { Reveal } from "./components/reveal";
 import { LocalTime } from "./components/local-time";
+import { CircularText } from "./components/circular-text";
 import portrait from "@/public/images/about/portrait-4x5.jpg";
 
 // TODO(sv): confirm email and WhatsApp (SPEC.md → Content inventory)
@@ -42,7 +43,7 @@ export default function Home() {
 
           <section id="about" aria-label="About" className="px-5 py-16 md:px-16 md:py-32">
             <Reveal className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
-              <figure className="reveal-item md:col-span-4">
+              <figure className="reveal-item relative md:col-span-4">
                 <div className="plate overflow-hidden">
                   <Image
                     src={portrait}
@@ -51,6 +52,10 @@ export default function Home() {
                     className="aspect-[4/5] object-cover"
                   />
                 </div>
+                <CircularText
+                  text="SANTIAGO VITTOR · BUENOS AIRES · "
+                  className="absolute -right-5 -top-5 h-24 w-24 md:-right-7 md:-top-7 md:h-28 md:w-28"
+                />
                 <figcaption className="mt-3 font-serif italic text-shadow-ink">
                   Somewhere in Europe, 2025.
                 </figcaption>
