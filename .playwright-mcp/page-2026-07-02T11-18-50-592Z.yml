@@ -1,0 +1,79 @@
+- generic [active] [ref=f6e1]:
+  - banner [ref=f6e2]:
+    - link "Santiago Vittor — home" [ref=f6e3] [cursor=pointer]:
+      - /url: "#top"
+      - text: SV
+    - navigation "Main" [ref=f6e4]:
+      - list [ref=f6e5]:
+        - listitem [ref=f6e6]:
+          - link "Work" [ref=f6e7] [cursor=pointer]:
+            - /url: "#work"
+        - listitem [ref=f6e8]:
+          - link "About" [ref=f6e9] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=f6e10]:
+          - link "Contact" [ref=f6e11] [cursor=pointer]:
+            - /url: "#contact"
+    - link "Get in touch" [ref=f6e12] [cursor=pointer]:
+      - /url: "#contact"
+  - main [ref=f6e13]:
+    - region "Intro" [ref=f6e14]:
+      - img "Field of orange poppies against a blue sky" [ref=f6e15]
+      - generic [ref=f6e17]:
+        - heading "Designing interfaces. Engineering the rest." [level=1] [ref=f6e18]:
+          - generic [ref=f6e19]: Designing interfaces.
+          - generic [ref=f6e20]: Engineering the rest.
+        - generic [ref=f6e21]:
+          - paragraph [ref=f6e22]: "I design products and build them: interfaces, frontends, and the AI behind them. Buenos Aires, working US hours."
+          - generic [ref=f6e23]:
+            - link "See the work" [ref=f6e24] [cursor=pointer]:
+              - /url: "#work"
+            - link "Get in touch" [ref=f6e25] [cursor=pointer]:
+              - /url: "#contact"
+    - region "Work" [ref=f6e26]:
+      - heading "Selected work" [level=2] [ref=f6e27]
+      - list [ref=f6e28]:
+        - listitem [ref=f6e29]:
+          - heading "santiagovittor.store" [level=3] [ref=f6e30]
+          - paragraph [ref=f6e31]: "Services site: positioning, conversion copy, WhatsApp funnel."
+          - paragraph [ref=f6e32]: Next.js · Copywriting · WhatsApp API
+        - listitem [ref=f6e33]:
+          - heading "dubanronald.com" [level=3] [ref=f6e34]
+          - paragraph [ref=f6e35]: Client site designed and shipped end to end.
+          - paragraph [ref=f6e36]: Design · Frontend
+        - listitem [ref=f6e37]:
+          - heading "Portfolio AI assistant" [level=3] [ref=f6e38]
+          - paragraph [ref=f6e39]: RAG chatbot that answers questions about my work.
+          - paragraph [ref=f6e40]: RAG · LLM · TypeScript
+    - region "About" [ref=f6e41]:
+      - heading "About" [level=2] [ref=f6e42]
+      - paragraph [ref=f6e43]: "I'm Santiago Vittor, a designer-engineer in Buenos Aires. I take products from first sketch to deployed code: design systems, frontends that hold up in production, and AI features that earn their place. Before this I built sites and funnels for small businesses, which taught me to care about outcomes, not deliverables."
+      - list [ref=f6e44]:
+        - listitem [ref=f6e45]: Product design
+        - listitem [ref=f6e46]: Frontend engineering
+        - listitem [ref=f6e47]: AI integration
+        - listitem [ref=f6e48]: Chatbots & automation
+      - paragraph [ref=f6e49]:
+        - link "Hiring for a business project? → my services site" [ref=f6e50] [cursor=pointer]:
+          - /url: https://santiagovittor.store
+    - region "Contact" [ref=f6e51]:
+      - heading "Let's talk" [level=2] [ref=f6e52]
+      - list [ref=f6e53]:
+        - listitem [ref=f6e54]:
+          - link "Email" [ref=f6e55] [cursor=pointer]:
+            - /url: mailto:svittordev@gmail.com
+        - listitem [ref=f6e56]:
+          - link "WhatsApp" [ref=f6e57] [cursor=pointer]:
+            - /url: https://wa.me/000000000000
+        - listitem [ref=f6e58]:
+          - link "GitHub" [ref=f6e59] [cursor=pointer]:
+            - /url: https://github.com/santiagovittor
+        - listitem [ref=f6e60]:
+          - link "LinkedIn" [ref=f6e61] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/santiagovittor
+  - contentinfo [ref=f6e62]:
+    - paragraph [ref=f6e63]: Santiago Vittor
+    - paragraph [ref=f6e64]:
+      - text: 2026 — Designed & built by me.
+      - link "View source" [ref=f6e65] [cursor=pointer]:
+        - /url: https://github.com/santiagovittor/portfolio-v3
