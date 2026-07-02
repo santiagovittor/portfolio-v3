@@ -36,7 +36,7 @@ export function Hero() {
           <div className="mt-6 flex gap-3">
             <a
               href="#work"
-              className="rounded-full bg-poppy px-6 py-3 font-medium text-white transition-colors hover:bg-poppy/90"
+              className="rounded-full bg-poppy px-6 py-3 font-medium text-ink transition-colors hover:bg-poppy/90"
             >
               See the work
             </a>

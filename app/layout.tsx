@@ -6,19 +6,35 @@ import "./globals.css";
 const archivo = Archivo({
   variable: "--font-archivo",
   subsets: ["latin"],
-  axes: ["wdth"],
 });
 
 const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
   style: "italic",
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: "Santiago Vittor, designer-engineer",
+  metadataBase: new URL("https://santiagovittor.online"), // TODO(sv): santiagovittor.com at launch
+  title: {
+    default: "Santiago Vittor, designer-engineer",
+    template: "%s · Santiago Vittor",
+  },
   description:
-    "Designer-engineer in Buenos Aires. Product design, frontend engineering, and AI integration.",
+    "Designer-engineer in Buenos Aires. Product design, frontend engineering, AI integration and automation.",
+  openGraph: {
+    title: "Santiago Vittor, designer-engineer",
+    description:
+      "Product design, frontend engineering, AI integration and automation. Based in Buenos Aires.",
+    url: "/",
+    siteName: "Santiago Vittor",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({

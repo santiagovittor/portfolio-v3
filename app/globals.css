@@ -26,6 +26,11 @@ body {
   font-family: var(--font-sans);
 }
 
+:focus-visible {
+  outline: 2px solid var(--color-poppy);
+  outline-offset: 2px;
+}
+
 /* DESIGN.md → Scroll transition: hero pinned in a 200vh stage, the work
    sheet (-mt-[100svh], z-10) slides up over it. Cover completes exactly
    when the hero unpins. */
@@ -63,6 +68,23 @@ body {
   }
   .work-sheet {
     margin-top: 0;
+  }
+}
+
+/* DESIGN.md → Motion rules: cards enter once, staggered via inline delay */
+@media (prefers-reduced-motion: no-preference) {
+  /* Hidden state only exists once JS adds .will-enter, so cards render
+     normally without JS or before hydration */
+  .card-entrance.will-enter > li {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 400ms var(--ease-out-quart),
+      transform 400ms var(--ease-out-quart);
+  }
+  .card-entrance.will-enter.in-view > li {
+    opacity: 1;
+    transform: none;
   }
 }
 

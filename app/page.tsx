@@ -62,7 +62,7 @@ export default function Home() {
                 <p className="mt-10">
                   <a
                     href={links.store}
-                    className="font-medium underline decoration-poppy decoration-2 underline-offset-4 hover:text-poppy"
+                    className="font-medium underline decoration-poppy decoration-2 underline-offset-4"
                   >
                     Hiring for a business project? → my services site
                   </a>
@@ -81,20 +81,20 @@ export default function Home() {
             </p>
             <a
               href={links.email}
-              className="mt-6 inline-block text-xl font-medium underline decoration-poppy decoration-2 underline-offset-4 hover:text-poppy md:text-2xl"
+              className="mt-6 inline-block text-xl font-medium underline decoration-poppy decoration-2 underline-offset-4 md:text-2xl"
             >
               svittordev@gmail.com
             </a>
             <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm font-medium uppercase tracking-[0.08em]">
               <li>
                 {/* TODO(sv): real WhatsApp number */}
-                <a href={links.whatsapp} className="hover:text-poppy">WhatsApp</a>
+                <a href={links.whatsapp} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">WhatsApp</a>
               </li>
               <li>
-                <a href={links.github} className="hover:text-poppy">GitHub</a>
+                <a href={links.github} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">GitHub</a>
               </li>
               <li>
-                <a href={links.linkedin} className="hover:text-poppy">LinkedIn</a>
+                <a href={links.linkedin} className="underline decoration-transparent decoration-2 underline-offset-4 transition-colors hover:decoration-poppy">LinkedIn</a>
               </li>
             </ul>
           </section>
@@ -106,7 +106,7 @@ export default function Home() {
               {" "}· Designed and built by me ·{" "}
               <a
                 href="https://github.com/santiagovittor/portfolio-v3"
-                className="underline hover:text-poppy"
+                className="underline"
               >
                 View source
               </a>

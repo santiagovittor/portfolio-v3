@@ -15,7 +15,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) return {};
-  return { title: `${cs.name} · Santiago Vittor`, description: cs.summary };
+  return { title: cs.name, description: cs.summary };
 }
 
 export default async function CaseStudyPage({
