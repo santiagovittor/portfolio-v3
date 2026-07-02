@@ -68,6 +68,25 @@ repeat it — do not run a live filter per frame.
 Optionally add a very subtle vignette on the hero only (radial, 4–6% black at
 edges) to sell the vintage-photo look.
 
+## Paper artifacts (the sheet's background system)
+
+The paper after the hero is printed stock, not a flat fill
+(`paper-artifacts.tsx`):
+
+- **The grid made visible.** The 12-column layout grid drawn as 1px ink/5%
+  hairlines behind everything (4 columns under 768px). Vignelli discipline
+  as ornament; it surfaces in open paper, disappears behind content.
+- **Ink-bleed washes.** Two or three large radial gradients in the brand
+  inks only (sky ≤11%, poppy ≤10%), like offset ink ghosting through the
+  stock. They drift ±6rem via scroll-driven animation
+  (`animation-timeline: view()`, progressive enhancement, static under
+  reduced motion). This is the one sanctioned gradient use besides the
+  shader.
+- **Second stock.** The about section sits on `--color-paper-shade`
+  (sky 7% into paper) with hairline borders: a tonal section break, the way
+  a magazine switches paper between signatures. Never more than one shaded
+  band per page.
+
 ## Shader rules (@paper-design/shaders-react)
 
 - **Read the package first.** Inspect its exports and prop types in
