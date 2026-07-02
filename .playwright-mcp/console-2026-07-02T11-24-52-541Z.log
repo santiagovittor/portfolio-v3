@@ -1,0 +1,2091 @@
+[     636ms] [ERROR] Failed to load resource: the server responded with a status of 999 () @ https://www.linkedin.com/in/santiago-vittor:0
+[    1101ms] [VERBOSE] [DOM] Input elements should have autocomplete attributes (suggested: "username"): (More info: https://goo.gl/9p2vKq) %o @ https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFZmD_EKoHNEQAAAZ8ikxeI8TUK0uxaOuVhPi7AiRMs3lIeZwi_m_AlE2qvcO8GnfPa1UKMtaNWOCAvPUKjLgm7jkwO2eYqNxCaZxHFmGzaMwkrg6kTSkaI1d1F_qriS_5jNnc=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fsantiago-vittor:0
+[    2397ms] [WARNING] Element with id: dust-var-locale not found @ https://static.licdn.com/aero-v1/sc/h/4sy6xgzo0t4xd6r0uco9cdjd2:1
+[    2671ms] [WARNING] [GSI_LOGGER]: Your client application may not display the Google One Tap in its default position. When FedCM becomes mandatory, One Tap only displays in the default position. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#layout @ https://static.licdn.com/aero-v1/sc/h/29rdkxlvag0d3cpj96fiilbju:168
+[    2671ms] [WARNING] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment @ https://static.licdn.com/aero-v1/sc/h/29rdkxlvag0d3cpj96fiilbju:168
+[    2672ms] [WARNING] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration @ https://static.licdn.com/aero-v1/sc/h/29rdkxlvag0d3cpj96fiilbju:168
+[    2675ms] [WARNING] [GSI_LOGGER]: Currently, you disable FedCM on Google One Tap. FedCM for One Tap will become mandatory starting Oct 2024, and you won’t be able to disable it. Refer to the migration guide to update your code accordingly to ensure users will not be blocked from logging in. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration @ https://static.licdn.com/aero-v1/sc/h/29rdkxlvag0d3cpj96fiilbju:168
+[  339362ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  339554ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  339776ms] [WARNING] Image with src "/_next/static/media/store.01wl_fy8_-d6h.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  340270ms] [WARNING] Image with src "/_next/static/media/dubanronald.0ksz4r9rb89nb.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  412565ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  412589ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  413171ms] [WARNING] Image with src "/_next/static/media/store.01wl_fy8_-d6h.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  413287ms] [WARNING] Image with src "/_next/static/media/dubanronald.0ksz4r9rb89nb.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  439315ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=Rj7HgOn1jw4uCSblEhQE1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  442676ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=Rj7HgOn1jw4uCSblEhQE1' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  447146ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  447722ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  447748ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  451775ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  451795ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  513911ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=_SAFZ-Lv-CSqfUZOQyEjo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  517268ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=_SAFZ-Lv-CSqfUZOQyEjo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  520631ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=_SAFZ-Lv-CSqfUZOQyEjo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  523969ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=_SAFZ-Lv-CSqfUZOQyEjo' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_0r5nbpw._.js:13422
+[  525268ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  528993ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  529012ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  535027ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  535051ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  548332ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  548349ms] [LOG] [Fast Refresh] done in 126ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  549454ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  549454ms] [LOG] [Fast Refresh] done in 110ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  582919ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  582919ms] [LOG] [Fast Refresh] done in 107ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  592067ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  592133ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[  592288ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  592673ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[  592739ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[  592851ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  593263ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:3318
+[  593263ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=q3mOO9BClNZHexY7:0
+[  593288ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=q3mOO9BClNZHexY7:0
+[  593313ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  593404ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_react-dom_0kla17-._.js:15305
+[  593467ms] Error: ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx
+
+
+    at <unknown> (Error: ./app/components/work.tsx:92:1)
+    at Object.getCompilationErrors (file://C:\Users\user-1\Documents\Personal Projects\portfolio-v3\node_modules\next\dist\server\dev\hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file://C:\Users\user-1\Documents\Personal Projects\portfolio-v3\node_modules\next\dist\server\lib\dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file://C:\Users\user-1\Documents\Personal Projects\portfolio-v3\node_modules\next\dist\server\dev\next-dev-server.js:720:42)
+    at DevServer.findPageComponents (file://C:\Users\user-1\Documents\Personal Projects\portfolio-v3\node_modules\next\dist\server\dev\next-dev-server.js:690:43)
+    at async DevServer.renderErrorToResponseImpl (file://C:\Users\user-1\Documents\Personal Projects\portfolio-v3\node_modules\next\dist\server\base-server.js:1753:26)
+[  593468ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  593476ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593477ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593545ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593607ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593669ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593731ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593794ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593842ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593904ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  593967ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594028ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594091ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594153ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594216ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594278ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594341ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594403ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594464ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594528ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594590ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594654ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594700ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594762ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594824ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594887ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  594949ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595011ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595073ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595135ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595197ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595260ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595323ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595387ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595450ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595513ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595576ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595637ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595700ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595761ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595823ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595886ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  595949ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596011ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596073ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596135ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596198ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596261ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596324ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596386ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596448ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596510ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596574ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596635ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596697ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596760ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596822ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596870ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596918ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  596980ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597041ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597104ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597165ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597227ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597289ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597352ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597414ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597475ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597538ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597601ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597664ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597725ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597787ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597850ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597913ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  597975ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598038ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598101ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598163ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598226ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598289ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598351ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598414ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598477ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598538ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598600ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598648ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598710ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598772ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598835ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598898ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  598962ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599025ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599087ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599148ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599211ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599273ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599334ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599397ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599461ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599522ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599570ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599632ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599693ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599755ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599816ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599879ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  599941ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600003ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600051ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600114ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600176ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600239ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600301ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600364ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600425ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600489ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600551ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600614ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600676ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600739ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600802ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600865ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600913ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  600976ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601038ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601099ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601160ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601221ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601283ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601343ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601406ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601467ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601528ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601591ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601654ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601718ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601766ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601829ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601892ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  601954ms] [ERROR] ./app/components/work.tsx:92:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  90 |     </section>
+  91 |   );
+> 92 | }
+     | ^
+  93 |
+
+Parsing ecmascript source code failed
+
+Import trace:
+  Server Component:
+    ./app/components/work.tsx
+    ./app/page.tsx @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1945
+[  602079ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  602408ms] [LOG] [Fast Refresh] done in 344ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1gdrd03._.js:1226
+[  602602ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
+[  602630ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_1ybzpk2._.js:2477
