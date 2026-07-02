@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* DESIGN.md → Tokens → Color */
+  --color-sky: #3d8bd9;
+  --color-poppy: #e86a17;
+  --color-paper: #efeae1;
+  --color-ink: #141210;
+  --color-white: #fafaf7;
+  --color-shadow-ink: #2a2e33;
+
+  /* DESIGN.md → Typography */
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-serif: var(--font-newsreader), georgia, serif;
+
+  /* DESIGN.md → Grid & spacing (8pt baseline: use even steps of the 4px scale) */
+  --radius-card: 12px;
+  --radius-image: 8px;
+
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
