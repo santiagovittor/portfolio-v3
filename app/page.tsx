@@ -1,3 +1,6 @@
+import { Hero } from "./components/hero";
+import { Nav } from "./components/nav";
+
 const projects = [
   {
     slug: "santiagovittor-store",
@@ -31,44 +34,10 @@ const links = {
 export default function Home() {
   return (
     <>
-      <header>
-        <nav aria-label="Main">
-          {/* M1: glass pill nav. Skeleton links for now. */}
-          <a href="#work">Work</a> <a href="#about">About</a>{" "}
-          <a href="#contact">Contact</a>
-        </nav>
-      </header>
+      <Nav />
 
-      <main>
-        {/* M1: hero shader. Sky field placeholder proves tokens render. */}
-        <section
-          aria-label="Intro"
-          className="flex min-h-screen flex-col justify-end bg-sky p-8 md:p-16"
-        >
-          <h1 className="max-w-4xl text-6xl font-medium leading-[0.95] tracking-tight text-white md:text-8xl">
-            {/* TODO(sv): confirm headline (SPEC.md → Hero) */}
-            Designing interfaces. Engineering the rest.
-          </h1>
-          <p className="mt-8 max-w-md text-white">
-            I design products and build them: interfaces, frontends, and the AI
-            plumbing behind them. Based in Buenos Aires, working with teams in
-            US time zones.
-          </p>
-          <div className="mt-6 flex gap-4">
-            <a
-              href="#work"
-              className="rounded-full bg-poppy px-6 py-3 text-white"
-            >
-              See the work
-            </a>
-            <a
-              href="#contact"
-              className="rounded-full border border-white/25 px-6 py-3 text-white"
-            >
-              Get in touch
-            </a>
-          </div>
-        </section>
+      <main id="top">
+        <Hero />
 
         <section id="work" aria-label="Work" className="px-8 py-16 md:px-16 md:py-32">
           <h2 className="text-4xl font-medium tracking-tight">Selected work</h2>
