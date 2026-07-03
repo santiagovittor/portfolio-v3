@@ -1,5 +1,6 @@
 import Image from "next/image";
 import poppies from "@/public/images/hero/poppies.jpg";
+import { Grain } from "./grain";
 import { HeroShader } from "./hero-shader";
 import { Magnet } from "./magnet";
 
@@ -24,25 +25,32 @@ function BlurLine({ text, from = 0 }: { text: string; from?: number }) {
 
 export function Hero() {
   return (
-    <section aria-label="Intro" className="relative min-h-svh overflow-hidden bg-sky">
-      {/* Poster: LCP element and the shader's static fallback */}
-      <Image
-        src={poppies}
-        alt="Field of orange poppies against a blue sky"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover"
-      />
-      <HeroShader image="/images/hero/poppies-1920.jpg" />
+    <section aria-label="Intro" className="relative h-svh">
+      {/* Ambient backdrop: pre-blurred, darkened 128px still of the same shot */}
+      <div aria-hidden className="hero-backdrop absolute inset-0" />
 
-      {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/60 to-transparent"
-      />
+      {/* The card is the viewport: everything hero lives inside it */}
+      <div className="hero-card bg-sky">
+        {/* Poster: LCP element and the shader's permanent fallback */}
+        <Image
+          src={poppies}
+          alt="Field of orange poppies against a blue sky"
+          fill
+          priority
+          sizes="100vw"
+          className="hero-poster object-cover"
+        />
+        {/* Card-scoped grain matches the shader's fiber so the swap is silent */}
+        <Grain className="absolute inset-0" />
+        <HeroShader image="/images/hero/poppies-1920.jpg" />
 
-      <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-10 md:flex-row md:items-end md:justify-between md:px-16 md:pb-16">
+        {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type */}
+        <div
+          aria-hidden
+          className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/60 to-transparent"
+        />
+
+        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
         <h1 className="hero-headline flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em] text-white">
           {/* TODO(sv): confirm headline (SPEC.md → Hero) */}
           <BlurLine text="Designing interfaces." />
@@ -71,6 +79,7 @@ export function Hero() {
               </a>
             </Magnet>
           </div>
+        </div>
         </div>
       </div>
     </section>

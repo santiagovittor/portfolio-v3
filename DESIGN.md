@@ -49,11 +49,14 @@ decoration — the only gradient-adjacent thing on the site is the shader.
 - Alignment is the ornament: hero headline starts at column 1; hero paragraph
   block occupies columns 9–12; work cards span 4 columns each (12 ÷ 3);
   case study text spans columns 4–10. When in doubt, align left, rag right.
-- Radii: exactly two shapes site-wide. Print surfaces (photos, covers,
-  plates) are square-cornered with a 1px ink/15% hairline (`.plate`), like
-  plates mounted on a magazine page; interactive elements (nav, buttons,
-  tags) are full pills (999px). Nothing in between. Nested pills keep a
-  uniform inset (nav container `p-1`) so curvature reads concentric.
+- Radii: two shapes site-wide plus one singleton. Print surfaces (photos,
+  covers, plates) are square-cornered with a 1px ink/15% hairline (`.plate`),
+  like plates mounted on a magazine page; interactive elements (nav, buttons,
+  tags) are full pills (999px); the **hero card** alone uses
+  `--radius-hero-card: 20px` — the one soft corner, reserved for the framed
+  hero floating over its ambient backdrop. Nothing else in between. Nested
+  pills keep a uniform inset (nav container `p-1`) so curvature reads
+  concentric.
 
 ## The grain (site-wide signature texture)
 
@@ -82,10 +85,33 @@ The paper after the hero is printed stock, not a flat fill
   (`animation-timeline: view()`, progressive enhancement, static under
   reduced motion). This is the one sanctioned gradient use besides the
   shader.
-- **Second stock.** The about section sits on `--color-paper-shade`
-  (sky 7% into paper) with hairline borders: a tonal section break, the way
-  a magazine switches paper between signatures. Never more than one shaded
-  band per page.
+- **Second stock.** The about section switches to laid paper (see Section
+  backgrounds below) between hairline borders: a textural section break, the
+  way a magazine switches paper between signatures. Never more than one
+  treated band per page.
+
+## Section backgrounds ("laid paper")
+
+The quiet-premium alternative to a flat `--paper` fill, currently on About;
+reusable on Contact if it earns it. Three layers, static and cheap, all
+scoped to the section (`overflow: hidden`, ornament at `-z-10` under
+`isolate` so it never paints over text):
+
+1. **Ribbing.** Fine horizontal laid lines like Ingres/letterpress stock:
+   `repeating-linear-gradient`, 1px ink at 3% opacity every 4px
+   (`.laid-paper`). Felt, not seen.
+2. **Column rules.** 1px shadow-ink/9% verticals, full section height, only
+   on column lines the content actually aligns to (About: content edges plus
+   the line where the bio column starts, `100%/12*5`). The layout system
+   made visible — the Swiss move, nothing decorative (`.column-rule`).
+3. **Ghost numeral.** One oversized Archivo watermark (About: "02"),
+   `clamp(9rem, 36vw, 34rem)`, weight 500, ink at 4% opacity, cropped by the
+   section edges, positioned in the open lower-right so it avoids body text
+   (`.ghost-numeral`). Letterpress: no shadow, no outline.
+
+If a section starts to look busy: drop the numeral first, then thin the
+ribbing — the column rules are the keeper. Combined layers must keep body
+text ≥ 4.5:1 (worst case here ≈ 13:1, ink on paper + all layers + grain).
 
 ## Shader rules (@paper-design/shaders-react)
 
@@ -110,8 +136,9 @@ scroll-jacking, native scroll always works.
 
 - The hero is `position: sticky; top: 0` in a ~180vh wrapper. As the user
   scrolls, the work section (paper background) slides up over it while the
-  hero content scales to ~0.96 and dims slightly (scroll-linked via
-  `motion`'s useScroll or CSS scroll-driven animations if stable).
+  hero card (`--radius-hero-card`, inset `clamp(16px, 3vw, 48px)` over the
+  ambient blurred backdrop) scales to ~0.96 and dims slightly (scroll-linked
+  via `motion`'s useScroll or CSS scroll-driven animations if stable).
 - Work cards enter with a small stagger (translateY 24px → 0, opacity,
   120ms apart, 400ms ease-out). Once. No re-triggering on scroll-up.
 - Nav: transparent glass on hero (`backdrop-blur`, white/12% fill, 1px
@@ -121,7 +148,8 @@ scroll-jacking, native scroll always works.
 
 - Durations 200–500ms, ease-out (`cubic-bezier(0.22, 1, 0.36, 1)`).
   Exceptions: cover-photo creep on work tiles (900ms scale 1.045, rostrum-
-  camera slow) and the shader fade-in (1.6s, a print developing).
+  camera slow) and the shader crossfade (500ms, only after its first frame
+  has painted over the matched poster — the handoff must be imperceptible).
 - Hover: work tiles = cover creep + poppy arrow slides in beside the title;
   links have a resting ink/30 hairline and a poppy underline draws over it;
   contact index rows shift 12px and their hairline warms to poppy.

@@ -37,7 +37,7 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   const base = variant === "paper" ? "/" : "";
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 flex items-center justify-between p-4 transition-colors duration-300 md:px-8 md:py-6">
+    <header className="nav-frame fixed inset-x-0 top-0 z-40 flex items-center justify-between transition-colors duration-300">
       <a
         href={`${base}#top`}
         className={`font-medium tracking-tight transition-colors duration-300 ${text}`}
