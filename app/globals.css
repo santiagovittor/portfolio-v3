@@ -8,17 +8,20 @@
   --color-ink: #141210;
   --color-white: #fafaf7;
   --color-shadow-ink: #2a2e33;
-  /* Sun-faded second paper stock: sky ink mixed into the page */
-  --color-paper-shade: color-mix(in srgb, #3d8bd9 7%, #efeae1);
 
   /* DESIGN.md → Typography */
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-serif: var(--font-newsreader), georgia, serif;
 
-  /* Radius system: exactly two shapes on the whole site.
+  /* Radius system: two shapes site-wide plus one singleton.
      Print surfaces (photos, covers, plates) are square-cornered like a
-     magazine spread; everything interactive is a full pill. */
+     magazine spread; everything interactive is a full pill; the hero card
+     alone gets a soft corner (DESIGN.md → Radii → hero card). */
   --radius-pill: 999px;
+  --radius-hero-card: 20px;
+
+  /* Hero card inset from the viewport edges */
+  --hero-inset: clamp(16px, 3vw, 48px);
 
   --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -101,6 +104,34 @@ body {
   }
 }
 
+/* DESIGN.md → Section backgrounds: "laid paper". Ribbed stock, the column
+   grid exposed as hairline rules, and one ghost numeral. Felt, not seen. */
+.laid-paper {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-ink) 3%, transparent) 0 1px,
+    transparent 1px 4px
+  );
+}
+.column-rule {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--color-shadow-ink) 9%, transparent);
+}
+.ghost-numeral {
+  position: absolute;
+  right: -0.06em;
+  bottom: -0.22em;
+  font-size: clamp(9rem, 36vw, 34rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--color-ink) 4%, transparent);
+  user-select: none;
+}
+
 /* Editorial link: resting hairline, poppy underline draws over it on hover. */
 .link-draw {
   background-image:
@@ -131,6 +162,39 @@ body {
     100% 1px;
 }
 
+/* Card-framed hero: an ambient blurred still of the same shot behind
+   everything, the live card floating on top, inset from the viewport. */
+.hero-backdrop {
+  background-image: url("/images/hero/poppies-blur.jpg");
+  background-size: cover;
+  background-position: center;
+  /* Darkening/desaturation is baked into the 128px asset at build time */
+  transform: scale(1.15);
+}
+.hero-card {
+  position: absolute;
+  inset: var(--hero-inset);
+  border-radius: var(--radius-hero-card);
+  overflow: hidden;
+  box-shadow: 0 32px 80px -16px color-mix(in srgb, var(--color-ink) 45%, transparent);
+}
+/* Hairline drawn above the card's content so it survives the imagery */
+.hero-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-white) 15%, transparent);
+  pointer-events: none;
+}
+/* Nav is fixed (it must persist over the paper sections) but padded to
+   sit inside the card frame while the hero is on screen. */
+.nav-frame {
+  padding: calc(var(--hero-inset) + 12px);
+  padding-bottom: 0;
+}
+
 /* DESIGN.md → Scroll transition: hero pinned in a 200vh stage, the work
    sheet (-mt-[100svh], z-10) slides up over it. Cover completes exactly
    when the hero unpins. */
@@ -138,11 +202,12 @@ body {
   height: 200svh;
 }
 
-/* Hero scales down and dims while covered. Guarded: without timeline
-   support a time-based animation would jump straight to the end state. */
+/* The card scales down and dims while covered; the ambient backdrop
+   holds still behind it. Guarded: without timeline support a time-based
+   animation would jump straight to the end state. */
 @supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
-    .hero-pin > section {
+    .hero-pin .hero-card {
       animation: hero-exit linear both;
       animation-timeline: scroll(root);
       animation-range: 0 100svh;
@@ -171,19 +236,27 @@ body {
   }
 }
 
-/* Shader arrives like a print developing, not a light switch. */
-.shader-develop {
-  animation: shader-develop 1600ms var(--ease-out-quart) both;
+/* Shader handoff: mounted invisible, crossfaded in only after its first
+   frame has actually painted (hero-shader.tsx). The treated poster stays
+   beneath forever as the no-WebGL / slow-device / reduced-motion floor. */
+.hero-shader {
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out-quart);
 }
-@keyframes shader-develop {
-  from {
-    opacity: 0;
-  }
+.hero-shader.is-ready {
+  opacity: 1;
 }
 @media (prefers-reduced-motion: reduce) {
-  .shader-develop {
-    animation: none;
+  .hero-shader {
+    transition: none;
   }
+}
+
+/* Poster pre-matched to the shader's treated output (PaperTexture
+   "details" preset) so the crossfade reads as nothing happening.
+   Tuned by eye against the shader's first frame. */
+.hero-poster {
+  filter: contrast(1.05) brightness(1.02) saturate(0.97);
 }
 
 /* Scroll reveal: sections rise onto the sheet once (see reveal.tsx).

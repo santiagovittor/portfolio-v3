@@ -1,7 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import type { PaperShaderElement } from "@paper-design/shaders";
 
 const PaperTextureLazy = dynamic(
   () => import("@paper-design/shaders-react").then((m) => m.PaperTexture),
@@ -38,13 +39,54 @@ const supportsWebGL2 = () =>
 
 const getSnapshot = () => awake && supportsWebGL2();
 
-export function HeroShader({ image }: { image: string }) {
-  const ready = useSyncExternalStore(subscribeWake, getSnapshot, () => false);
+// How long a slow device gets to produce a first frame before we give up
+// and stay on the treated poster (no late pop-in).
+const READY_DEADLINE_MS = 3000;
 
-  if (!ready) return null;
+export function HeroShader({ image }: { image: string }) {
+  const woken = useSyncExternalStore(subscribeWake, getSnapshot, () => false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState<"waiting" | "ready" | "gave-up">(
+    "waiting"
+  );
+
+  // The package exposes no onLoad/ready callback. The vanilla ShaderMount
+  // sets `paperShaderMount` on its host div once textures are loaded and GL
+  // is compiled, and its ResizeObserver paints the first frame a tick later —
+  // so: poll for the mount, then wait two frames so the paint is on screen.
+  useEffect(() => {
+    if (!woken) return;
+    let raf = 0;
+    const deadline = performance.now() + READY_DEADLINE_MS;
+    const check = () => {
+      const host = wrapRef.current?.firstElementChild as
+        | PaperShaderElement
+        | null
+        | undefined;
+      if (host?.paperShaderMount) {
+        raf = requestAnimationFrame(() =>
+          requestAnimationFrame(() => setPhase("ready"))
+        );
+        return;
+      }
+      if (performance.now() > deadline) {
+        setPhase("gave-up");
+        return;
+      }
+      raf = requestAnimationFrame(check);
+    };
+    raf = requestAnimationFrame(check);
+    return () => cancelAnimationFrame(raf);
+  }, [woken]);
+
+  if (!woken || phase === "gave-up") return null;
 
   return (
-    <div aria-hidden className="shader-develop absolute inset-0">
+    <div
+      ref={wrapRef}
+      aria-hidden
+      className={`hero-shader absolute inset-0 ${phase === "ready" ? "is-ready" : ""}`}
+    >
       <PaperTextureLazy
         image={image}
         // "Details" preset (transparent colors = pure image filter), toned down

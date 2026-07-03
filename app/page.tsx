@@ -43,12 +43,26 @@ export default function Home() {
           <PaperArtifacts />
           <Work />
 
-          {/* Second paper stock: the tonal break between work and contact */}
+          {/* Laid-paper stock: the textural break between work and contact
+              (DESIGN.md → Section backgrounds) */}
           <section
             id="about"
             aria-label="About"
-            className="relative border-y border-shadow-ink/15 bg-paper-shade px-5 py-16 md:px-16 md:py-32"
+            className="laid-paper relative isolate overflow-hidden border-y border-shadow-ink/15 bg-paper px-5 py-16 md:px-16 md:py-32"
           >
+            {/* The column grid the content aligns to, made visible */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-5 right-5 -z-10 md:left-16 md:right-16"
+            >
+              <div className="column-rule left-0" />
+              <div className="column-rule hidden md:block" style={{ left: "calc(100% / 12 * 5)" }} />
+              <div className="column-rule left-full" />
+            </div>
+            {/* Ghost numeral: letterpress watermark in the open lower-right */}
+            <span aria-hidden className="ghost-numeral -z-10">
+              02
+            </span>
             <Reveal className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
               <figure className="reveal-item relative md:col-span-4">
                 <div className="plate overflow-hidden">
