@@ -72,7 +72,10 @@ export function Work() {
 
       <section id="work" aria-label="Work" className="relative px-5 py-16 md:px-16 md:py-32">
         <Reveal className="flex items-baseline justify-between">
-          <h2 className="reveal-item text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight">
+          <h2
+            data-text="Selected work"
+            className="register reveal-item text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight"
+          >
             Selected work
             <span className="ml-3 align-middle font-serif text-[0.5em] font-normal italic tracking-normal text-shadow-ink">
               (three)
