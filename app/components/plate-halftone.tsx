@@ -39,10 +39,17 @@ export function PlateHalftone({ image }: { image: string }) {
     const el = wrapRef.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (!supportsWebGL2()) return;
 
     const io = new IntersectionObserver(
       ([entry]) => {
+        // GL probe deferred to first intersection: creating a WebGL2 context
+        // costs real main-thread time and this effect runs during hydration —
+        // probing at mount put ~1.4s of TBT inside the LCP window on
+        // throttled mobile.
+        if (entry.isIntersecting && !supportsWebGL2()) {
+          io.disconnect();
+          return;
+        }
         setNear(entry.isIntersecting);
         if (!entry.isIntersecting) setPhase((p) => (p === "ready" ? "waiting" : p));
       },
