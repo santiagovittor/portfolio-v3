@@ -441,6 +441,53 @@ body {
   }
 }
 
+/* M9: press-registration headings. Sky and poppy ink layers print slightly
+   off-register and slide into place as the heading enters view — a press
+   sheet aligning. Pseudos exist only where scroll-driven animation is
+   supported and motion is allowed; everywhere else the heading is plain
+   ink, which is also the end state. content alt syntax ("/ ''") keeps
+   screen readers from voicing the duplicate text. */
+.register {
+  position: relative;
+  /* Chrome won't drive view() from a pseudo-element subject; the heading
+     owns the timeline and the pseudos subscribe to it by name. */
+  view-timeline: --register-tl;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .register::before,
+    .register::after {
+      content: attr(data-text) / "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+      animation: register-align linear both;
+      animation-timeline: --register-tl;
+      animation-range: entry 0% entry 100%;
+    }
+    .register::before {
+      color: var(--color-sky);
+      --register-offset: 0.05em 0.03em;
+    }
+    .register::after {
+      color: var(--color-poppy);
+      --register-offset: -0.05em -0.03em;
+    }
+  }
+}
+@keyframes register-align {
+  from {
+    opacity: 0.55;
+    translate: var(--register-offset);
+  }
+  to {
+    opacity: 0;
+    translate: 0 0;
+  }
+}
+
 /* Buttons settle under the finger. */
 .btn {
   transition:

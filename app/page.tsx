@@ -85,7 +85,10 @@ export default function Home() {
                 className="reveal-item md:col-span-7 md:col-start-6"
                 style={{ "--reveal-delay": "120ms" } as CSSProperties}
               >
-                <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight">
+                <h2
+                  data-text="About"
+                  className="register text-[clamp(2rem,4vw,3.5rem)] font-medium tracking-tight"
+                >
                   About
                 </h2>
                 <p className="mt-6 max-w-[65ch] text-lg leading-relaxed">
@@ -117,7 +120,10 @@ export default function Home() {
             className="relative px-5 py-16 md:px-16 md:py-32"
           >
             <Reveal>
-              <h2 className="reveal-item text-[clamp(3rem,10vw,9rem)] font-medium leading-none tracking-[-0.03em]">
+              <h2
+                data-text="Let's talk"
+                className="register reveal-item text-[clamp(3rem,10vw,9rem)] font-medium leading-none tracking-[-0.03em]"
+              >
                 Let&apos;s talk
               </h2>
             </Reveal>
