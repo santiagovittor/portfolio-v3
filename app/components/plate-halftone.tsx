@@ -46,7 +46,10 @@ export function PlateHalftone({ image }: { image: string }) {
         setNear(entry.isIntersecting);
         if (!entry.isIntersecting) setPhase((p) => (p === "ready" ? "waiting" : p));
       },
-      { rootMargin: "50% 0px" }
+      // Tight margin on purpose: the first card sits just past one viewport
+      // below the hero, so anything ≥15% would mount shaders during the LCP
+      // window on load. 10% means mounting starts with the first real scroll.
+      { rootMargin: "10% 0px" }
     );
     io.observe(el);
 
