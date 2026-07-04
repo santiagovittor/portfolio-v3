@@ -86,6 +86,18 @@ Launch content (TODO(sv): verify facts, supply images):
 - **M4 — About, contact, footer.**
 - **M5 — Polish.** SEO metadata, OG image (grainy, on-brand, 1200×630),
   favicon, sitemap, a11y pass, Lighthouse ≥ 90 mobile, reduced-motion pass.
+- **M7 — Wet-ink work plates.** ✅ Shipped. Covers rest as CMYK halftone in
+  brand inks (`HalftoneCmyk`, static render), resolve to the photo on
+  hover/focus, or once at 60% visibility on touch. Photo is the permanent
+  fallback (no WebGL2 / reduced motion / JS off).
+- **M8 — Ink-morph navigation.** ✅ Shipped. `experimental.viewTransition` +
+  React `<ViewTransition>`: card cover and title morph into the case study
+  hero and h1 on forward navigation. Back/unsupported browsers get instant
+  navigation (built-in fallback); reduced motion is instant via CSS.
+- **M9 — Press-registration headings.** ✅ Shipped. Section headings print
+  as misregistered sky/poppy layers that slide into register on entry
+  (scroll-driven, named view-timeline). Plain ink everywhere the API or
+  motion preference is missing.
 
 ## Acceptance criteria (launch)
 
