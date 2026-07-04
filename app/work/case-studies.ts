@@ -44,7 +44,7 @@ export const caseStudies: CaseStudy[] = [
     decisions: [
       {
         title: "Outcomes in the headline, stack in the footnotes",
-        body: "The landing leads with what the client gets. Tech stack appears once, small, near the end. Every section ends with the same question a client would ask next, and answers it. English at the root, Argentine Spanish at /ar — same argument, native register in both.",
+        body: "The landing leads with what the client gets. Tech stack appears once, small, near the end. Every section ends with the same question a client would ask next, and answers it. English at the root, Argentine Spanish at /ar: same argument, native register in both.",
         image: {
           src: storeLanding,
           alt: "Landing headline of santiagovittor.store",
@@ -83,7 +83,7 @@ export const caseStudies: CaseStudy[] = [
     decisions: [
       {
         title: "Lead with the client's real objection",
-        body: "The page opens with 'Your budget isn't the problem.' — the phrase behind every first meeting. It filters visitors fast: people who nod keep reading, people who don't were never going to hire the agency. The ad is only half the system; the site sells the other half.",
+        body: "The page opens with 'Your budget isn't the problem.', the phrase behind every first meeting. It filters visitors fast: people who nod keep reading, people who don't were never going to hire the agency. The ad is only half the system; the site sells the other half.",
         image: {
           src: dubanronaldLanding,
           alt: "dubanronald.com headline",
@@ -91,7 +91,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Editorial warmth over agency gloss",
-        body: "Cormorant Garamond display type against Inter body, on a warm analog palette — cream, deep teal, burnt orange — instead of the default SaaS blue-on-white. The hero background is a hand-rolled mesh gradient, not a stock photo, and GSAP drives the scroll sections. It reads like a well set article, which matches how the agency sells: with arguments, not showreels.",
+        body: "Cormorant Garamond display type against Inter body, on a warm analog palette of cream, deep teal and burnt orange instead of the default SaaS blue-on-white. The hero background is a hand-rolled mesh gradient, not a stock photo, and GSAP drives the scroll sections. It reads like a well set article, which matches how the agency sells: with arguments, not showreels.",
       },
       {
         title: "Measurement that survives ad blockers",
@@ -99,7 +99,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "A landing per market",
-        body: "Bilingual routing, English at /en and Spanish at /es, plus a dedicated /real-estate page for the agency's strongest vertical — acquisition systems for high-consideration sales cycles, with its own copy about lead quality and speed to response.",
+        body: "Bilingual routing, English at /en and Spanish at /es, plus a dedicated /real-estate page for the agency's strongest vertical: acquisition systems for high-consideration sales cycles, with its own copy about lead quality and speed to response.",
         image: {
           src: dubanronaldRealEstate,
           alt: "dubanronald.com real estate landing page",
@@ -122,7 +122,7 @@ export const caseStudies: CaseStudy[] = [
       alt: "Canvass outreach queue with a ranked lead list and a drafted cold email in Spanish",
     },
     problem:
-      "Cold outreach breaks one of two ways: mass-send a generic template and everyone ignores it, or hand-write every email and send four a day. I built the middle path to run my own client acquisition — pull real business data off Google Maps, rank leads by fit, read each one's web presence, and draft an email that names a concrete gap. I use it most weeks, so it has to earn its place.",
+      "Cold outreach breaks one of two ways: mass-send a generic template and everyone ignores it, or hand-write every email and send four a day. I built the middle path to run my own client acquisition: pull real business data off Google Maps, rank leads by fit, read each one's web presence, and draft an email that names a concrete gap. I use it most weeks, so it has to earn its place.",
     decisions: [
       {
         title: "Draw an area, get a queue",
@@ -134,11 +134,11 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Deterministic lead scoring",
-        body: "Every lead gets a 0-to-1 score from pure math, so the queue is stable and I can explain any ranking. Ratings are pulled toward the database mean with Bayesian shrinkage — a 5.0 with two reviews shouldn't outrank a 4.6 with four hundred, and that alone killed roughly 720 low-sample five-stars that flooded the top. Review volume, category budget, reachability and visible site pain fill out the weights.",
+        body: "Every lead gets a 0-to-1 score from pure math, so the queue is stable and I can explain any ranking. Ratings are pulled toward the database mean with Bayesian shrinkage, because a 5.0 with two reviews shouldn't outrank a 4.6 with four hundred, and that alone killed roughly 720 low-sample five-stars that flooded the top. Review volume, category budget, reachability and visible site pain fill out the weights.",
       },
       {
         title: "Read the website before pitching",
-        body: "A cheap crawl checks the basics: SSL, mobile viewport, booking, WhatsApp, PageSpeed. Then a gated vision pass renders the site in headless Chromium, screenshots desktop and mobile, and has Gemini read the design and name specific gaps. The expensive layer only runs for leads heading into outreach — the difference between an AI bill of a few cents and a few dollars. The draft cites one concrete problem, never a generic pitch.",
+        body: "A cheap crawl checks the basics: SSL, mobile viewport, booking, WhatsApp, PageSpeed. Then a gated vision pass renders the site in headless Chromium, screenshots desktop and mobile, and has Gemini read the design and name specific gaps. The expensive layer only runs for leads heading into outreach, which is the difference between an AI bill of a few cents and a few dollars. The draft cites one concrete problem, never a generic pitch.",
         image: {
           src: canvassAnalytics,
           alt: "Canvass analytics: pipeline funnel, lead density map of Buenos Aires and send-streak calendar",
@@ -146,7 +146,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         title: "Reply detection that distrusts machines",
-        body: "Every ten minutes an IMAP scan checks the inbox for contacted leads. The trap is that autoresponders look exactly like replies, so each match is classified with three signals: RFC 3834 auto-reply headers, out-of-office heuristics in English and Spanish, and velocity — an answer inside three minutes of a cold send is a machine. Real replies leave the follow-up queue immediately; out-of-offices don't count as engagement.",
+        body: "Every ten minutes an IMAP scan checks the inbox for contacted leads. The trap is that autoresponders look exactly like replies, so each match is classified with three signals: RFC 3834 auto-reply headers, out-of-office heuristics in English and Spanish, and velocity, because an answer inside three minutes of a cold send is a machine. Real replies leave the follow-up queue immediately; out-of-offices don't count as engagement.",
       },
     ],
     outcome:
