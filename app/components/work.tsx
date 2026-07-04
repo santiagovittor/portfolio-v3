@@ -6,6 +6,7 @@ import dubanronald from "@/public/images/projects/dubanronald.png";
 // TODO(sv): real cover for the AI assistant case study
 import assistant from "@/public/images/hero/eugene-golovesov-OvB7KPihcL8-unsplash.jpg";
 import { Reveal } from "./reveal";
+import { PlateHalftone } from "./plate-halftone";
 
 type Project = {
   slug: string;
@@ -13,6 +14,8 @@ type Project = {
   outcome: string;
   tags: string[];
   cover: StaticImageData;
+  /** Public URL of the same cover for the halftone shader (takes a URL, not StaticImageData) */
+  halftone: string;
   alt: string;
   year: string;
 };
@@ -24,6 +27,7 @@ const projects: Project[] = [
     outcome: "Services site that turns visits into WhatsApp conversations.",
     tags: ["Positioning", "Conversion copy", "WhatsApp funnel"],
     cover: store,
+    halftone: "/images/projects/store-1200.jpg",
     alt: "Homepage of santiagovittor.store",
     year: "2025",
   },
@@ -33,6 +37,7 @@ const projects: Project[] = [
     outcome: "Client site designed and shipped end to end.",
     tags: ["Design", "Frontend"],
     cover: dubanronald,
+    halftone: "/images/projects/dubanronald-1200.jpg",
     alt: "Homepage of dubanronald.com",
     year: "2025",
   },
@@ -42,6 +47,7 @@ const projects: Project[] = [
     outcome: "RAG chatbot that answers recruiter questions with citations.",
     tags: ["RAG", "LLM", "TypeScript"],
     cover: assistant,
+    halftone: "/images/projects/assistant-1200.jpg",
     alt: "Abstract infrared trees, placeholder cover for the AI assistant",
     year: "2024",
   },
@@ -88,13 +94,14 @@ export function Work() {
               style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties}
             >
               <Link href={`/work/${p.slug}`} className="tile group block">
-                <div className="tile-cover plate overflow-hidden">
+                <div className="tile-cover plate relative overflow-hidden">
                   <Image
                     src={p.cover}
                     alt={p.alt}
                     sizes="(min-width: 1024px) 30vw, 90vw"
                     className="aspect-[4/3] object-cover"
                   />
+                  <PlateHalftone image={p.halftone} />
                 </div>
                 <div className="mt-4 flex items-baseline justify-between gap-4">
                   <h3 className="text-2xl font-medium tracking-tight">

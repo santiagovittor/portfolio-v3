@@ -117,7 +117,9 @@ text ≥ 4.5:1 (worst case here ≈ 13:1, ink on paper + all layers + grain).
 
 - **Read the package first.** Inspect its exports and prop types in
   node_modules before writing any code. Do not guess the API.
-- One shader instance on the whole site: the hero. Prefer an effect that can
+- One *live* shader per viewport. The hero owns the sky; work plates may
+  each mount a `HalftoneCmyk` filter, but they are static renders (speed 0),
+  pause offscreen, and degrade to the plain photo. Prefer an effect that can
   distort/displace an image (the reference's sliced-warp look). If the
   library's components are color-field-only in the installed version, layer:
   hero photo (bottom) → shader with transparent/blended regions (top) →
@@ -143,6 +145,9 @@ scroll-jacking, native scroll always works.
   120ms apart, 400ms ease-out). Once. No re-triggering on scroll-up.
 - Nav: transparent glass on hero (`backdrop-blur`, white/12% fill, 1px
   white/25% border) → on paper it flips to ink-on-glass. One smooth swap.
+- Case study navigation morphs via the View Transitions API (M8): the card
+  cover and title morph into the case study hero and `<h1>`; reduced motion
+  serves instant navigation.
 
 ## Motion rules
 
@@ -158,6 +163,9 @@ scroll-jacking, native scroll always works.
   static under reduced motion.
 - Page load: headline lines reveal with a 60ms stagger (clip-path or
   translateY), once, under 900ms total. Nothing else animates on load.
+- Section headings print with a brief CMYK misregistration that resolves to
+  ink as they enter view (M9). End state is always the plain ink heading;
+  the fringe never persists.
 - If any animation needs a comment to justify it, delete it.
 
 ## Voice
