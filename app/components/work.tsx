@@ -1,12 +1,10 @@
 import { ViewTransition, type CSSProperties } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
-import store from "@/public/images/projects/store.png";
-import dubanronald from "@/public/images/projects/dubanronald.png";
-// TODO(sv): real cover for the AI assistant case study
-import assistant from "@/public/images/hero/eugene-golovesov-OvB7KPihcL8-unsplash.jpg";
+import storeLanding from "@/public/images/projects/store-landing.png";
+import dubanronaldLanding from "@/public/images/projects/dubanronald-landing.jpg";
+import canvassOutreach from "@/public/images/projects/canvass-outreach.png";
 import { Reveal } from "./reveal";
-import { PlateHalftone } from "./plate-halftone";
 
 type Project = {
   slug: string;
@@ -14,8 +12,6 @@ type Project = {
   outcome: string;
   tags: string[];
   cover: StaticImageData;
-  /** Public URL of the same cover for the halftone shader (takes a URL, not StaticImageData) */
-  halftone: string;
   alt: string;
   year: string;
 };
@@ -24,32 +20,30 @@ const projects: Project[] = [
   {
     slug: "santiagovittor-store",
     name: "santiagovittor.store",
-    outcome: "Services site that turns visits into WhatsApp conversations.",
-    tags: ["Positioning", "Conversion copy", "WhatsApp funnel"],
-    cover: store,
-    halftone: "/images/projects/store-1200.jpg",
+    outcome:
+      "Services site with an AI assistant that qualifies leads and books calls.",
+    tags: ["Positioning", "AI assistant", "Conversion copy"],
+    cover: storeLanding,
     alt: "Homepage of santiagovittor.store",
     year: "2025",
   },
   {
     slug: "dubanronald",
     name: "dubanronald.com",
-    outcome: "Client site designed and shipped end to end.",
-    tags: ["Design", "Frontend"],
-    cover: dubanronald,
-    halftone: "/images/projects/dubanronald-1200.jpg",
+    outcome: "Paid media agency site, designed and shipped end to end.",
+    tags: ["Design", "Frontend", "Meta CAPI"],
+    cover: dubanronaldLanding,
     alt: "Homepage of dubanronald.com",
     year: "2025",
   },
   {
-    slug: "portfolio-ai-assistant",
-    name: "Portfolio AI assistant",
-    outcome: "RAG chatbot that answers recruiter questions with citations.",
-    tags: ["RAG", "LLM", "TypeScript"],
-    cover: assistant,
-    halftone: "/images/projects/assistant-1200.jpg",
-    alt: "Abstract infrared trees, placeholder cover for the AI assistant",
-    year: "2024",
+    slug: "canvass",
+    name: "Canvass",
+    outcome: "Prospecting tool that maps, scores and emails local business leads.",
+    tags: ["Node", "React", "Gemini"],
+    cover: canvassOutreach,
+    alt: "Outreach queue of Canvass with a drafted cold email",
+    year: "2026",
   },
 ];
 
@@ -98,17 +92,14 @@ export function Work() {
             >
               <Link href={`/work/${p.slug}`} className="tile group block">
                 <div className="tile-cover plate relative overflow-hidden">
-                  {/* M8: only the photo morphs into the case study hero —
-                      the halftone canvas is decoration, outside the name */}
                   <ViewTransition name={`cover-${p.slug}`}>
                     <Image
                       src={p.cover}
                       alt={p.alt}
                       sizes="(min-width: 1024px) 30vw, 90vw"
-                      className="aspect-[4/3] object-cover"
+                      className="aspect-[4/3] object-cover object-top"
                     />
                   </ViewTransition>
-                  <PlateHalftone image={p.halftone} />
                 </div>
                 <div className="mt-4 flex items-baseline justify-between gap-4">
                   <ViewTransition name={`title-${p.slug}`}>
