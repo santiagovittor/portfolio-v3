@@ -1,3 +1,4 @@
+import { ViewTransition } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,9 +36,11 @@ export default async function CaseStudyPage({
 
       <main className="mx-auto max-w-[1440px] px-5 pb-24 pt-32 md:px-16">
         <header className="max-w-3xl">
-          <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.02] tracking-tight">
-            {cs.name}
-          </h1>
+          <ViewTransition name={`title-${cs.slug}`}>
+            <h1 className="text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.02] tracking-tight">
+              {cs.name}
+            </h1>
+          </ViewTransition>
           <p className="mt-4 text-xl text-shadow-ink">{cs.summary}</p>
           <dl className="mt-8 flex flex-wrap gap-x-12 gap-y-4 text-sm">
             <div>
@@ -62,13 +65,15 @@ export default async function CaseStudyPage({
         </header>
 
         <div className="plate mt-12 overflow-hidden">
-          <Image
-            src={cs.cover.src}
-            alt={cs.cover.alt}
-            priority
-            sizes="(min-width: 1440px) 1312px, 90vw"
-            className="aspect-[16/9] w-full object-cover object-top"
-          />
+          <ViewTransition name={`cover-${cs.slug}`}>
+            <Image
+              src={cs.cover.src}
+              alt={cs.cover.alt}
+              priority
+              sizes="(min-width: 1440px) 1312px, 90vw"
+              className="aspect-[16/9] w-full object-cover object-top"
+            />
+          </ViewTransition>
         </div>
 
         <article className="mx-auto mt-16 grid max-w-3xl gap-16 md:mt-24">
