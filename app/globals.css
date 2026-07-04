@@ -348,6 +348,27 @@ body {
   }
 }
 
+/* M8: ink-morph case study navigation (View Transitions API). Card cover
+   and title morph into the case study hero and h1; everything else gets a
+   quick root crossfade. Browsers without the API navigate instantly. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-out-quart);
+}
+::view-transition-group(*) {
+  animation-duration: 450ms;
+  animation-timing-function: var(--ease-out-quart);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+  }
+}
+
 /* Wet ink (plate-halftone.tsx): the halftone canvas sits over the cover
    photo, fades in only after its first frame, and lifts on hover/focus —
    or once on scroll-in for touch (.is-resolved) — revealing the photo.

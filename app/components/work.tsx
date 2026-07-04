@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import { ViewTransition, type CSSProperties } from "react";
 import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
 import store from "@/public/images/projects/store.png";
@@ -95,21 +95,27 @@ export function Work() {
             >
               <Link href={`/work/${p.slug}`} className="tile group block">
                 <div className="tile-cover plate relative overflow-hidden">
-                  <Image
-                    src={p.cover}
-                    alt={p.alt}
-                    sizes="(min-width: 1024px) 30vw, 90vw"
-                    className="aspect-[4/3] object-cover"
-                  />
+                  {/* M8: only the photo morphs into the case study hero —
+                      the halftone canvas is decoration, outside the name */}
+                  <ViewTransition name={`cover-${p.slug}`}>
+                    <Image
+                      src={p.cover}
+                      alt={p.alt}
+                      sizes="(min-width: 1024px) 30vw, 90vw"
+                      className="aspect-[4/3] object-cover"
+                    />
+                  </ViewTransition>
                   <PlateHalftone image={p.halftone} />
                 </div>
                 <div className="mt-4 flex items-baseline justify-between gap-4">
-                  <h3 className="text-2xl font-medium tracking-tight">
-                    {p.name}
-                    <span aria-hidden className="tile-arrow ml-2">
-                      →
-                    </span>
-                  </h3>
+                  <ViewTransition name={`title-${p.slug}`}>
+                    <h3 className="text-2xl font-medium tracking-tight">
+                      {p.name}
+                      <span aria-hidden className="tile-arrow ml-2">
+                        →
+                      </span>
+                    </h3>
+                  </ViewTransition>
                   <span className="shrink-0 font-serif italic text-shadow-ink">
                     {p.year}
                   </span>
