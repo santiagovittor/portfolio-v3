@@ -348,6 +348,23 @@ body {
   }
 }
 
+/* Wet ink (plate-halftone.tsx): the halftone canvas sits over the cover
+   photo, fades in only after its first frame, and lifts on hover/focus —
+   or once on scroll-in for touch (.is-resolved) — revealing the photo.
+   The photo is the permanent floor; the ink is pure enhancement. */
+.plate-halftone {
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out-quart);
+}
+.plate-halftone.is-ready {
+  opacity: 1;
+}
+.tile:hover .plate-halftone,
+.tile:focus-visible .plate-halftone,
+.tile.is-resolved .plate-halftone {
+  opacity: 0;
+}
+
 /* Work tiles: cover photo creeps like a slow rostrum camera on hover. */
 .tile-cover img {
   transition: transform 900ms var(--ease-out-quart);
