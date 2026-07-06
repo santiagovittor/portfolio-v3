@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Archivo, Newsreader } from "next/font/google";
+import { Archivo, Newsreader, Rye } from "next/font/google";
 import { Grain } from "./components/grain";
 import "./globals.css";
 
@@ -12,6 +12,13 @@ const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
   style: "italic",
+  preload: false,
+});
+
+const rye = Rye({
+  variable: "--font-noir",
+  subsets: ["latin"],
+  weight: "400",
   preload: false,
 });
 
@@ -45,7 +52,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${newsreader.variable} antialiased`}
+      className={`${archivo.variable} ${newsreader.variable} ${rye.variable} antialiased`}
     >
       <body>
         {children}
