@@ -46,16 +46,6 @@ export function Hero() {
               <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
               <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
             </filter>
-            <filter id="noir-wipe-edge" x="-20%" y="-100%" width="140%" height="300%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.015 0.35" numOctaves="2" seed="4" result="noise" />
-              <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" />
-            </filter>
-            <mask id="noir-wipe-mask-1" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-              <rect className="noir-sweep noir-sweep-1" x="0" y="-1" width="1" height="3" fill="white" filter="url(#noir-wipe-edge)" />
-            </mask>
-            <mask id="noir-wipe-mask-2" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-              <rect className="noir-sweep noir-sweep-2" x="0" y="-1" width="1" height="3" fill="white" filter="url(#noir-wipe-edge)" />
-            </mask>
           </defs>
         </svg>
         <div className="max-w-xs shrink-0">
