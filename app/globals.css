@@ -277,32 +277,52 @@ body {
   }
 }
 
-/* DESIGN.md → Motion rules: headline reveals once on load.
-   Reactbits BlurText: words develop from blur like ink drying,
-   70ms apart, whole run under 900ms. */
-.hero-word {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(0.25em);
-  animation: word-develop 600ms var(--ease-out-quart) forwards;
+/* Hero noir lettering (docs/superpowers/specs/2026-07-06-hero-noir-lettering-design.md).
+   Fill+outline come from one element via background-clip + text-stroke;
+   the cast shadow is a ::before duplicate. Brush texture reuses the
+   feTurbulence/feDisplacementMap technique from grain.tsx. */
+.hero-noir {
+  position: relative;
+  isolation: isolate;
+  font-family: var(--font-noir);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
 }
 
-@keyframes word-develop {
-  to {
-    opacity: 1;
-    filter: blur(0);
-    transform: none;
-  }
+.hero-noir::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  z-index: -2;
+  background: radial-gradient(
+    ellipse at 30% 60%,
+    color-mix(in srgb, var(--color-poppy) 4%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-word {
-    opacity: 1;
-    filter: none;
-    transform: none;
-    animation: none;
-  }
+.noir-line {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  color: transparent;
+  background: linear-gradient(to bottom, var(--color-white) 55%, #fff9ee 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-stroke: clamp(1.5px, 0.35vw, 4px) var(--color-ink);
+  filter: url(#noir-grain);
+}
+
+.noir-line::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--color-ink);
+  -webkit-text-stroke: 0;
+  transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
 }
 
 /* Reactbits CircularText: letterpress seal, one slow revolution per 40s. */
