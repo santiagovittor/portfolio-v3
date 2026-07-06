@@ -33,26 +33,15 @@ export function Hero() {
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
         <h1 className="hero-headline hero-noir flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
-          <span
-            style={{
-              position: "absolute",
-              width: 1,
-              height: 1,
-              padding: 0,
-              margin: -1,
-              overflow: "hidden",
-              clip: "rect(0, 0, 0, 0)",
-              whiteSpace: "nowrap",
-              borderWidth: 0,
-            }}
-          >
-            Designing interfaces. Engineering the rest.
+          <span className="noir-line noir-line-1">
+            <span className="noir-line-shadow" aria-hidden="true">Designing interfaces.</span>
+            <span className="noir-line-outline" aria-hidden="true">Designing interfaces.</span>
+            <span className="noir-line-fill">Designing interfaces.</span>
           </span>
-          <span className="noir-line noir-line-1" aria-hidden="true" data-text="Designing interfaces.">
-            Designing interfaces.
-          </span>
-          <span className="noir-line noir-line-2" aria-hidden="true" data-text="Engineering the rest.">
-            Engineering the rest.
+          <span className="noir-line noir-line-2">
+            <span className="noir-line-shadow" aria-hidden="true">Engineering the rest.</span>
+            <span className="noir-line-outline" aria-hidden="true">Engineering the rest.</span>
+            <span className="noir-line-fill">Engineering the rest.</span>
           </span>
         </h1>
         <div className="max-w-xs shrink-0">

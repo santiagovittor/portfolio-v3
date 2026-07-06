@@ -303,25 +303,44 @@ body {
   pointer-events: none;
 }
 
+/* Three genuinely separate layers - shadow, outline, fill - each using
+   exactly one simple, well-supported technique. Combining text-stroke or
+   text-shadow together with background-clip:text on the SAME element is
+   what caused the banding/blackout artifacts; keeping every element to a
+   single technique renders consistently across real browsers. */
 .noir-line {
   position: relative;
   display: block;
   isolation: isolate;
+}
+
+.noir-line-shadow,
+.noir-line-outline {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.noir-line-shadow {
+  z-index: 1;
+  color: var(--color-ink);
+  transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
+}
+
+.noir-line-outline {
+  z-index: 2;
+  color: transparent;
+  -webkit-text-stroke: clamp(3px, 0.7vw, 8px) var(--color-ink);
+}
+
+.noir-line-fill {
+  position: relative;
+  z-index: 3;
+  display: block;
   color: transparent;
   background: linear-gradient(to bottom, var(--color-white) 55%, #fff9ee 100%);
   background-clip: text;
   -webkit-background-clip: text;
-  -webkit-text-stroke: clamp(1.5px, 0.35vw, 4px) var(--color-ink);
-}
-
-.noir-line::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  color: var(--color-ink);
-  -webkit-text-stroke: 0;
-  transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
 }
 
 /* Brush-wipe reveal: a static feTurbulence/feDisplacementMap texture
