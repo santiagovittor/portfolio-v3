@@ -4,25 +4,6 @@ import { Grain } from "./grain";
 import { HeroShader } from "./hero-shader";
 import { Magnet } from "./magnet";
 
-// Reactbits "BlurText": each word develops from blur with a small stagger.
-// Split at build time; CSS owns the animation and reduced motion.
-function BlurLine({ text, from = 0 }: { text: string; from?: number }) {
-  return (
-    <span className="block">
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          className="hero-word"
-          style={{ animationDelay: `${(from + i) * 70}ms` }}
-        >
-          {word}
-          {" "}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 export function Hero() {
   return (
     <section aria-label="Intro" className="relative h-svh">
@@ -51,11 +32,32 @@ export function Hero() {
         />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
-        <h1 className="hero-headline flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em] text-white">
-          {/* TODO(sv): confirm headline (SPEC.md → Hero) */}
-          <BlurLine text="Designing interfaces." />
-          <BlurLine text="Engineering the rest." from={2} />
+        <h1 className="hero-headline hero-noir flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
+          <span className="noir-line noir-line-1" data-text="Designing interfaces.">
+            Designing interfaces.
+          </span>
+          <span className="noir-line noir-line-2" data-text="Engineering the rest.">
+            Engineering the rest.
+          </span>
         </h1>
+        <svg aria-hidden focusable="false" style={{ position: "absolute", width: 0, height: 0 }}>
+          <defs>
+            <filter id="noir-grain" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+            <filter id="noir-wipe-edge" x="-20%" y="-100%" width="140%" height="300%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.015 0.35" numOctaves="2" seed="4" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="28" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+            <mask id="noir-wipe-mask-1" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+              <rect className="noir-sweep noir-sweep-1" x="0" y="-1" width="1" height="3" fill="white" filter="url(#noir-wipe-edge)" />
+            </mask>
+            <mask id="noir-wipe-mask-2" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+              <rect className="noir-sweep noir-sweep-2" x="0" y="-1" width="1" height="3" fill="white" filter="url(#noir-wipe-edge)" />
+            </mask>
+          </defs>
+        </svg>
         <div className="max-w-xs shrink-0">
           <p className="text-white/90">
             I design products and build them: interfaces, frontends, and the
