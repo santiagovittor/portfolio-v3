@@ -312,7 +312,6 @@ body {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-stroke: clamp(1.5px, 0.35vw, 4px) var(--color-ink);
-  filter: url(#noir-grain);
 }
 
 .noir-line::before {
