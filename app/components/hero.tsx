@@ -33,10 +33,11 @@ export function Hero() {
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
         <h1 className="hero-headline hero-noir flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
-          <span className="noir-line noir-line-1" data-text="Designing interfaces.">
+          <span className="sr-only">Designing interfaces. Engineering the rest.</span>
+          <span className="noir-line noir-line-1" aria-hidden="true" data-text="Designing interfaces.">
             Designing interfaces.
           </span>
-          <span className="noir-line noir-line-2" data-text="Engineering the rest.">
+          <span className="noir-line noir-line-2" aria-hidden="true" data-text="Engineering the rest.">
             Engineering the rest.
           </span>
         </h1>
