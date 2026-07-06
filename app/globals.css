@@ -325,6 +325,43 @@ body {
   transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
 }
 
+.noir-line-1 {
+  mask: url(#noir-wipe-mask-1);
+  -webkit-mask: url(#noir-wipe-mask-1);
+}
+.noir-line-2 {
+  mask: url(#noir-wipe-mask-2);
+  -webkit-mask: url(#noir-wipe-mask-2);
+}
+
+/* Brush-wipe reveal: the mask's rect scales in from the left edge,
+   its right boundary warped by #noir-wipe-edge so the reveal line
+   looks like a brush pass, not a mechanical wipe. Mirrors the
+   unconditional-then-reduced-motion-reset pattern used elsewhere
+   in this file (see the old .hero-word rule this replaces). */
+.noir-sweep {
+  transform-origin: 0 0;
+  transform: scaleX(0);
+  animation: noir-wipe 500ms var(--ease-out-quart) forwards;
+}
+
+.noir-sweep-2 {
+  animation-delay: 150ms;
+}
+
+@keyframes noir-wipe {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .noir-sweep {
+    transform: scaleX(1);
+    animation: none;
+  }
+}
+
 /* Reactbits CircularText: letterpress seal, one slow revolution per 40s. */
 .seal svg {
   animation: seal-spin 40s linear infinite;
