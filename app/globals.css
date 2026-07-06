@@ -286,7 +286,11 @@ body {
   isolation: isolate;
   font-family: var(--font-noir);
   font-weight: 400;
-  line-height: 0.98;
+  /* Rye's descenders (and the added outline/shadow bulk around them)
+     need more room than the original Archivo headline's 0.98 tight
+     leading - at 0.98, wrapped lines sit close enough that a 'g' tail
+     visually collides with the line below it. */
+  line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
