@@ -517,8 +517,19 @@ body {
   opacity: 1;
 }
 
-/* Contact index rows: label shifts, arrow surfaces, hairline warms. */
+/* Contact index rows: label shifts, arrow surfaces, hairline warms.
+   Clipped corners are the ticket-stub motif that lost the hero corner
+   decision (spec §5) — right-sized here on a small link row instead. */
 .index-row {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
   transition:
     border-color 300ms var(--ease-out-quart),
     padding-left 300ms var(--ease-out-quart);
