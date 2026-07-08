@@ -182,6 +182,11 @@ export default function Home() {
                 View source
               </a>
             </p>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `console.log("%cBuilt frame by frame.\\nSource: https://github.com/santiagovittor/portfolio-v3", "font-family: monospace; color: #e86a17;");`,
+              }}
+            />
           </footer>
         </div>
       </main>
