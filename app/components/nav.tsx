@@ -56,9 +56,12 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
     };
   }, [variant]);
 
+  // Ticket-radius on mobile (avoids a rounded pill floating over the
+  // hero card's sharp corner with almost no mat clearance), full pill
+  // from sm: up where there's room to actually read as "floating".
   const glass = onPaper
-    ? "rounded-full border border-ink/20 bg-ink/5 backdrop-blur-md"
-    : "rounded-full border border-white/25 bg-white/12 backdrop-blur-md";
+    ? "rounded-[var(--radius-ticket)] sm:rounded-full border border-ink/20 bg-ink/5 backdrop-blur-md"
+    : "rounded-[var(--radius-ticket)] sm:rounded-full border border-white/25 bg-white/12 backdrop-blur-md";
   const text = onPaper
     ? "text-ink [text-shadow:0_1px_1px_rgba(255,255,255,0.5)]"
     : "text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]";
@@ -85,17 +88,17 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
       >
         <ul className={`flex items-center text-sm font-medium transition-colors duration-300 ${text}`}>
           <li>
-            <a href={`${base}#work`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
+            <a href={`${base}#work`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               Work
             </a>
           </li>
           <li>
-            <a href={`${base}#about`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
+            <a href={`${base}#about`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               About
             </a>
           </li>
           <li>
-            <a href={`${base}#contact`} className={`block rounded-full px-4 py-2 transition-colors duration-200 ${hover}`}>
+            <a href={`${base}#contact`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               Contact
             </a>
           </li>
