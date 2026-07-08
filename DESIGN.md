@@ -139,9 +139,10 @@ scroll-jacking, native scroll always works.
 
 - The hero is `position: sticky; top: 0` in a ~180vh wrapper. As the user
   scrolls, the work section (paper background) slides up over it while the
-  hero card (`--radius-hero-card`, inset `clamp(16px, 3vw, 48px)` over the
-  ambient blurred backdrop) scales to ~0.96 and dims slightly (scroll-linked
-  via `motion`'s useScroll or CSS scroll-driven animations if stable).
+  hero card (sharp-cornered, inset `clamp(16px, 3vw, 48px)` within a
+  `bg-paper` mat, no backdrop layer) scales to ~0.96 and dims slightly
+  (scroll-linked via `motion`'s useScroll or CSS scroll-driven animations if
+  stable).
 - Work cards enter with a small stagger (translateY 24px → 0, opacity,
   120ms apart, 400ms ease-out). Once. No re-triggering on scroll-up.
 - Nav: transparent glass on hero (`backdrop-blur`, white/12% fill, 1px

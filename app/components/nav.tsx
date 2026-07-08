@@ -59,7 +59,9 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   const glass = onPaper
     ? "rounded-full border border-ink/20 bg-ink/5 backdrop-blur-md"
     : "rounded-full border border-white/25 bg-white/12 backdrop-blur-md";
-  const text = onPaper ? "text-ink" : "text-white";
+  const text = onPaper
+    ? "text-ink [text-shadow:0_1px_1px_rgba(255,255,255,0.5)]"
+    : "text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]";
   const hover = onPaper ? "hover:bg-ink/10" : "hover:bg-white/15";
   const base = variant === "paper" ? "/" : "";
 

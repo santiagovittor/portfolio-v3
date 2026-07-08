@@ -547,6 +547,13 @@ body {
   opacity: 1;
   transform: none;
 }
+
+/* clip-path above clips the global :focus-visible outline (it sits outside
+   the clipped border box). Draw the indicator inside the clip instead. */
+.index-row:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-poppy);
+}
 @media (prefers-reduced-motion: reduce) {
   .index-row,
   .tile-arrow,
