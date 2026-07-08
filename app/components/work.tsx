@@ -14,6 +14,8 @@ type Project = {
   cover: StaticImageData;
   alt: string;
   year: string;
+  /** True for covers dark enough to need the nav to flip to white text. */
+  dark?: boolean;
 };
 
 const projects: Project[] = [
@@ -26,6 +28,7 @@ const projects: Project[] = [
     cover: storeLanding,
     alt: "Homepage of santiagovittor.store",
     year: "2025",
+    dark: true,
   },
   {
     slug: "dubanronald",
@@ -44,6 +47,7 @@ const projects: Project[] = [
     cover: canvassOutreach,
     alt: "Outreach queue of Canvass with a drafted cold email",
     year: "2026",
+    dark: true,
   },
 ];
 
@@ -91,7 +95,10 @@ export function Work() {
               style={{ "--reveal-delay": `${i * 120}ms` } as CSSProperties}
             >
               <Link href={`/work/${p.slug}`} className="tile group block">
-                <div className="tile-cover plate relative overflow-hidden">
+                <div
+                  className="tile-cover plate relative overflow-hidden"
+                  data-nav-theme={p.dark ? "dark" : undefined}
+                >
                   <ViewTransition name={`cover-${p.slug}`}>
                     <Image
                       src={p.cover}

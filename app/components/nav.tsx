@@ -1,31 +1,58 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
- * Glass on the hero, ink-on-glass once the work sheet covers it
- * (DESIGN.md → Scroll transition). Cover completes at 100svh of scroll.
+ * Glass over anything tagged data-nav-theme="dark", ink-on-glass everywhere
+ * else (DESIGN.md → Scroll transition). Content-aware, not scroll-position-
+ * aware: an IntersectionObserver watches every data-nav-theme="dark"
+ * element in the document and flips theme based on how many currently
+ * intersect the fixed nav's own height band at the top of the viewport.
  * variant="paper" pins the ink style for pages without a hero.
  */
 export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
-  const [scrolled, setScrolled] = useState(false);
-  const onPaper = variant === "paper" || scrolled;
+  const [onDark, setOnDark] = useState(variant === "hero");
+  const headerRef = useRef<HTMLElement>(null);
+  const onPaper = variant === "paper" || !onDark;
 
   useEffect(() => {
     if (variant === "paper") return;
-    let raf = 0;
-    const check = () => {
-      raf = 0;
-      setScrolled(window.scrollY > window.innerHeight * 0.9);
+    const header = headerRef.current;
+    if (!header) return;
+
+    const intersecting = new Set<Element>();
+    let observer: IntersectionObserver | null = null;
+
+    const setup = () => {
+      observer?.disconnect();
+      intersecting.clear();
+      const navHeight = header.offsetHeight;
+      observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              intersecting.add(entry.target);
+            } else {
+              intersecting.delete(entry.target);
+            }
+          }
+          setOnDark(intersecting.size > 0);
+        },
+        {
+          rootMargin: `0px 0px -${window.innerHeight - navHeight}px 0px`,
+          threshold: 0,
+        }
+      );
+      document
+        .querySelectorAll('[data-nav-theme="dark"]')
+        .forEach((el) => observer!.observe(el));
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(check);
-    };
-    check();
-    window.addEventListener("scroll", onScroll, { passive: true });
+
+    setup();
+    window.addEventListener("resize", setup);
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", setup);
+      observer?.disconnect();
     };
   }, [variant]);
 
@@ -37,7 +64,10 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   const base = variant === "paper" ? "/" : "";
 
   return (
-    <header className="nav-frame fixed inset-x-0 top-0 z-40 flex items-center justify-between transition-colors duration-300">
+    <header
+      ref={headerRef}
+      className="nav-frame fixed inset-x-0 top-0 z-40 flex items-center justify-between transition-colors duration-300"
+    >
       <a
         href={`${base}#top`}
         className={`font-medium tracking-tight transition-colors duration-300 ${text}`}
