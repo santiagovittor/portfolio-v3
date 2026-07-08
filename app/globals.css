@@ -13,14 +13,15 @@
   --font-sans: var(--font-archivo), system-ui, sans-serif;
   --font-serif: var(--font-newsreader), georgia, serif;
 
-  /* Radius system: two shapes site-wide plus one singleton.
-     Print surfaces (photos, covers, plates) are square-cornered like a
-     magazine spread; everything interactive is a full pill; the hero card
-     alone gets a soft corner (DESIGN.md → Radii → hero card). */
+  /* Radius system: exactly two shapes site-wide (DESIGN.md → Radii).
+     Print surfaces (photos, covers, plates, the hero card) are square-
+     cornered; everything interactive is a full pill, except the hero
+     CTAs which use --radius-ticket (documented exception, added in the
+     visual-polish pass — see DESIGN.md). */
   --radius-pill: 999px;
-  --radius-hero-card: 20px;
+  --radius-ticket: 3px;
 
-  /* Hero card inset from the viewport edges */
+  /* Hero mat: width of the paper border exposed around the card */
   --hero-inset: clamp(16px, 3vw, 48px);
 
   --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
@@ -162,34 +163,37 @@ body {
     100% 1px;
 }
 
-/* Card-framed hero: an ambient blurred still of the same shot behind
-   everything, the live card floating on top, inset from the viewport. */
-.hero-backdrop {
-  background-image: url("/images/hero/poppies-blur.jpg");
-  background-size: cover;
-  background-position: center;
-  /* Darkening/desaturation is baked into the 128px asset at build time */
-  transform: scale(1.15);
-}
+/* Paper-mat hero: the photo sits sharp-cornered inside a bg-paper mat
+   (the hero <section>'s own background, exposed around the card via
+   --hero-inset), like a print mounted on a page — not a floating panel. */
 .hero-card {
   position: absolute;
   inset: var(--hero-inset);
-  border-radius: var(--radius-hero-card);
   overflow: hidden;
-  box-shadow: 0 32px 80px -16px color-mix(in srgb, var(--color-ink) 45%, transparent);
 }
-/* Hairline drawn above the card's content so it survives the imagery */
+/* Hairline drawn above the card's content so it survives the imagery —
+   same ink/15% hairline as .plate, since the hero card now belongs to
+   that shape category (DESIGN.md → Radii). */
 .hero-card::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 30;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-white) 15%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-ink) 15%, transparent);
   pointer-events: none;
 }
+/* Subtle radial darkening toward the corners, over the image, under the
+   text/scrim layer — reads as a physical print, not a filter. */
+.hero-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    color-mix(in srgb, var(--color-ink) 45%, transparent) 100%
+  );
+  mix-blend-mode: multiply;
+}
 /* Nav is fixed (it must persist over the paper sections) but padded to
-   sit inside the card frame while the hero is on screen. */
+   sit inside the mat while the hero is on screen. */
 .nav-frame {
   padding: calc(var(--hero-inset) + 12px);
   padding-bottom: 0;

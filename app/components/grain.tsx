@@ -8,15 +8,17 @@ const NOISE = `data:image/svg+xml,${encodeURIComponent(
 
 export function Grain({
   className = "fixed inset-0 z-50",
+  opacity = 0.06,
 }: {
   /** Positioning only; pass e.g. "absolute inset-0" to scope it to a surface */
   className?: string;
+  opacity?: number;
 }) {
   return (
     <div
       aria-hidden
-      className={`pointer-events-none opacity-[0.06] mix-blend-overlay ${className}`}
-      style={{ backgroundImage: `url("${NOISE}")` }}
+      className={`pointer-events-none mix-blend-overlay ${className}`}
+      style={{ backgroundImage: `url("${NOISE}")`, opacity }}
     />
   );
 }

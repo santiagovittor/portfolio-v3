@@ -6,12 +6,10 @@ import { Magnet } from "./magnet";
 
 export function Hero() {
   return (
-    <section aria-label="Intro" className="relative h-svh">
-      {/* Ambient backdrop: pre-blurred, darkened 128px still of the same shot */}
-      <div aria-hidden className="hero-backdrop absolute inset-0" />
-
-      {/* The card is the viewport: everything hero lives inside it */}
-      <div className="hero-card bg-sky">
+    <section aria-label="Intro" className="relative h-svh bg-paper">
+      {/* The card is a photograph mounted in a paper mat: --hero-inset is
+          the mat width, exposing bg-paper around the card's sharp corners. */}
+      <div data-nav-theme="dark" className="hero-card bg-sky">
         {/* Poster: LCP element and the shader's permanent fallback */}
         <Image
           src={poppies}
@@ -24,6 +22,11 @@ export function Hero() {
         {/* Card-scoped grain matches the shader's fiber so the swap is silent */}
         <Grain className="absolute inset-0" />
         <HeroShader image="/images/hero/poppies-1920.jpg" />
+        {/* Second, heavier grain layer: the 0.06 site-wide pass reads too
+            subtle at hero scale on its own (validated against renders). */}
+        <Grain className="absolute inset-0" opacity={0.15} />
+        {/* Vignette: darkens toward the corners like a physical print */}
+        <div aria-hidden className="hero-vignette absolute inset-0" />
 
         {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type */}
         <div
