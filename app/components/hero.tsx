@@ -4,25 +4,6 @@ import { Grain } from "./grain";
 import { HeroShader } from "./hero-shader";
 import { Magnet } from "./magnet";
 
-// Reactbits "BlurText": each word develops from blur with a small stagger.
-// Split at build time; CSS owns the animation and reduced motion.
-function BlurLine({ text, from = 0 }: { text: string; from?: number }) {
-  return (
-    <span className="block">
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          className="hero-word"
-          style={{ animationDelay: `${(from + i) * 70}ms` }}
-        >
-          {word}
-          {" "}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 export function Hero() {
   return (
     <section aria-label="Intro" className="relative h-svh">
@@ -51,10 +32,17 @@ export function Hero() {
         />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
-        <h1 className="hero-headline flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em] text-white">
-          {/* TODO(sv): confirm headline (SPEC.md → Hero) */}
-          <BlurLine text="Designing interfaces." />
-          <BlurLine text="Engineering the rest." from={2} />
+        <h1 className="hero-headline hero-noir flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
+          <span className="noir-line noir-line-1">
+            <span className="noir-line-shadow" aria-hidden="true">Designing interfaces.</span>
+            <span className="noir-line-outline" aria-hidden="true">Designing interfaces.</span>
+            <span className="noir-line-fill">Designing interfaces.</span>
+          </span>
+          <span className="noir-line noir-line-2">
+            <span className="noir-line-shadow" aria-hidden="true">Engineering the rest.</span>
+            <span className="noir-line-outline" aria-hidden="true">Engineering the rest.</span>
+            <span className="noir-line-fill">Engineering the rest.</span>
+          </span>
         </h1>
         <div className="max-w-xs shrink-0">
           <p className="text-white/90">

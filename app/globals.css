@@ -277,30 +277,123 @@ body {
   }
 }
 
-/* DESIGN.md → Motion rules: headline reveals once on load.
-   Reactbits BlurText: words develop from blur like ink drying,
-   70ms apart, whole run under 900ms. */
-.hero-word {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(10px);
-  transform: translateY(0.25em);
-  animation: word-develop 600ms var(--ease-out-quart) forwards;
+/* Hero noir lettering (docs/superpowers/specs/2026-07-06-hero-noir-lettering-design.md).
+   Fill+outline come from one element via background-clip + text-stroke;
+   the cast shadow is a ::before duplicate. Brush texture reuses the
+   feTurbulence/feDisplacementMap technique from grain.tsx. */
+.hero-noir {
+  position: relative;
+  isolation: isolate;
+  font-family: var(--font-noir);
+  font-weight: 400;
+  /* Rye's descenders (and the added outline/shadow bulk around them)
+     need more room than the original Archivo headline's 0.98 tight
+     leading - at 0.98, wrapped lines sit close enough that a 'g' tail
+     visually collides with the line below it. */
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
-@keyframes word-develop {
+.hero-noir::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10%;
+  z-index: -2;
+  background: radial-gradient(
+    ellipse at 30% 60%,
+    color-mix(in srgb, var(--color-poppy) 4%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Three genuinely separate layers - shadow, outline, fill - each using
+   exactly one simple, well-supported technique. Combining text-stroke or
+   text-shadow together with background-clip:text on the SAME element is
+   what caused the banding/blackout artifacts; keeping every element to a
+   single technique renders consistently across real browsers. */
+.noir-line {
+  position: relative;
+  display: block;
+  isolation: isolate;
+}
+
+.noir-line-shadow,
+.noir-line-outline {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.noir-line-shadow {
+  z-index: 1;
+  color: var(--color-ink);
+  transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
+}
+
+.noir-line-outline {
+  z-index: 2;
+  color: transparent;
+  -webkit-text-stroke: clamp(3px, 0.7vw, 8px) var(--color-ink);
+}
+
+.noir-line-fill {
+  position: relative;
+  z-index: 3;
+  display: block;
+  color: transparent;
+  background: linear-gradient(to bottom, var(--color-white) 55%, #fff9ee 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  /* background-clip:text only paints glyphs where the gradient box exists.
+     The box is exactly line-height tall, so Rye's descenders fall below it
+     and render transparent - a flat-cut 'g'/'y' fill (the solid-color
+     shadow/outline layers underneath still show their tails, which is why
+     it looked like only the fill was sliced). Extend the paint box down
+     past the descenders; the matching negative margin keeps layout intact
+     so line spacing is unchanged. */
+  padding-bottom: 0.35em;
+  margin-bottom: -0.35em;
+}
+
+/* Left-to-right reveal via clip-path inset. The previous feTurbulence
+   displacement mask was scrapped: its vertical frequency striped the left
+   edges of the D/E, and its coverage flat-clipped Rye's descenders no
+   matter how far the mask was stretched. A plain inset wipe cannot do
+   either - the top/bottom insets are pinned negative (region extends well
+   beyond the glyph box) so ascenders, descenders, the offset shadow and
+   the stroke outline are ALL outside the clip and can never be sliced.
+   Only the right inset animates, sweeping the reveal seam leftward. */
+.noir-line-1,
+.noir-line-2 {
+  clip-path: inset(-60% 100% -60% -8%);
+  filter: blur(10px);
+  animation:
+    noir-wipe 700ms var(--ease-out-quart) forwards,
+    noir-focus 700ms var(--ease-out-quart) forwards;
+}
+
+.noir-line-2 {
+  animation-delay: 180ms;
+}
+
+@keyframes noir-wipe {
   to {
-    opacity: 1;
+    clip-path: inset(-60% -8% -60% -8%);
+  }
+}
+
+@keyframes noir-focus {
+  to {
     filter: blur(0);
-    transform: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-word {
-    opacity: 1;
+  .noir-line-1,
+  .noir-line-2 {
+    clip-path: inset(-60% -8% -60% -8%);
     filter: none;
-    transform: none;
     animation: none;
   }
 }
