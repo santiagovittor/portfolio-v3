@@ -445,6 +445,20 @@ body {
   }
 }
 
+/* Sprocket-hole rail: filmstrip motif along the ticker's top edge,
+   reinforcing the grain/paper "print" system (spec §5). */
+.ticker::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background-image: repeating-radial-gradient(
+    circle at 6px 3px,
+    color-mix(in srgb, var(--color-ink) 25%, transparent) 0 2px,
+    transparent 2.5px 14px
+  );
+}
+
 /* M8: ink-morph case study navigation (View Transitions API). Card cover
    and title morph into the case study hero and h1; everything else gets a
    quick root crossfade. Browsers without the API navigate instantly. */
@@ -493,6 +507,16 @@ body {
   transform: none;
 }
 
+/* Frame number: contact-sheet-style label, fades in on hover/focus. */
+.frame-number {
+  opacity: 0;
+  transition: opacity 300ms var(--ease-out-quart);
+}
+.tile:hover .frame-number,
+.tile:focus-visible .frame-number {
+  opacity: 1;
+}
+
 /* Contact index rows: label shifts, arrow surfaces, hairline warms. */
 .index-row {
   transition:
@@ -516,7 +540,8 @@ body {
   .index-row,
   .tile-arrow,
   .tile-cover img,
-  .link-draw {
+  .link-draw,
+  .frame-number {
     transition: none;
   }
 }

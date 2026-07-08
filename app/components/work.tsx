@@ -107,6 +107,12 @@ export function Work() {
                       className="aspect-[4/3] object-cover object-top"
                     />
                   </ViewTransition>
+                  <span
+                    aria-hidden
+                    className="frame-number absolute bottom-2 right-2 rounded-[2px] bg-ink/50 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-[0.08em] text-white/80"
+                  >
+                    {String(i + 1).padStart(2, "0")}A
+                  </span>
                 </div>
                 <div className="mt-4 flex items-baseline justify-between gap-4">
                   <ViewTransition name={`title-${p.slug}`}>
