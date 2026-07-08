@@ -49,14 +49,15 @@ decoration — the only gradient-adjacent thing on the site is the shader.
 - Alignment is the ornament: hero headline starts at column 1; hero paragraph
   block occupies columns 9–12; work cards span 4 columns each (12 ÷ 3);
   case study text spans columns 4–10. When in doubt, align left, rag right.
-- Radii: two shapes site-wide plus one singleton. Print surfaces (photos,
-  covers, plates) are square-cornered with a 1px ink/15% hairline (`.plate`),
-  like plates mounted on a magazine page; interactive elements (nav, buttons,
-  tags) are full pills (999px); the **hero card** alone uses
-  `--radius-hero-card: 20px` — the one soft corner, reserved for the framed
-  hero floating over its ambient backdrop. Nothing else in between. Nested
-  pills keep a uniform inset (nav container `p-1`) so curvature reads
-  concentric.
+- Radii: exactly two shapes site-wide. Print/photographic surfaces (photos,
+  covers, plates, and the hero card) are square-cornered with a 1px
+  ink/15% hairline (`.plate`), like plates mounted on a magazine page;
+  interactive elements (nav, buttons, tags) are full pills (999px) —
+  except the hero CTAs, which use `--radius-ticket: 3px` instead, a
+  documented, named exception: a full pill at button size reads as
+  default rounded UI, the small radius reads as a printed ticket/stamp
+  label instead. Nested pills keep a uniform inset (nav container `p-1`)
+  so curvature reads concentric.
 
 ## The grain (site-wide signature texture)
 

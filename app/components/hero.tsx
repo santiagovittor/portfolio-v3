@@ -48,7 +48,7 @@ export function Hero() {
           </span>
         </h1>
         <div className="max-w-xs shrink-0">
-          <p className="text-white/90">
+          <p className="font-serif text-lg italic text-white/90">
             I design products and build them: interfaces, frontends, and the
             AI behind them. Buenos Aires, working US hours.
           </p>
@@ -56,7 +56,7 @@ export function Hero() {
             <Magnet>
               <a
                 href="#work"
-                className="btn block rounded-full bg-poppy px-6 py-3 font-medium text-ink hover:bg-poppy/90"
+                className="btn btn-letterpress block rounded-[var(--radius-ticket)] bg-poppy px-6 py-2.5 text-sm font-medium uppercase tracking-[0.06em] text-ink hover:bg-poppy/90"
               >
                 See the work
               </a>
@@ -64,7 +64,7 @@ export function Hero() {
             <Magnet>
               <a
                 href="#contact"
-                className="btn block rounded-full border border-white/25 bg-white/12 px-6 py-3 font-medium text-white backdrop-blur-md hover:bg-white/20"
+                className="btn block rounded-[var(--radius-ticket)] border border-white/25 bg-white/12 px-6 py-2.5 text-sm font-medium uppercase tracking-[0.06em] text-white backdrop-blur-md hover:bg-white/20"
               >
                 Get in touch
               </a>

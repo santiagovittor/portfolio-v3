@@ -589,3 +589,10 @@ body {
     transform: none;
   }
 }
+
+/* Poppy CTA reads pressed-into-paper, not flat (DESIGN.md → Buttons). */
+.btn-letterpress {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-white) 25%, transparent),
+    inset 0 -2px 0 color-mix(in srgb, var(--color-ink) 25%, transparent);
+}
