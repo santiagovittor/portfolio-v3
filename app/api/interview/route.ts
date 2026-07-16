@@ -98,7 +98,7 @@ export async function POST(req: Request) {
 
   const windowed = trimWindow(messages);
   const truncatedWindowed = windowed.map((m, i) =>
-    i === windowed.length - 1
+    i === windowed.length - 1 && m.role === "user"
       ? { ...m, parts: [{ type: "text" as const, text: lastUserText }] }
       : m
   );
