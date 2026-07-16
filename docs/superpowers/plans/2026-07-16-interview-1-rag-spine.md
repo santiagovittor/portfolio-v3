@@ -508,3 +508,82 @@ git commit -m "interview-1: runtime retrieval + index freshness gate"
   implementer's report, not asserted from memory.
 - Check the embedding API calls against `node_modules/@ai-sdk/google`
   yourself — this is the likeliest silent-drift point in the whole build.
+
+## Execution record
+
+Executed via superpowers:subagent-driven-development in worktree
+`interview-1-rag-spine`, one implementer + one task-reviewer subagent per
+task, all tasks Approved on first or corrected pass. Ledger:
+`.superpowers/sdd/progress.md` (gitignored scratch — summarized here).
+
+**Task 1** (adafeb3→d9503d0): deps + scripts. Review clean.
+
+**Task 2** (d9503d0→ba715a9): `lib/interview/chunking.ts` + test, 4 tests.
+Review clean. Minor (non-blocking, not fixed): `source` field keeps the
+`.md` extension while `id` strips it; no test for zero-`##`-section files,
+missing frontmatter fields, or duplicate-heading id collisions.
+
+**Task 3** (ba715a9→5e520ef): `lib/interview/similarity.ts` + test, 9 tests
+(4 new + 5 prior). Review clean. Minor (non-blocking, not fixed): `dot()`
+has no dimension-mismatch guard (silently produces NaN scores rather than
+throwing); no test at the exact `score === minScore` boundary.
+
+**Task 4** (5e520ef→0ee9e9d): `scripts/embed.ts` + committed
+`data/interview-index.json`. Review clean, `npm run build` independently
+re-verified by controller after review. Two verified, documented deviations
+from the plan's literal sketch (ground-truthed against
+`node_modules/@ai-sdk/google/dist/index.d.ts`, per this task's own Step 1):
+`.textEmbedding()` is deprecated → used `.embedding()` instead; `tsx`
+compiles this file as CJS (no `"type": "module"` in `package.json`) → body
+wrapped in `async function main() { ... }; main();` instead of top-level
+`await`, marked with a `ponytail:` comment.
+
+**Task 5** (0ee9e9d→d1da184): `lib/interview/retrieval.ts` +
+`freshness.test.ts`, 10 tests (1 new + 9 prior). Review clean, reviewer
+independently re-ran `tsc`/`vitest`/`build`. Two pre-approved deviations,
+same class as Task 4: `retrieval.ts` builds its own provider via
+`createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY })` (the
+bare default `google` export only reads `GOOGLE_GENERATIVE_AI_API_KEY`,
+which this repo never sets) and uses `.embedding()` not `.textEmbedding()`.
+Also imports the committed index via a relative path rather than the `@/*`
+alias, since no `vitest.config.*` exists to resolve tsconfig path aliases
+under `npm test` (verified: no such config anywhere in the repo).
+
+### Advisor checkpoint — results (fresh run at HEAD `d1da184`)
+
+- `npx tsc --noEmit` → **No errors found**
+- `npm test` → **3 test files, 10 tests, all passed**
+- `npm run build` → **compiled successfully**, 11 static routes + 3 SSG
+  work-slug pages generated (only a pre-existing, unrelated Turbopack
+  multi-lockfile warning, not an error)
+- `data/interview-index.json`: **160.7 KB** (well under the 1.5 MB budget),
+  **21 chunks**, every embedding array length **768** (single unique
+  length across all chunks), `persona` field starts
+  `"# Who is speaking\r\n\r\nYou are an AI stand..."`, zero chunk ids
+  trace back to `00-persona` or `QUESTIONNAIRE`.
+- Smoke-test evidence (real Gemini API calls, from Task 5's report,
+  `.superpowers/sdd/task-5-report.md`):
+  - `retrieve("what do you do at FoodStyles?")` → top hit
+    `10-work#current-role-foodstyles` score **0.7448** (next:
+    `40-tastes#cooking` 0.6525, `30-craft#how-i-work` 0.6162,
+    `30-craft#design-taste` 0.6050)
+  - `retrieve("what's on the record player?")` → top hit
+    `40-tastes#music` score **0.6206** (next: `90-classified#the-console`
+    0.5893, `20-projects#this-site-portfolio-v3` 0.5889,
+    `90-classified#the-name-of-this-machine` 0.5883)
+  Both clear the `minScore=0.35` floor by a wide margin and land in the
+  expected source file.
+- Embedding API calls checked against `node_modules/@ai-sdk/google`
+  directly (not the plan's literal sketch) at Tasks 4 and 5: model id
+  `gemini-embedding-001` valid, `providerOptions.google.{taskType,
+  outputDimensionality}` shape valid, `.embedding()` is the current
+  (non-deprecated) factory. This was the plan's own named highest-risk
+  drift point and is confirmed correct end-to-end by the smoke test above
+  (stored document embeddings and freshly-embedded query embeddings
+  actually rank correctly against each other).
+
+**Slice 1 status: complete.** All 5 tasks implemented, reviewed, and
+verified with first-hand evidence. No Critical or Important issues at any
+task gate. Minor items above are logged, not fixed — carry them into
+slice 2 if they become load-bearing (in particular: the `source`/`id`
+extension inconsistency, if slice 2 displays `source` to the user).
