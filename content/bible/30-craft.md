@@ -26,4 +26,4 @@ matched by cosine similarity in memory; the footnotes under my answers
 name the chunks that were actually retrieved. Gemini Flash does the
 talking through the Vercel AI SDK. The guardrails — injection filtering,
 input truncation, an orphan-safe sliding window — are ported from the
-assistant I shipped on santiagovittor.store.
+assistant I shipped on santiagovittor.com.

@@ -30,4 +30,4 @@ with the US East Coast is most of my afternoon.
 
 Product design and frontend engineering work where AI integration is a
 feature, not the whole pitch. Roles and referrals via LinkedIn; business
-projects via santiagovittor.store. (SV: confirm current availability.)
+projects via santiagovittor.com

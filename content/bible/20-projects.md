@@ -3,7 +3,7 @@ source: case studies
 tags: projects, work
 ---
 
-## santiagovittor.store — services site with an AI assistant
+## santiagovittor.com — services site with an AI assistant
 
 Bilingual services site where the corner chat IS the product demo — a
 client asking "can you build a chatbot?" gets the answer by talking to
