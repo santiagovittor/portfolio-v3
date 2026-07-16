@@ -70,7 +70,7 @@ Santiago's own words."* Immersive without pretending.
 ```
 content/bible/*.md              the corpus (see below)
 content/bible/taste.ts          typed taste data for show_taste cards
-scripts/embed.mts               chunk bible → Gemini embeddings
+scripts/embed.ts                chunk bible → Gemini embeddings (via tsx)
                                 → data/interview-index.json (committed)
 lib/interview/retrieval.ts      embed query, cosine top-k, in memory
 lib/interview/prompt.ts         persona system prompt + guardrail text
@@ -98,8 +98,9 @@ app/interview/transcript.tsx    "use client" chat UI
 - **Streaming:** route handler + `streamText` + `toUIMessageStreamResponse`,
   client via `useChat` — the proven pattern from santiagovittor-store.
   `abortSignal: req.signal` so closed tabs stop billing. `stepCountIs(4)`.
-- **New dependencies (approved):** `ai`, `@ai-sdk/google`, `zod`. Nothing
-  else — no vector DB, no chat UI kit.
+- **New dependencies (approved):** `ai`, `@ai-sdk/react` (useChat lives
+  there in AI SDK v5+), `@ai-sdk/google`, `zod`; dev-only: `vitest`, `tsx` (runs the embed script).
+  Nothing else — no vector DB, no chat UI kit.
 - **Env:** `GEMINI_API_KEY` (same name as the other repos). Needed at dev/
   runtime and when running `npm run embed`; NOT needed for `npm run build`.
 
@@ -193,9 +194,9 @@ Tool cards are square-cornered `.plate` surfaces per the radius system.
 - Unit (node --test or vitest-free plain scripts kept minimal): cosine/
   top-k retrieval against fixture vectors; window-trim orphan cases;
   injection gate; staleness hash.
-- Integration: route handler invoked directly with mocked model (AI SDK
-  supports provider mocking) — schema rejects, injection refusal path,
-  happy path streams, tool call path, rate limit path.
+- Integration: live curl gates against the dev route — schema rejects,
+  injection refusal path (no model call, verified in logs), happy path
+  streams with sources metadata, tool call path, Spanish path, rate limit.
 - Manual gates per slice: `npm run build` clean, console clean, 375/768/
   1440, reduced-motion pass, a11y checklist.
 
