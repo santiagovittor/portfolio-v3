@@ -17,7 +17,12 @@ import { chatModel } from "@/lib/interview/model";
 export const maxDuration = 30;
 
 const bodySchema = z.object({
-  messages: z.array(z.record(z.string(), z.unknown())).min(1).max(20),
+  messages: z.array(
+    z.object({
+      role: z.string(),
+      parts: z.array(z.record(z.string(), z.unknown())),
+    }).passthrough()
+  ).min(1).max(20),
 });
 
 const perMinute = createRateLimiter(5, 60_000);
