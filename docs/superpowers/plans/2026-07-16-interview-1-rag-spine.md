@@ -587,3 +587,43 @@ verified with first-hand evidence. No Critical or Important issues at any
 task gate. Minor items above are logged, not fixed — carry them into
 slice 2 if they become load-bearing (in particular: the `source`/`id`
 extension inconsistency, if slice 2 displays `source` to the user).
+
+### Post-merge fix: checkout-dependent bible hash
+
+Merging to `main` and re-running the suite on the merged result (per
+finishing-a-development-branch's "verify tests on the merged result,"
+which caught this) surfaced a real bug: `freshness.test.ts` failed on
+`main` even though it passed throughout every task review. Root cause,
+confirmed by byte comparison and `git show HEAD:... | xxd`: git stores
+`content/bible/*.md` as LF; `main`'s on-disk copies stayed LF (edited in
+place by Write/Edit, never re-checked-out); but the worktree used for
+Tasks 1-5 got a real `git checkout`, and Windows `core.autocrlf=true`
+(no `.gitattributes` existed) silently converted those files to CRLF.
+`scripts/embed.ts` (Task 4) ran inside that CRLF worktree, so the
+committed index's `bibleHash` and `persona`/chunk `text` all carried
+`\r` bytes a LF checkout could never reproduce — the freshness test only
+ever passed by coincidence of running in the same checkout that built
+the index.
+
+Fixed forward, reviewed clean (commit `6cb5221`):
+`.gitattributes` (`content/bible/*.md text eol=lf`) pins LF regardless
+of local `core.autocrlf`; `data/interview-index.json` regenerated
+against the now-clean LF files (21 chunks, unchanged; zero `\r` bytes
+anywhere in the file, confirmed by byte scan). Retrieval quality
+re-verified: `FoodStyles` query top hit unchanged at
+`10-work#current-role-foodstyles` (0.7448→0.7341), record-player query
+top hit unchanged at `40-tastes#music` (0.6206→0.6161) — small shifts
+consistent with a whitespace-only input change, ranking order unaffected.
+Re-merged to `main`; `npx tsc --noEmit`, `npm test` (20/20, includes the
+suite running twice since the worktree nests inside `main`'s tree — a
+harmless vitest-scanning artifact, not a new bug), and `npm run build`
+all clean on `main` itself.
+
+Logged Minor gap (reviewer-flagged, not fixed): `hashFiles`/`chunkFile`
+still trust their `raw` input is already LF rather than normalizing
+defensively — `.gitattributes` is the correct primary fix, but a stray
+CRLF reintroduced between checkout and `npm run embed` (without a
+git-add cycle) would reproduce this silently. `freshness.test.ts` is the
+backstop that would catch it. Consider a one-line
+`raw.replace(/\r\n/g, "\n")` in `hashFiles` in a future slice if this
+recurs.
