@@ -20,7 +20,7 @@ const bodySchema = z.object({
   messages: z.array(
     z.object({
       role: z.string(),
-      parts: z.array(z.record(z.string(), z.unknown())),
+      parts: z.array(z.object({ type: z.string() }).passthrough()),
     }).passthrough()
   ).min(1).max(20),
 });
@@ -82,6 +82,9 @@ export async function POST(req: Request) {
   const messages = parsed.data.messages as unknown as UIMessage[];
 
   const texts = userTexts(messages);
+  if (texts.length === 0) {
+    return Response.json({ error: "invalid body" }, { status: 400 });
+  }
   const lastUserText = (texts.at(-1) ?? "").slice(0, 500);
   const language = detectLanguage(texts[0] ?? "");
 
@@ -93,6 +96,13 @@ export async function POST(req: Request) {
   const chunks = await retrieve(lastUserText);
   const sources = [...new Set(chunks.map((c) => c.source))].map((label) => ({ label }));
 
+  const windowed = trimWindow(messages);
+  const truncatedWindowed = windowed.map((m, i) =>
+    i === windowed.length - 1
+      ? { ...m, parts: [{ type: "text" as const, text: lastUserText }] }
+      : m
+  );
+
   const result = streamText({
     model: chatModel(),
     system: buildSystemPrompt({
@@ -101,7 +111,7 @@ export async function POST(req: Request) {
       language,
       offTheRecord,
     }),
-    messages: await convertToModelMessages(trimWindow(messages)),
+    messages: await convertToModelMessages(truncatedWindowed),
     tools: interviewTools,
     stopWhen: stepCountIs(4),
     abortSignal: req.signal,

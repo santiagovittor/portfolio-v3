@@ -8,6 +8,13 @@ const INJECTION_PATTERNS: RegExp[] = [
   /override your/i,
   /new instructions/i,
   /(reveal|show|print|dump).{0,20}(system prompt|instructions|configuration)/i,
+  // Spanish equivalents
+  /ignor[aá] (todas )?las instrucciones (anteriores|previas)/i,
+  /desestim[aá] las instrucciones (anteriores|previas)/i,
+  /ahora (sos|eres)/i,
+  /^sistema\s*:/im,
+  /(revel[aá]|mostr[aá]|dec[ií]) (tu |tus )?(prompt del sistema|instrucciones)/i,
+  /nuevas instrucciones/i,
 ];
 
 export function looksLikeInjection(text: string): boolean {
