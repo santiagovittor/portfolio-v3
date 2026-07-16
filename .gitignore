@@ -43,3 +43,6 @@ next-env.d.ts
 
 # git worktrees (never commit into the repo)
 .claude/worktrees/
+
+# local claude settings overrides
+.claude/settings.local.json
