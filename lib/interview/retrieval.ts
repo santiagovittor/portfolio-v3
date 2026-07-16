@@ -1,7 +1,7 @@
 // lib/interview/retrieval.ts — runtime retrieval for the Interview chat route.
 import { embed } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import index from "../../data/interview-index.json";
+import { google } from "./model";
 import { topK, type IndexedChunk, type RetrievedChunk } from "./similarity";
 
 type InterviewIndex = {
@@ -11,8 +11,6 @@ type InterviewIndex = {
   persona: string;
   chunks: IndexedChunk[];
 };
-
-const google = createGoogleGenerativeAI({ apiKey: process.env.GEMINI_API_KEY });
 
 export function getIndex(): InterviewIndex {
   return index as InterviewIndex;
