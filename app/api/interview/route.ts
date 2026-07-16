@@ -20,8 +20,8 @@ const bodySchema = z.object({
   messages: z.array(
     z.object({
       role: z.string(),
-      parts: z.array(z.object({ type: z.string() }).passthrough()),
-    }).passthrough()
+      parts: z.array(z.object({ type: z.string() }).loose()),
+    }).loose()
   ).min(1).max(20),
 });
 
