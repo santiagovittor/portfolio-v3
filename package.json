@@ -6,15 +6,21 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "embed": "tsx scripts/embed.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.17",
+    "@ai-sdk/react": "^4.0.32",
     "@paper-design/shaders-react": "^0.0.76",
     "agent-reach": "^0.3.4",
+    "ai": "^7.0.29",
     "motion": "^12.42.2",
     "next": "16.2.10",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -25,6 +31,8 @@
     "eslint-config-next": "16.2.10",
     "playwright": "^1.61.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsx": "^4.23.1",
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }
