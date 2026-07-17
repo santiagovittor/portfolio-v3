@@ -1,9 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
 import type { InterviewMessage } from "@/lib/interview/types";
+
+// Model output sometimes carries markdown emphasis (*Abbey Road*, **never**).
+// No parts renderer for a fenced-off feature: this is a one-pass split for
+// the two emphasis marks the corpus actually uses, not a markdown parser.
+function renderEmphasis(text: string) {
+  const pieces = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  return pieces.map((piece, i) => {
+    if (piece.startsWith("**") && piece.endsWith("**")) {
+      return <strong key={i}>{piece.slice(2, -2)}</strong>;
+    }
+    if (piece.startsWith("*") && piece.endsWith("*")) {
+      return <em key={i}>{piece.slice(1, -1)}</em>;
+    }
+    return piece;
+  });
+}
 
 const SUGGESTIONS = [
   "What do you actually do at FoodStyles?",
@@ -31,7 +47,7 @@ function Answer({ message }: { message: InterviewMessage }) {
             key={i}
             className="mt-4 max-w-[65ch] whitespace-pre-wrap text-lg leading-relaxed"
           >
-            {part.text}
+            {renderEmphasis(part.text)}
           </p>
         ) : (
           <div key={i}>{renderPart(part)}</div>
@@ -48,6 +64,7 @@ function Answer({ message }: { message: InterviewMessage }) {
 
 export function Transcript() {
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
   const { messages, sendMessage, status, error } = useChat<InterviewMessage>({
     transport: new DefaultChatTransport({ api: "/api/interview" }),
   });
@@ -65,6 +82,9 @@ export function Transcript() {
     if (!q || busy) return;
     sendMessage({ text: q });
     setInput("");
+    // A clicked chip unmounts (filtered out of `chips` once asked), taking
+    // focus with it — land the keyboard back on the input, not <body>.
+    inputRef.current?.focus();
   };
 
   return (
@@ -126,6 +146,7 @@ export function Transcript() {
         }}
       >
         <input
+          ref={inputRef}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           maxLength={500}
