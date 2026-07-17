@@ -15,7 +15,7 @@ make them open a case study or hit "Get in touch."
 ```
 /                  Home (hero → work → about → contact)  ← 90% of effort
 /work/[slug]       Case studies (3 at launch)
-/api/*             (none at launch — RAG assistant is post-launch, see Non-goals)
+/api/interview     (the interview endpoint — only API route)
 ```
 
 ### Home, section by section
@@ -55,7 +55,8 @@ Structure per case study — problem → decisions → outcome, ~300 words + ima
 Launch content (TODO(sv): verify facts, supply images):
 1. **santiagovittor.store** — services site: positioning, conversion copy, WhatsApp funnel
 2. **dubanronald.com** — client project
-3. **Portfolio AI assistant** — the RAG chatbot from portfolio v2 (write as a case study now; re-integrate live later)
+3. **Portfolio AI assistant** — the RAG chatbot from portfolio v2, now live at
+   /interview (see M10); this case study, when written, should link to it
 
 ## Content inventory
 
@@ -68,7 +69,6 @@ Launch content (TODO(sv): verify facts, supply images):
 
 ## Non-goals (launch)
 
-- Live RAG assistant (post-launch; design a slot for it in the nav, ship without)
 - Blog, CMS, dark-mode toggle, contact form backend, analytics
 - Migrating anything from the old portfolio codebase
 
@@ -98,6 +98,11 @@ Launch content (TODO(sv): verify facts, supply images):
   as misregistered sky/poppy layers that slide into register on entry
   (scroll-driven, named view-timeline). Plain ink everywhere the API or
   motion preference is missing.
+- **M10 — The Interview.** ✅ Shipped. `/interview`: magazine-interview
+  chatbot, RAG over `content/bible` with build-time embeddings, retrieval
+  sources shown as footnotes, three tools, guardrails ported from
+  santiagovittor.store. Spec:
+  docs/superpowers/specs/2026-07-16-interview-chatbot-design.md
 
 ## Acceptance criteria (launch)
 
