@@ -1,0 +1,313 @@
+/* Slice 2 — The Ambient Layer (isolated demo).
+   Consumes global tokens (--color-*, --font-*, --ease-out-quart) and the
+   global .ghost-numeral class; everything else is self-contained (amb-). */
+
+.amb-root {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 170svh; /* room for the scroll half of the parallax */
+  background: var(--color-paper);
+}
+
+/* When the asterisk cursor is live (fine pointer + motion OK, set from JS) */
+.amb-no-cursor,
+.amb-no-cursor * {
+  cursor: none;
+}
+
+/* ── Film grain ───────────────────────────────────────────────────────── */
+
+/* Oversized so the jitter never reveals an edge; steps() so it flickers
+   like film frames instead of sliding. */
+.amb-grain {
+  position: absolute;
+  inset: -16px;
+  z-index: 3;
+  opacity: 0.04;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amb-grain {
+    animation: amb-grain-shift 0.7s steps(1) infinite;
+  }
+}
+@keyframes amb-grain-shift {
+  25% {
+    transform: translate(-8px, 6px);
+  }
+  50% {
+    transform: translate(6px, -8px);
+  }
+  75% {
+    transform: translate(-4px, -6px);
+  }
+}
+
+/* ── Ghost numeral ────────────────────────────────────────────────────── */
+
+.amb-numeral {
+  z-index: -1; /* .ghost-numeral supplies size/color/position */
+}
+
+/* ── Vinyl ────────────────────────────────────────────────────────────── */
+
+.amb-vinyl {
+  position: absolute;
+  top: clamp(16px, 3vw, 40px);
+  right: clamp(16px, 3vw, 40px);
+  z-index: 2;
+  width: clamp(64px, 8vw, 96px);
+}
+.amb-vinyl svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ── Layout ───────────────────────────────────────────────────────────── */
+
+.amb-grid {
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: clamp(24px, 5vw, 64px);
+  padding-top: 96px;
+  padding-bottom: 192px;
+}
+@media (min-width: 900px) {
+  .amb-grid {
+    display: grid;
+    grid-template-columns: 17rem 1fr;
+    column-gap: 64px;
+  }
+  .amb-header,
+  .amb-inputline {
+    grid-column: 1 / -1;
+  }
+}
+
+.amb-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-shadow-ink);
+}
+.amb-title {
+  margin-top: 12px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+.amb-sub {
+  margin-top: 12px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: color-mix(in srgb, var(--color-ink) 72%, var(--color-paper));
+}
+
+/* ── Marginalia cards ─────────────────────────────────────────────────── */
+
+.amb-cards {
+  margin-top: 64px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* hand-scattered: each note sits a little off its neighbors */
+.amb-cards li:nth-child(2) {
+  margin-left: 24px;
+}
+.amb-cards li:nth-child(3) {
+  margin-left: -8px;
+}
+@media (max-width: 899px) {
+  .amb-cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .amb-cards li:nth-child(2),
+  .amb-cards li:nth-child(3) {
+    margin-left: 0;
+  }
+}
+
+.amb-card {
+  --tilt: 0deg;
+  rotate: var(--tilt);
+  display: block;
+  width: min(15rem, 70vw);
+  padding: 14px 16px 12px;
+  text-align: left;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0 21px,
+      color-mix(in srgb, var(--color-sky) 14%, transparent) 21px 22px
+    ),
+    color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  box-shadow:
+    0 1px 2px rgba(20, 18, 16, 0.08),
+    0 6px 18px rgba(20, 18, 16, 0.1);
+  transition:
+    translate 300ms var(--ease-out-quart),
+    box-shadow 300ms var(--ease-out-quart);
+}
+.amb-card:hover,
+.amb-card:focus-visible {
+  translate: 0 -4px;
+  box-shadow:
+    0 2px 4px rgba(20, 18, 16, 0.1),
+    0 14px 28px rgba(20, 18, 16, 0.14);
+}
+
+.amb-card-inner {
+  display: block; /* magnetic pull target (gsap x/y) */
+}
+.amb-card-eyebrow {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-shadow-ink);
+}
+.amb-card-q {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+/* Hand-drawn underline: draws itself on hover via stroke-dashoffset */
+.amb-underline {
+  display: block;
+  width: 7.5rem;
+  height: 8px;
+  margin-top: 6px;
+  overflow: visible;
+}
+.amb-underline path {
+  stroke: var(--color-poppy);
+  stroke-width: 2;
+  stroke-linecap: round;
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 150ms var(--ease-out-quart);
+}
+.amb-card:hover .amb-underline path,
+.amb-card:focus-visible .amb-underline path {
+  stroke-dashoffset: 0;
+  transition-duration: 500ms;
+}
+
+/* ── Static excerpt ───────────────────────────────────────────────────── */
+
+.amb-excerpt {
+  margin-top: 64px;
+  max-width: 65ch;
+}
+.amb-q {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.3;
+}
+.amb-q + p {
+  margin-top: 16px;
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+.amb-q:not(:first-child) {
+  margin-top: 48px;
+}
+.amb-q-marker {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ── Fly target: the input baseline placeholder ───────────────────────── */
+
+.amb-inputline {
+  margin-top: 96px;
+  max-width: 65ch;
+}
+.amb-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-shadow-ink);
+}
+.amb-rule {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 8px;
+  min-height: 2.6em;
+  padding: 8px 0 8px 2px;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 35%, transparent);
+}
+.amb-flytext {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--color-ink);
+}
+.amb-caret {
+  width: 1px;
+  height: 1.2em;
+  background: var(--color-ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .amb-caret {
+    animation: amb-blink 1.1s steps(2, jump-none) infinite;
+  }
+}
+@keyframes amb-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ── Custom cursor ────────────────────────────────────────────────────── */
+
+.amb-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  margin: -11px 0 0 -11px; /* center the glyph on the pointer */
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-white);
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden; /* gsap autoAlpha shows it on section enter */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amb-card,
+  .amb-underline path {
+    transition: none;
+  }
+}
