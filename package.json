@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "embed": "tsx scripts/embed.ts"
+    "embed": "tsx scripts/embed.ts",
+    "spotify:token": "tsx scripts/spotify-token.ts"
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.17",
