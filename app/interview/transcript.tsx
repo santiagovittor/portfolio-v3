@@ -71,7 +71,7 @@ export function Transcript() {
     <div className="mx-auto mt-12 w-full max-w-[72ch]">
       <div role="log" aria-live="polite" aria-label="Interview transcript">
         {messages.length === 0 && (
-          <p className="border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink">
+          <p className="border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink max-w-[65ch]">
             The subject is at the table, coffee in hand. Ask anything — the
             work, this site, the record player.
           </p>
@@ -95,7 +95,7 @@ export function Transcript() {
           </p>
         )}
         {error && (
-          <p className="mt-6 border border-shadow-ink/20 p-4 text-shadow-ink">
+          <p className="mt-6 border border-shadow-ink/20 p-4 text-shadow-ink max-w-[65ch]">
             The line to Buenos Aires dropped. Ask again.
           </p>
         )}
@@ -136,7 +136,7 @@ export function Transcript() {
         <button
           type="submit"
           disabled={busy || input.trim().length === 0}
-          className="btn btn-letterpress rounded-[var(--radius-ticket)] bg-poppy px-6 py-3 text-sm font-medium uppercase tracking-[0.08em] text-white disabled:opacity-50"
+          className="btn btn-letterpress rounded-[var(--radius-ticket)] bg-poppy px-6 py-3 text-sm font-medium uppercase tracking-[0.08em] text-ink disabled:opacity-50"
         >
           {busy ? "…" : "Ask"}
         </button>
