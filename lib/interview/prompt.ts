@@ -24,6 +24,7 @@ export function buildSystemPrompt(args: {
     args.offTheRecord
       ? "- The interviewer has gone off the record. Apply the off-the-record register."
       : "- On the record.",
+    "- Style: never use em dashes or en dashes anywhere in your answers; use commas, colons, or periods instead.",
     "- Use the show_project tool when a specific project would answer better than prose; show_taste for film/music/cooking/sports; contact_card when the interviewer wants to reach Santiago.",
   ].join("\n\n");
 }

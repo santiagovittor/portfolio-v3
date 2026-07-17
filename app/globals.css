@@ -742,3 +742,52 @@ body {
     transition: none;
   }
 }
+
+/* Interview: the transcript scrolls like a chat inside a viewport-locked
+   page. Scrollbar hidden; lines fade out under the header edge. */
+.transcript-scroll {
+  scrollbar-width: none;
+  mask-image: linear-gradient(to bottom, transparent, #000 28px);
+}
+.transcript-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Caret at the end of a streaming answer: type being set, not a spinner. */
+.type-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.12em;
+  background: var(--color-ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .type-caret {
+    animation: caret-blink 1s steps(2, jump-none) infinite;
+  }
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Recording dot beside the input label while an answer is live. */
+.rec-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-poppy);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .rec-dot {
+    animation: rec-pulse 1.2s ease-in-out infinite;
+  }
+}
+@keyframes rec-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}

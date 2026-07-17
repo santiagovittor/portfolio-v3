@@ -8,6 +8,10 @@ import type { InterviewMessage } from "@/lib/interview/types";
 import { ContactCard, ProjectCard, TasteCard } from "./cards";
 import type { TasteCategory } from "@/content/bible/taste";
 
+// House style bans em dashes on this page. The system prompt asks the model
+// to avoid them; this catches the ones that slip through anyway.
+const deDash = (t: string) => t.replace(/[^\S\n]*—[^\S\n]*/g, ", ");
+
 // Model output sometimes carries markdown emphasis (*Abbey Road*, **never**).
 // No parts renderer for a fenced-off feature: this is a one-pass split for
 // the two emphasis marks the corpus actually uses, not a markdown parser.
@@ -141,6 +145,18 @@ const SUGGESTIONS = [
   "Can I hire you?",
 ];
 
+const PLACEHOLDERS = [
+  "(Lean in. Ask him anything.)",
+  "(The tape is rolling.)",
+  "(Ask about the work, the site, the records.)",
+];
+
+const stampFormat = new Intl.DateTimeFormat("en-US", {
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+});
+
 function renderPart(part: InterviewMessage["parts"][number]) {
   if (part.type === "tool-show_project" && part.state === "output-available") {
     return <ProjectCard slug={(part.output as { slug: string }).slug} />;
@@ -165,6 +181,10 @@ function Answer({
 }) {
   const offRecord = message.metadata?.offTheRecord;
   const sources = message.metadata?.sources ?? [];
+  const lastTextIdx = message.parts.reduce(
+    (acc, p, i) => (p.type === "text" ? i : acc),
+    -1,
+  );
   return (
     <div
       className={offRecord ? "font-serif italic" : ""}
@@ -181,7 +201,10 @@ function Answer({
             key={i}
             className="mt-4 max-w-[65ch] whitespace-pre-wrap text-lg leading-relaxed"
           >
-            <WordReveal text={part.text} done={!isStreaming} />
+            <WordReveal text={deDash(part.text)} done={!isStreaming} />
+            {isStreaming && i === lastTextIdx && (
+              <span className="type-caret" aria-hidden />
+            )}
           </p>
         ) : (
           <div key={i}>{renderPart(part)}</div>
@@ -198,110 +221,166 @@ function Answer({
 
 export function Transcript() {
   const [input, setInput] = useState("");
+  const [ph, setPh] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  // pinned-to-bottom like a real chat; scrolling up releases the pin
+  const stickRef = useRef(true);
+  const stampsRef = useRef(new Map<string, string>());
   const { messages, sendMessage, status, error } = useChat<InterviewMessage>({
     transport: new DefaultChatTransport({ api: "/api/interview" }),
   });
 
   const busy = status === "submitted" || status === "streaming";
-  const asked = new Set(
-    messages
-      .filter((m) => m.role === "user")
-      .map((m) => m.parts.find((p) => p.type === "text")?.text)
-  );
-  const notes = SUGGESTIONS.filter((s) => !asked.has(s)).slice(0, 3);
+  const notes = SUGGESTIONS.slice(0, 3);
+
+  // the time each question hit the tape (visitor's clock, set once per id)
+  const stampFor = (id: string) => {
+    const m = stampsRef.current;
+    if (!m.has(id)) m.set(id, stampFormat.format(new Date()));
+    return m.get(id)!;
+  };
+
+  // idle placeholder cycles like the room is waiting
+  useEffect(() => {
+    const id = setInterval(
+      () => setPh((n) => (n + 1) % PLACEHOLDERS.length),
+      4000,
+    );
+    return () => clearInterval(id);
+  }, []);
+
+  // keep the transcript pinned to its newest line while answers stream
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (el && stickRef.current) el.scrollTop = el.scrollHeight;
+  }, [messages, status]);
 
   const ask = (text: string) => {
     const q = text.trim();
     if (!q || busy) return;
+    stickRef.current = true;
     sendMessage({ text: q });
     setInput("");
-    // A clicked note unmounts (filtered out of `notes` once asked), taking
-    // focus with it. Land the keyboard back on the input, not <body>.
+    // A clicked note unmounts (notes hide once the interview starts),
+    // taking focus with it. Land the keyboard back on the input, not <body>.
     inputRef.current?.focus();
   };
 
   return (
-    <div className="mx-auto mt-12 w-full max-w-[72ch]">
-      <div role="log" aria-live="polite" aria-label="Interview transcript">
+    <div className="mx-auto mt-6 flex min-h-0 w-full max-w-[72ch] flex-1 flex-col">
+      <div
+        ref={scrollRef}
+        onScroll={(e) => {
+          const el = e.currentTarget;
+          stickRef.current =
+            el.scrollHeight - el.scrollTop - el.clientHeight < 120;
+        }}
+        className="transcript-scroll min-h-0 flex-1 overflow-y-auto pb-6 pt-8"
+      >
         {messages.length === 0 && (
-          <p className="border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink max-w-[65ch]">
-            The subject is at the table, coffee in hand. Ask anything: the
-            work, this site, the record player.
-          </p>
-        )}
-        {messages.map((message, i) =>
-          message.role === "user" ? (
-            <p
-              key={message.id}
-              className="q-in mt-12 max-w-[60ch] border-t border-shadow-ink/20 pt-6 font-serif text-xl italic leading-snug"
-            >
-              <span className="sr-only">Question: </span>
-              <span aria-hidden className="font-sans font-medium not-italic">
-                Q —{" "}
-              </span>
-              {message.parts.find((p) => p.type === "text")?.text}
+          <>
+            <p className="border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink max-w-[65ch]">
+              The subject is at the table, coffee in hand. Ask anything: the
+              work, this site, the record player.
             </p>
-          ) : (
-            <Answer
-              key={message.id}
-              message={message}
-              isStreaming={busy && i === messages.length - 1}
-            />
-          )
+            <ul
+              className="mt-10 flex flex-wrap items-start gap-4"
+              aria-label="Suggested questions"
+            >
+              {notes.map((s, i) => (
+                <li key={s}>
+                  <button
+                    type="button"
+                    onClick={() => ask(s)}
+                    disabled={busy}
+                    className="interview-note"
+                    style={
+                      { "--tilt": `${[-2, 1.5, 2.5][i % 3]}deg` } as React.CSSProperties
+                    }
+                  >
+                    <span className="block text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink">
+                      Ask about
+                    </span>
+                    <span className="mt-1 block font-serif italic">{s}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </>
         )}
-        {status === "submitted" && <StageDirection />}
-        {error && (
-          <p className="mt-6 border border-shadow-ink/20 p-4 text-shadow-ink max-w-[65ch]">
-            The line to Buenos Aires dropped. Ask again.
-          </p>
-        )}
+
+        <div role="log" aria-live="polite" aria-label="Interview transcript">
+          {messages.map((message, i) =>
+            message.role === "user" ? (
+              <div
+                key={message.id}
+                className="q-in mt-10 border-t border-shadow-ink/20 pt-6 first:mt-0 first:border-t-0 first:pt-0"
+              >
+                <p className="flex items-baseline justify-between gap-4">
+                  <span className="max-w-[56ch] font-serif text-xl italic leading-snug">
+                    <span className="sr-only">Question: </span>
+                    <span aria-hidden className="font-sans font-medium not-italic">
+                      Q.{" "}
+                    </span>
+                    {message.parts.find((p) => p.type === "text")?.text}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="shrink-0 text-[10px] font-medium uppercase tracking-[0.08em] tabular-nums text-shadow-ink"
+                  >
+                    {stampFor(message.id)}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <Answer
+                key={message.id}
+                message={message}
+                isStreaming={busy && i === messages.length - 1}
+              />
+            )
+          )}
+          {status === "submitted" && <StageDirection />}
+          {error && (
+            <p className="mt-6 border border-shadow-ink/20 p-4 text-shadow-ink max-w-[65ch]">
+              The line to Buenos Aires dropped. Ask again.
+            </p>
+          )}
+        </div>
       </div>
 
-      {notes.length > 0 && (
-        <ul
-          className="mt-12 flex flex-wrap items-start gap-4"
-          aria-label="Suggested questions"
-        >
-          {notes.map((s, i) => (
-            <li key={s}>
-              <button
-                type="button"
-                onClick={() => ask(s)}
-                disabled={busy}
-                className="interview-note"
-                style={{ "--tilt": `${[-2, 1.5, 2.5][i % 3]}deg` } as React.CSSProperties}
-              >
-                <span className="block text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink">
-                  Ask about
-                </span>
-                <span className="mt-1 block font-serif italic">{s}</span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-
       <form
-        className="sticky bottom-0 mt-12 bg-paper pb-[max(1rem,env(safe-area-inset-bottom))] pt-4"
+        className="border-t border-shadow-ink/15 bg-paper pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-4"
         onSubmit={(e) => {
           e.preventDefault();
           ask(input);
         }}
       >
-        <label
-          htmlFor="interview-question"
-          className="block text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink"
-        >
-          {busy ? "Hold, he's answering" : "Your question"}
-        </label>
+        <div className="flex items-baseline justify-between">
+          <label
+            htmlFor="interview-question"
+            className="block text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink"
+          >
+            {busy ? "Hold, he's answering" : "Your question"}
+          </label>
+          {busy && (
+            <span
+              aria-hidden
+              className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink"
+            >
+              <span className="rec-dot" />
+              Recording
+            </span>
+          )}
+        </div>
         <input
           ref={inputRef}
           id="interview-question"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           maxLength={500}
-          placeholder="(Lean in. Ask him anything.)"
+          placeholder={PLACEHOLDERS[ph]}
           className="interview-input mt-1"
         />
       </form>

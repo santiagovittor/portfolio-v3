@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Nav } from "../components/nav";
+import { LocalTime } from "../components/local-time";
 import { Transcript } from "./transcript";
 
 export const metadata: Metadata = {
   title: "Interview",
   description:
-    "A live interview with Santiago Vittor — conducted by you, answered by an AI stand-in grounded in his own words.",
+    "A live interview with Santiago Vittor, conducted by you, answered by an AI stand-in grounded in his own words.",
   openGraph: {
     title: "Interview with Santiago Vittor",
     description:
@@ -18,21 +19,21 @@ export default function InterviewPage() {
   return (
     <>
       <Nav variant="paper" />
-      <main className="laid-paper relative isolate min-h-svh overflow-hidden border-b border-shadow-ink/15 bg-paper px-5 pb-16 pt-32 md:px-16 md:pt-40">
+      <main className="laid-paper relative isolate flex h-svh flex-col overflow-hidden border-b border-shadow-ink/15 bg-paper px-5 pb-3 pt-28 md:px-16 md:pt-32">
         <span aria-hidden className="ghost-numeral -z-10">
           03
         </span>
-        <header className="mx-auto w-full max-w-[72ch]">
+        <header className="mx-auto w-full max-w-[72ch] flex-none">
           <p className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
-            In conversation — Buenos Aires
+            In conversation, Buenos Aires · <LocalTime />
           </p>
           <h1
             data-text="Interview with Santiago Vittor"
-            className="register mt-3 text-[clamp(2rem,5vw,3.5rem)] font-medium leading-[1.02] tracking-tight"
+            className="register mt-3 text-[clamp(1.75rem,4vw,3rem)] font-medium leading-[1.02] tracking-tight"
           >
             Interview with Santiago Vittor
           </h1>
-          <p className="mt-4 font-serif italic text-shadow-ink">
+          <p className="mt-3 font-serif italic text-shadow-ink">
             Conducted live, by you. Answers by an AI stand-in, grounded in
             Santiago&apos;s own words.
           </p>
@@ -41,7 +42,7 @@ export default function InterviewPage() {
       </main>
       <script
         dangerouslySetInnerHTML={{
-          __html: `console.log("%cQ — Who built this?%c\\nSV — I did. The stand-in answers upstairs; the source is at https://github.com/santiagovittor/portfolio-v3","font:600 13px Archivo,sans-serif;color:#2a2e33","font:13px Archivo,sans-serif;color:#e86a17")`,
+          __html: `console.log("%cQ. Who built this?%c\\nSV. I did. The stand-in answers upstairs; the source is at https://github.com/santiagovittor/portfolio-v3","font:600 13px Archivo,sans-serif;color:#2a2e33","font:13px Archivo,sans-serif;color:#e86a17")`,
         }}
       />
     </>
