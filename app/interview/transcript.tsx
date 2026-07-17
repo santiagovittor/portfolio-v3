@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
 import type { InterviewMessage } from "@/lib/interview/types";
+import { ContactCard, ProjectCard, TasteCard } from "./cards";
+import type { TasteCategory } from "@/content/bible/taste";
 
 // Model output sometimes carries markdown emphasis (*Abbey Road*, **never**).
 // No parts renderer for a fenced-off feature: this is a one-pass split for
@@ -30,10 +32,19 @@ const SUGGESTIONS = [
   "Can I hire you?",
 ];
 
-// Slice 4 replaces this body with tool cards. Must never throw on
-// part types it doesn't know.
-function renderPart(_part: InterviewMessage["parts"][number]) {
-  return null;
+function renderPart(part: InterviewMessage["parts"][number]) {
+  if (part.type === "tool-show_project" && part.state === "output-available") {
+    return <ProjectCard slug={(part.output as { slug: string }).slug} />;
+  }
+  if (part.type === "tool-show_taste" && part.state === "output-available") {
+    return (
+      <TasteCard category={(part.output as { category: TasteCategory }).category} />
+    );
+  }
+  if (part.type === "tool-contact_card" && part.state === "output-available") {
+    return <ContactCard />;
+  }
+  return null; // unknown parts and in-flight tool states render nothing
 }
 
 function Answer({ message }: { message: InterviewMessage }) {
