@@ -93,32 +93,40 @@ export async function POST(req: Request) {
   if (looksLikeInjection(lastUserText)) return refusalStream(REFUSALS.injection[language]);
 
   const offTheRecord = isOffTheRecord([lastUserText]);
-  const chunks = await retrieve(lastUserText);
-  const sources = [...new Set(chunks.map((c) => c.source))].map((label) => ({ label }));
 
-  const windowed = trimWindow(messages);
-  const truncatedWindowed = windowed.map((m, i) =>
-    i === windowed.length - 1 && m.role === "user"
-      ? { ...m, parts: [{ type: "text" as const, text: lastUserText }] }
-      : m
-  );
+  try {
+    const chunks = await retrieve(lastUserText);
+    const sources = [...new Set(chunks.map((c) => c.source))].map((label) => ({ label }));
 
-  const result = streamText({
-    model: chatModel(),
-    system: buildSystemPrompt({
-      persona: getIndex().persona,
-      chunks,
-      language,
-      offTheRecord,
-    }),
-    messages: await convertToModelMessages(truncatedWindowed),
-    tools: interviewTools,
-    stopWhen: stepCountIs(4),
-    abortSignal: req.signal,
-  });
+    const windowed = trimWindow(messages);
+    const truncatedWindowed = windowed.map((m, i) =>
+      i === windowed.length - 1 && m.role === "user"
+        ? { ...m, parts: [{ type: "text" as const, text: lastUserText }] }
+        : m
+    );
 
-  return result.toUIMessageStreamResponse({
-    messageMetadata: ({ part }) =>
-      part.type === "finish" ? { sources, offTheRecord } : undefined,
-  });
+    const result = streamText({
+      model: chatModel(),
+      system: buildSystemPrompt({
+        persona: getIndex().persona,
+        chunks,
+        language,
+        offTheRecord,
+      }),
+      messages: await convertToModelMessages(truncatedWindowed),
+      tools: interviewTools,
+      stopWhen: stepCountIs(4),
+      abortSignal: req.signal,
+    });
+
+    return result.toUIMessageStreamResponse({
+      messageMetadata: ({ part }) =>
+        part.type === "finish" ? { sources, offTheRecord } : undefined,
+    });
+  } catch (err) {
+    // Missing key, embedding/model outage, etc. — fail as a normal request
+    // error (client already renders "the line dropped"), not a raw 500.
+    console.error("interview route: upstream failure", err);
+    return Response.json({ error: "upstream unavailable" }, { status: 503 });
+  }
 }
