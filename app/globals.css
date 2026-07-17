@@ -640,40 +640,105 @@ body {
     inset 0 -2px 0 color-mix(in srgb, var(--color-ink) 25%, transparent);
 }
 
-/* Interview: streaming cursor — type being set. Static under reduced motion. */
-.interview-cursor {
-  color: var(--color-ink);
-}
+/* Interview: live-transcript typesetting. Questions settle onto the page
+   like set type, answers arrive word by word from a slight blur, the
+   thinking state is a stage direction. All static under reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
-  .interview-cursor {
-    animation: cursor-set 1s steps(2) infinite;
+  .q-in {
+    animation: q-settle 450ms var(--ease-out-quart);
+  }
+  /* inline-block only while animating (transform needs it); once an answer
+     completes, transcript.tsx swaps back to plain text nodes */
+  .word-in {
+    display: inline-block;
+    animation: word-in 400ms var(--ease-out-quart);
+  }
+  .stage-in {
+    animation: stage-in 350ms var(--ease-out-quart);
   }
 }
-@keyframes cursor-set {
-  50% {
+@keyframes q-settle {
+  from {
     opacity: 0;
+    transform: translateY(16px);
+    letter-spacing: 0.04em;
+  }
+}
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+    filter: blur(4px);
+  }
+}
+@keyframes stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
   }
 }
 
-/* Interview: suggestion chips — the ticket-stub clip from .index-row at chip
-   size, hairline warms to poppy on hover. */
-.interview-chip {
-  clip-path: polygon(
-    0 0,
-    calc(100% - 8px) 0,
-    100% 8px,
-    100% 100%,
-    8px 100%,
-    0 calc(100% - 8px)
-  );
-  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
-  border: 1px solid color-mix(in srgb, var(--color-shadow-ink) 20%, transparent);
+/* Interview input: a bare baseline rule, not a pill. Focus warms the
+   baseline to poppy instead of drawing an outline box around a rule. */
+.interview-input {
+  width: 100%;
+  padding: 10px 2px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 35%, transparent);
+  border-radius: 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.125rem;
+  caret-color: var(--color-ink);
   transition: border-color 300ms var(--ease-out-quart);
 }
-.interview-chip:hover:not(:disabled) {
-  border-color: var(--color-poppy);
+.interview-input::placeholder {
+  color: color-mix(in srgb, var(--color-ink) 55%, var(--color-paper));
 }
-.interview-chip:focus-visible {
+.interview-input:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--color-poppy);
+  border-bottom-color: var(--color-poppy);
+}
+
+/* Interview suggestions: index-card notes in the margin, slightly tilted,
+   paper shadow, hairline warms to poppy on hover. */
+.interview-note {
+  --tilt: 0deg;
+  rotate: var(--tilt);
+  max-width: 15rem;
+  padding: 12px 14px;
+  text-align: left;
+  background: color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  box-shadow:
+    0 1px 2px rgba(20, 18, 16, 0.08),
+    0 5px 14px rgba(20, 18, 16, 0.09);
+  transition:
+    translate 300ms var(--ease-out-quart),
+    border-color 300ms var(--ease-out-quart),
+    box-shadow 300ms var(--ease-out-quart);
+}
+.interview-note:hover:not(:disabled),
+.interview-note:focus-visible {
+  translate: 0 -3px;
+  border-color: var(--color-poppy);
+  box-shadow:
+    0 2px 4px rgba(20, 18, 16, 0.1),
+    0 10px 22px rgba(20, 18, 16, 0.12);
+}
+.interview-note:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 0 0 2px var(--color-poppy),
+    0 2px 4px rgba(20, 18, 16, 0.1);
+}
+.interview-note:disabled {
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .interview-note,
+  .interview-input {
+    transition: none;
+  }
 }
