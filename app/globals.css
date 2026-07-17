@@ -639,3 +639,41 @@ body {
     inset 0 1px 0 color-mix(in srgb, var(--color-white) 25%, transparent),
     inset 0 -2px 0 color-mix(in srgb, var(--color-ink) 25%, transparent);
 }
+
+/* Interview: streaming cursor — type being set. Static under reduced motion. */
+.interview-cursor {
+  color: var(--color-ink);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .interview-cursor {
+    animation: cursor-set 1s steps(2) infinite;
+  }
+}
+@keyframes cursor-set {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Interview: suggestion chips — the ticket-stub clip from .index-row at chip
+   size, hairline warms to poppy on hover. */
+.interview-chip {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% 100%,
+    8px 100%,
+    0 calc(100% - 8px)
+  );
+  background: color-mix(in srgb, var(--color-ink) 4%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-shadow-ink) 20%, transparent);
+  transition: border-color 300ms var(--ease-out-quart);
+}
+.interview-chip:hover:not(:disabled) {
+  border-color: var(--color-poppy);
+}
+.interview-chip:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-poppy);
+}
