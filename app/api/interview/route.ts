@@ -117,6 +117,9 @@ export async function POST(req: Request) {
       tools: interviewTools,
       stopWhen: stepCountIs(4),
       abortSignal: req.signal,
+      providerOptions: {
+        nvidia: { chat_template_kwargs: { enable_thinking: false } },
+      },
     });
 
     return result.toUIMessageStreamResponse({

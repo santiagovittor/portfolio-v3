@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^4.0.17",
+    "@ai-sdk/openai-compatible": "^3.0.12",
     "@ai-sdk/react": "^4.0.32",
     "@paper-design/shaders-react": "^0.0.76",
     "agent-reach": "^0.3.4",
