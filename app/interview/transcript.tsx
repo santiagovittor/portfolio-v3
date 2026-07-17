@@ -140,7 +140,7 @@ function StageDirection() {
 const SUGGESTIONS = [
   "What do you actually do at FoodStyles?",
   "Pitch me this website.",
-  "What's on the record player?",
+  "Recommend a song.",
   "How does this chatbot work?",
   "Show me your favorite project.",
   "Can I hire you?",
@@ -168,6 +168,9 @@ function renderPart(part: InterviewMessage["parts"][number]) {
     );
   }
   if (part.type === "tool-now_spinning" && part.state === "output-available") {
+    return <MusicCard snapshot={part.output as MusicCardData} />;
+  }
+  if (part.type === "tool-recommend_song" && part.state === "output-available") {
     return <MusicCard snapshot={part.output as MusicCardData} />;
   }
   if (part.type === "tool-contact_card" && part.state === "output-available") {

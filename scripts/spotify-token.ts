@@ -15,7 +15,8 @@ for (const line of readFileSync(join(process.cwd(), ".env.local"), "utf8").split
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const REDIRECT_URI = "http://127.0.0.1:8888/callback"; // Spotify bans localhost/plain-http; loopback IP is the allowed dev form
-const SCOPE = "user-top-read user-read-currently-playing user-read-recently-played";
+const SCOPE =
+  "user-top-read user-read-currently-playing user-read-recently-played user-library-read playlist-read-private";
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error("Missing SPOTIFY_CLIENT_ID or SPOTIFY_CLIENT_SECRET in .env.local.");

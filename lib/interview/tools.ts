@@ -1,6 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
-import { getSnapshot } from "../spotify/api";
+import { getSnapshot, getRecommendation } from "../spotify/api";
 
 // Keep in sync with app/work/case-studies.ts slugs (checked in slice 5).
 export const PROJECT_SLUGS = ["santiagovittor-store", "dubanronald", "canvass"] as const;
@@ -27,6 +27,15 @@ export const interviewTools = {
     execute: async () => {
       const snap = await getSnapshot();
       return snap ?? { unavailable: true as const };
+    },
+  }),
+  recommend_song: tool({
+    description:
+      "Recommend one song to the interviewer and show it as a playable card. Picks a real random track from Santiago's liked songs and his own playlists. Use when asked to recommend, suggest, or play a song, or for 'surprise me' style music requests. Follow with at most two sentences introducing the pick warmly.",
+    inputSchema: z.object({}),
+    execute: async () => {
+      const rec = await getRecommendation();
+      return rec ?? { unavailable: true as const };
     },
   }),
   contact_card: tool({

@@ -110,6 +110,60 @@ describe("getSnapshot", () => {
   });
 });
 
+describe("pickSource", () => {
+  it("selects the weighted source for a cumulative r", async () => {
+    const { pickSource } = await import("./api");
+    const pool = [
+      { kind: "liked" as const, total: 10 },
+      { kind: "playlist" as const, id: "a", name: "A", total: 5 },
+      { kind: "playlist" as const, id: "b", name: "B", total: 2 },
+    ];
+    expect(pickSource(pool, 0).kind).toBe("liked");
+    expect(pickSource(pool, 9).kind).toBe("liked");
+    expect(pickSource(pool, 10)).toMatchObject({ id: "a" });
+    expect(pickSource(pool, 14)).toMatchObject({ id: "a" });
+    expect(pickSource(pool, 15)).toMatchObject({ id: "b" });
+    expect(pickSource(pool, 16)).toMatchObject({ id: "b" }); // past-end clamps to last
+  });
+});
+
+describe("buildSourcePool", () => {
+  it("keeps liked songs and only owned playlists with more than 20 tracks", async () => {
+    global.fetch = mockFetch([
+      [TOKEN, () => ok({ access_token: "at", expires_in: 3600 })],
+      [
+        "/me/playlists",
+        () =>
+          ok({
+            items: [
+              { id: "p1", name: "Mine Big", owner: { id: "santi" }, items: { total: 50 } },
+              { id: "p2", name: "Mine Small", owner: { id: "santi" }, items: { total: 5 } },
+              { id: "p3", name: "Not Mine", owner: { id: "other" }, items: { total: 99 } },
+              { id: "p4", name: "Exactly 20", owner: { id: "santi" }, items: { total: 20 } },
+            ],
+            next: null,
+          }),
+      ],
+      ["/me/tracks", () => ok({ total: 2605 })],
+      ["/me", () => ok({ id: "santi" })],
+    ]) as unknown as typeof fetch;
+
+    const { buildSourcePool } = await import("./api");
+    const pool = await buildSourcePool();
+    expect(pool.find((s) => s.kind === "liked")?.total).toBe(2605);
+    const playlists = pool.filter((s) => s.kind === "playlist") as { id: string }[];
+    expect(playlists.map((s) => s.id)).toEqual(["p1"]); // p2 too small, p3 not owned, p4 not > 20
+  });
+});
+
+describe("getRecommendation", () => {
+  it("returns null when the refresh token is missing", async () => {
+    delete process.env.SPOTIFY_REFRESH_TOKEN;
+    const { getRecommendation } = await import("./api");
+    expect(await getRecommendation()).toBeNull();
+  });
+});
+
 describe("getAccessToken", () => {
   it("memoizes: two calls make one token request", async () => {
     const f = mockFetch([[TOKEN, () => ok({ access_token: "at", expires_in: 3600 })]]);

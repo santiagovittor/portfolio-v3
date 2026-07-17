@@ -7,10 +7,10 @@
 // the static taste card whenever live data is unavailable.
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import type { SpotifySnapshot, SpotifyTrack } from "@/lib/spotify/api";
+import type { SpotifyPick, SpotifySnapshot, SpotifyTrack } from "@/lib/spotify/api";
 import { TasteCard } from "./cards";
 
-export type MusicCardData = SpotifySnapshot | { unavailable: true };
+export type MusicCardData = SpotifySnapshot | SpotifyPick | { unavailable: true };
 
 // Minimal shape of Spotify's iFrame Embed API (no @types package ships one).
 type SpotifyController = {
@@ -94,23 +94,32 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
   // Hooks must run unconditionally, so the early returns come after them.
   if ("unavailable" in snapshot) return <TasteCard category="music" />;
 
-  const lead = snapshot.nowPlaying ?? snapshot.recent[0] ?? snapshot.top[0] ?? null;
+  // Two shapes share this card: a live listening snapshot, and a single
+  // recommended pick. A pick has no rotation and no "live" pulse at rest.
+  const pick = "pick" in snapshot ? snapshot : null;
+  const snap = "pick" in snapshot ? null : snapshot;
+
+  const lead = pick ? pick.pick : snap!.nowPlaying ?? snap!.recent[0] ?? snap!.top[0] ?? null;
   if (!lead) return <TasteCard category="music" />;
 
   // rotation = recent tracks minus whatever is already the lead, then top as
-  // filler so the sleeve is never a one-liner.
+  // filler so the sleeve is never a one-liner. (Empty for a single pick.)
   const rotation: SpotifyTrack[] = [];
-  const seen = new Set<string>([lead.id]);
-  for (const t of [...snapshot.recent, ...snapshot.top]) {
-    if (seen.has(t.id)) continue;
-    seen.add(t.id);
-    rotation.push(t);
-    if (rotation.length === 3) break;
+  if (snap) {
+    const seen = new Set<string>([lead.id]);
+    for (const t of [...snap.recent, ...snap.top]) {
+      if (seen.has(t.id)) continue;
+      seen.add(t.id);
+      rotation.push(t);
+      if (rotation.length === 3) break;
+    }
   }
 
   const display = activeTrack ?? lead;
-  const spinning = isPlaying || (!activeTrack && !!snapshot.nowPlaying);
-  const label = spinning ? "now spinning" : "last spun";
+  const spinning = isPlaying || (!!snap && !activeTrack && !!snap.nowPlaying);
+  const restingLabel = pick ? "a song for you" : snap!.nowPlaying ? "now spinning" : "last spun";
+  const label = isPlaying ? "now spinning" : restingLabel;
+  const eyebrowRight = pick ? pick.source : "b-side · live from spotify";
 
   async function toggle(track: SpotifyTrack) {
     const uri = `spotify:track:${track.id}`;
@@ -155,9 +164,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
           {label}
           {spinning && <span className="sr-only">, playing</span>}
         </span>
-        <span className="font-serif text-xs italic text-shadow-ink">
-          b-side · live from spotify
-        </span>
+        <span className="font-serif text-xs italic text-shadow-ink">{eyebrowRight}</span>
       </figcaption>
 
       {/* lead row: the turntable. Art shows the active track, spins on play. */}
@@ -238,9 +245,11 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
         >
           open in spotify ↗
         </a>
-        <span className="font-serif italic tabular-nums text-shadow-ink">
-          fetched {timeFmt.format(new Date(snapshot.fetchedAt))} ART
-        </span>
+        {snap && (
+          <span className="font-serif italic tabular-nums text-shadow-ink">
+            fetched {timeFmt.format(new Date(snap.fetchedAt))} ART
+          </span>
+        )}
       </div>
     </figure>
   );

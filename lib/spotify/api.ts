@@ -21,8 +21,21 @@ export type SpotifySnapshot = {
   fetchedAt: string; // ISO
 };
 
+export type SpotifyPick = {
+  pick: SpotifyTrack;
+  source: string; // human label: "from your liked songs" / 'from the playlist "X"'
+};
+
 const API = "https://api.spotify.com/v1";
 const TOKEN_URL = "https://accounts.spotify.com/api/token";
+
+function hasSpotifyEnv(): boolean {
+  return !!(
+    process.env.SPOTIFY_REFRESH_TOKEN &&
+    process.env.SPOTIFY_CLIENT_ID &&
+    process.env.SPOTIFY_CLIENT_SECRET
+  );
+}
 
 const imageSchema = z.object({
   url: z.string(),
@@ -117,17 +130,95 @@ export async function fetchSnapshot(): Promise<SpotifySnapshot> {
 const cachedFetch = unstable_cache(fetchSnapshot, ["spotify-snapshot"], { revalidate: 120 });
 
 export async function getSnapshot(): Promise<SpotifySnapshot | null> {
-  if (
-    !process.env.SPOTIFY_REFRESH_TOKEN ||
-    !process.env.SPOTIFY_CLIENT_ID ||
-    !process.env.SPOTIFY_CLIENT_SECRET
-  ) {
-    return null; // unconfigured: degrade, never fetch or throw
-  }
+  if (!hasSpotifyEnv()) return null; // unconfigured: degrade, never fetch or throw
   try {
     return await cachedFetch();
   } catch (err) {
     console.error("spotify snapshot failed", err);
+    return null;
+  }
+}
+
+// A source we can draw a random track from: all liked songs, or one of
+// Santiago's own playlists with enough tracks to be worth recommending from.
+export type Source =
+  | { kind: "liked"; total: number }
+  | { kind: "playlist"; id: string; name: string; total: number };
+
+// Walk a weighted list: source i is chosen with probability total_i / sum, so
+// the final pick is uniform across every individual track in the pool.
+export function pickSource(pool: Source[], r: number): Source {
+  for (const s of pool) {
+    if (r < s.total) return s;
+    r -= s.total;
+  }
+  return pool[pool.length - 1];
+}
+
+const PLAYLIST_MIN = 20; // only recommend from playlists with MORE than this
+
+// Liked songs + the visitor-worthy playlists Santiago made. Cached an hour:
+// his library changes slowly and this is 5+ requests to assemble.
+export async function buildSourcePool(): Promise<Source[]> {
+  const token = await getAccessToken();
+  const me = (await spotifyGet("/me", token)) as { id?: string } | null;
+  const meId = me?.id ?? "";
+  const pool: Source[] = [];
+
+  const liked = (await spotifyGet("/me/tracks?limit=1", token)) as { total?: number } | null;
+  if (liked?.total) pool.push({ kind: "liked", total: liked.total });
+
+  let path: string | null = "/me/playlists?limit=50";
+  while (path) {
+    const page = (await spotifyGet(path, token)) as {
+      items?: Array<{ id: string; name: string; owner?: { id?: string }; items?: { total?: number } }>;
+      next?: string | null;
+    } | null;
+    for (const p of page?.items ?? []) {
+      const count = p.items?.total ?? 0;
+      if (p.owner?.id === meId && count > PLAYLIST_MIN) {
+        pool.push({ kind: "playlist", id: p.id, name: p.name, total: count });
+      }
+    }
+    path = page?.next ? page.next.replace(API, "") : null;
+  }
+  return pool;
+}
+
+const cachedPool = unstable_cache(buildSourcePool, ["spotify-source-pool"], { revalidate: 3600 });
+
+// One random track from the pool, returned fresh (uncached) each call so
+// "recommend a song" varies. Retries a few times because a random slot can
+// land on a local file or podcast episode that has no playable track.
+export async function getRecommendation(): Promise<SpotifyPick | null> {
+  if (!hasSpotifyEnv()) return null;
+  try {
+    const token = await getAccessToken();
+    const pool = await cachedPool();
+    const totalTracks = pool.reduce((n, s) => n + s.total, 0);
+    if (totalTracks === 0) return null;
+
+    for (let attempt = 0; attempt < 5; attempt++) {
+      const src = pickSource(pool, Math.floor(Math.random() * totalTracks));
+      const offset = Math.floor(Math.random() * src.total);
+      const res = (await spotifyGet(
+        src.kind === "liked"
+          ? `/me/tracks?offset=${offset}&limit=1`
+          : `/playlists/${src.id}/items?offset=${offset}&limit=1`,
+        token,
+      )) as { items?: Array<{ track?: unknown; item?: unknown }> } | null;
+      // /me/tracks nests the track under `track`; /playlists/{id}/items under `item`
+      const row = res?.items?.[0];
+      const track = toTrack(row?.track ?? row?.item);
+      if (track) {
+        const source =
+          src.kind === "liked" ? "from your liked songs" : `from the playlist "${src.name}"`;
+        return { pick: track, source };
+      }
+    }
+    return null;
+  } catch (err) {
+    console.error("spotify recommendation failed", err);
     return null;
   }
 }
