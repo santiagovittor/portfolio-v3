@@ -1,5 +1,6 @@
 import { tool } from "ai";
 import { z } from "zod";
+import { getSnapshot } from "@/lib/spotify/api";
 
 // Keep in sync with app/work/case-studies.ts slugs (checked in slice 5).
 export const PROJECT_SLUGS = ["santiagovittor-store", "dubanronald", "canvass"] as const;
@@ -18,6 +19,15 @@ export const interviewTools = {
       category: z.enum(["film", "music", "cooking", "sports"]),
     }),
     execute: async ({ category }) => ({ category }),
+  }),
+  now_spinning: tool({
+    description:
+      "Live look at what Santiago is listening to on Spotify right now and lately. Use for any question about current music, what he's playing, or listening habits. For long-standing taste use show_taste instead. Follow with at most two sentences that react to the actual tracks.",
+    inputSchema: z.object({}),
+    execute: async () => {
+      const snap = await getSnapshot();
+      return snap ?? { unavailable: true as const };
+    },
   }),
   contact_card: tool({
     description:
