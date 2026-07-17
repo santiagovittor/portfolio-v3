@@ -6,6 +6,12 @@ export const metadata: Metadata = {
   title: "Interview",
   description:
     "A live interview with Santiago Vittor — conducted by you, answered by an AI stand-in grounded in his own words.",
+  openGraph: {
+    title: "Interview with Santiago Vittor",
+    description:
+      "Conducted live, by you. Answers by an AI stand-in, grounded in Santiago's own words.",
+    url: "/interview",
+  },
 };
 
 export default function InterviewPage() {
