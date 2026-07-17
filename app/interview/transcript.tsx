@@ -47,11 +47,25 @@ function renderPart(part: InterviewMessage["parts"][number]) {
   return null; // unknown parts and in-flight tool states render nothing
 }
 
-function Answer({ message }: { message: InterviewMessage }) {
+function Answer({
+  message,
+  isStreaming,
+}: {
+  message: InterviewMessage;
+  isStreaming: boolean;
+}) {
   const offRecord = message.metadata?.offTheRecord;
   const sources = message.metadata?.sources ?? [];
   return (
-    <div className={offRecord ? "font-serif italic" : ""}>
+    <div
+      className={offRecord ? "font-serif italic" : ""}
+      // role="log" announces additions as they happen; a streaming answer
+      // mutates dozens of times, which some screen readers re-announce on
+      // every token. Opt the in-progress text out and let it announce once,
+      // complete, when streaming ends and this reverts to the ancestor's
+      // aria-live="polite".
+      aria-live={isStreaming ? "off" : undefined}
+    >
       {message.parts.map((part, i) =>
         part.type === "text" ? (
           <p
@@ -107,7 +121,7 @@ export function Transcript() {
             work, this site, the record player.
           </p>
         )}
-        {messages.map((message) =>
+        {messages.map((message, i) =>
           message.role === "user" ? (
             <p
               key={message.id}
@@ -117,7 +131,11 @@ export function Transcript() {
               {message.parts.find((p) => p.type === "text")?.text}
             </p>
           ) : (
-            <Answer key={message.id} message={message} />
+            <Answer
+              key={message.id}
+              message={message}
+              isStreaming={busy && i === messages.length - 1}
+            />
           )
         )}
         {busy && (
