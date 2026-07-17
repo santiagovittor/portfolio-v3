@@ -15,6 +15,12 @@ on its own:
 | 4 | `2026-07-16-interview-4-props.md` | Tool cards, nav + contact entry points, easter eggs | 3 |
 | 5 | `2026-07-16-interview-5-press-check.md` | Hardening, a11y, Lighthouse, OG metadata | 4 |
 | 6 | `2026-07-17-interview-6-nvidia-model.md` | Chat model swapped to NVIDIA (Gemini free-tier quota escape) | 5 |
+| 7 | (commit-only, no plan file) | Transcript typesetting on `/interview` | 6 |
+| 8 | (commit-only, no plan file) | Chat-locked transcript, live details, no em dashes | 7 |
+| 9 | `2026-07-17-interview-9-spotify-b-side.md` | Live Spotify listening via `now_spinning` tool + playable B-side card | 8 |
+
+Slices 7 and 8 were small UI passes shipped straight as commits (no plan
+files), so the numbering jumps from 6 to 9 in the plan folder on purpose.
 
 ## Roles
 
@@ -35,6 +41,13 @@ on its own:
   NOT needed for `npm run build` (the embeddings index is committed).
 - `NVIDIA_API_KEY` in `.env.local` — chat model (NVIDIA-hosted Nemotron 3,
   slice 6). Needed for `npm run dev`. NOT needed for `npm run build`.
+- `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET`, `SPOTIFY_REFRESH_TOKEN`
+  (slice 9) — the live `now_spinning` music card. Mint the refresh token
+  once with `npm run spotify:token` (needs the id + secret set first, then
+  approve in the browser). Needed for `npm run dev` if you want live music
+  data, and add all three to the Vercel project env for production. NOT
+  needed for `npm run build`; with any of them missing the tool degrades to
+  the static taste card and nothing crashes.
 - Node ≥ 20.9 (Next 16 floor). Windows dev machine; scripts must be
   cross-platform (no bash-isms in npm scripts).
 
