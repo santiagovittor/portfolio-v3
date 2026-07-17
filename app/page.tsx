@@ -8,15 +8,7 @@ import { LocalTime } from "./components/local-time";
 import { CircularText } from "./components/circular-text";
 import { PaperArtifacts } from "./components/paper-artifacts";
 import portrait from "@/public/images/about/portrait-4x5.jpg";
-
-// TODO(sv): confirm email and WhatsApp (SPEC.md → Content inventory)
-const links = {
-  github: "https://github.com/santiagovittor",
-  store: "https://santiagovittor.store",
-  email: "mailto:svittordev@gmail.com",
-  whatsapp: "https://wa.me/000000000000",
-  linkedin: "https://www.linkedin.com/in/santiago-vittor/",
-};
+import { links } from "./links";
 
 const contactIndex = [
   // TODO(sv): real WhatsApp number
