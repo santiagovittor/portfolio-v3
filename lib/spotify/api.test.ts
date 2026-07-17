@@ -128,7 +128,7 @@ describe("pickSource", () => {
 });
 
 describe("buildSourcePool", () => {
-  it("keeps liked songs and only owned playlists with more than 20 tracks", async () => {
+  it("keeps liked songs and only allowlisted playlists, ignoring case/emoji/spacing", async () => {
     global.fetch = mockFetch([
       [TOKEN, () => ok({ access_token: "at", expires_in: 3600 })],
       [
@@ -136,23 +136,22 @@ describe("buildSourcePool", () => {
         () =>
           ok({
             items: [
-              { id: "p1", name: "Mine Big", owner: { id: "santi" }, items: { total: 50 } },
-              { id: "p2", name: "Mine Small", owner: { id: "santi" }, items: { total: 5 } },
-              { id: "p3", name: "Not Mine", owner: { id: "other" }, items: { total: 99 } },
-              { id: "p4", name: "Exactly 20", owner: { id: "santi" }, items: { total: 20 } },
+              { id: "p1", name: "Vintage Mood 💾", items: { total: 478 } }, // allowlisted (emoji + case)
+              { id: "p2", name: "teen pop ⚡", items: { total: 141 } }, // allowlisted (lower + emoji)
+              { id: "p3", name: "Some Followed Playlist", items: { total: 99 } }, // not allowlisted
+              { id: "p4", name: "Cool Vibes", items: { total: 0 } }, // allowlisted but empty
             ],
             next: null,
           }),
       ],
       ["/me/tracks", () => ok({ total: 2605 })],
-      ["/me", () => ok({ id: "santi" })],
     ]) as unknown as typeof fetch;
 
     const { buildSourcePool } = await import("./api");
     const pool = await buildSourcePool();
     expect(pool.find((s) => s.kind === "liked")?.total).toBe(2605);
     const playlists = pool.filter((s) => s.kind === "playlist") as { id: string }[];
-    expect(playlists.map((s) => s.id)).toEqual(["p1"]); // p2 too small, p3 not owned, p4 not > 20
+    expect(playlists.map((s) => s.id)).toEqual(["p1", "p2"]); // p3 not allowlisted, p4 empty
   });
 });
 

@@ -155,14 +155,26 @@ export function pickSource(pool: Source[], r: number): Source {
   return pool[pool.length - 1];
 }
 
-const PLAYLIST_MIN = 20; // only recommend from playlists with MORE than this
+// The exact playlists Santiago wants "recommend a song" to draw from. Matched
+// by name, ignoring case, spacing, emoji and punctuation, so edit this list in
+// plain words to change the pool. (The "Tu top de canciones 20XX" ones are not
+// in his library via the API yet; save them in Spotify and add them here.)
+const PLAYLIST_ALLOWLIST = [
+  "Vintage Mood",
+  "Cool Vibes",
+  "Pure beauty",
+  "Build me up 2022",
+  "Teen pop",
+  "IWANTTORIDEMYBICYCLE",
+  "2026",
+];
+const normName = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+const allowedPlaylists = new Set(PLAYLIST_ALLOWLIST.map(normName));
 
-// Liked songs + the visitor-worthy playlists Santiago made. Cached an hour:
-// his library changes slowly and this is 5+ requests to assemble.
+// Liked songs + only the allowlisted playlists. Cached an hour: his library
+// changes slowly and this is several requests to assemble.
 export async function buildSourcePool(): Promise<Source[]> {
   const token = await getAccessToken();
-  const me = (await spotifyGet("/me", token)) as { id?: string } | null;
-  const meId = me?.id ?? "";
   const pool: Source[] = [];
 
   const liked = (await spotifyGet("/me/tracks?limit=1", token)) as { total?: number } | null;
@@ -171,12 +183,12 @@ export async function buildSourcePool(): Promise<Source[]> {
   let path: string | null = "/me/playlists?limit=50";
   while (path) {
     const page = (await spotifyGet(path, token)) as {
-      items?: Array<{ id: string; name: string; owner?: { id?: string }; items?: { total?: number } }>;
+      items?: Array<{ id: string; name: string; items?: { total?: number } }>;
       next?: string | null;
     } | null;
     for (const p of page?.items ?? []) {
       const count = p.items?.total ?? 0;
-      if (p.owner?.id === meId && count > PLAYLIST_MIN) {
+      if (count > 0 && allowedPlaylists.has(normName(p.name))) {
         pool.push({ kind: "playlist", id: p.id, name: p.name, total: count });
       }
     }
