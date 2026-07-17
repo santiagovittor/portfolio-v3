@@ -15,6 +15,7 @@ const contactIndex = [
   { label: "WhatsApp", note: "fastest for projects", href: links.whatsapp },
   { label: "LinkedIn", note: "roles and referrals", href: links.linkedin },
   { label: "GitHub", note: "the code, including this site", href: links.github },
+  { label: "Interview", note: "ask the AI stand-in anything", href: "/interview" },
   { label: "Services site", note: "for business projects", href: links.store },
 ];
 

@@ -102,6 +102,14 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
               Contact
             </a>
           </li>
+          <li>
+            <a
+              href="/interview"
+              className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}
+            >
+              Interview
+            </a>
+          </li>
         </ul>
       </nav>
       <a

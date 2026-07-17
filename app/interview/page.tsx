@@ -33,6 +33,11 @@ export default function InterviewPage() {
         </header>
         <Transcript />
       </main>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `console.log("%cQ — Who built this?%c\\nSV — I did. The stand-in answers upstairs; the source is at https://github.com/santiagovittor/portfolio-v3","font:600 13px Archivo,sans-serif;color:#2a2e33","font:13px Archivo,sans-serif;color:#e86a17")`,
+        }}
+      />
     </>
   );
 }
