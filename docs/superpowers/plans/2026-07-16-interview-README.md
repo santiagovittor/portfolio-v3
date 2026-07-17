@@ -14,6 +14,7 @@ on its own:
 | 3 | `2026-07-16-interview-3-spread.md` | `/interview` page UI, all states | 2 |
 | 4 | `2026-07-16-interview-4-props.md` | Tool cards, nav + contact entry points, easter eggs | 3 |
 | 5 | `2026-07-16-interview-5-press-check.md` | Hardening, a11y, Lighthouse, OG metadata | 4 |
+| 6 | `2026-07-17-interview-6-nvidia-model.md` | Chat model swapped to NVIDIA (Gemini free-tier quota escape) | 5 |
 
 ## Roles
 
@@ -30,8 +31,10 @@ on its own:
 
 - `GEMINI_API_KEY` in `.env.local` (same variable name as the
   santiagovittor-store and portfolio2026 repos — Santiago has the key).
-  Needed for `npm run dev`, `npm run embed`. NOT needed for `npm run build`
-  (the embeddings index is committed).
+  Needed for `npm run dev`, `npm run embed` (embeddings only, slice 6 on).
+  NOT needed for `npm run build` (the embeddings index is committed).
+- `NVIDIA_API_KEY` in `.env.local` — chat model (NVIDIA-hosted Nemotron 3,
+  slice 6). Needed for `npm run dev`. NOT needed for `npm run build`.
 - Node ≥ 20.9 (Next 16 floor). Windows dev machine; scripts must be
   cross-platform (no bash-isms in npm scripts).
 
