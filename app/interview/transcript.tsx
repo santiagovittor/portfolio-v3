@@ -6,6 +6,7 @@ import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
 import type { InterviewMessage } from "@/lib/interview/types";
 import { ContactCard, ProjectCard, TasteCard } from "./cards";
+import { MusicCard, type MusicCardData } from "./music-card";
 import type { TasteCategory } from "@/content/bible/taste";
 
 // House style bans em dashes on this page. The system prompt asks the model
@@ -165,6 +166,9 @@ function renderPart(part: InterviewMessage["parts"][number]) {
     return (
       <TasteCard category={(part.output as { category: TasteCategory }).category} />
     );
+  }
+  if (part.type === "tool-now_spinning" && part.state === "output-available") {
+    return <MusicCard snapshot={part.output as MusicCardData} />;
   }
   if (part.type === "tool-contact_card" && part.state === "output-available") {
     return <ContactCard />;
