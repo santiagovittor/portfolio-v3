@@ -92,7 +92,7 @@ export async function POST(req: Request) {
   if (!perMinute(ip) || !perHour(ip)) return refusalStream(REFUSALS.rate[language]);
   if (looksLikeInjection(lastUserText)) return refusalStream(REFUSALS.injection[language]);
 
-  const offTheRecord = isOffTheRecord(texts);
+  const offTheRecord = isOffTheRecord([lastUserText]);
   const chunks = await retrieve(lastUserText);
   const sources = [...new Set(chunks.map((c) => c.source))].map((label) => ({ label }));
 
