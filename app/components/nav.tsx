@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Grain } from "./grain";
 
 /**
  * Glass over anything tagged data-nav-theme="dark", ink-on-glass everywhere
@@ -9,10 +10,15 @@ import { useEffect, useRef, useState } from "react";
  * element in the document and flips theme based on how many currently
  * intersect the fixed nav's own height band at the top of the viewport.
  * variant="paper" pins the ink style for pages without a hero.
+ *
+ * Below md the link pill doesn't fit next to the logo, so the nav collapses
+ * to SV + a Menu button that opens a full-screen paper contents sheet
+ * (native <dialog>). Desktop (md+) keeps the centered pill untouched.
  */
 export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   const [onDark, setOnDark] = useState(variant === "hero");
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDialogElement>(null);
   const onPaper = variant === "paper" || !onDark;
 
   useEffect(() => {
@@ -68,6 +74,13 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   const hover = onPaper ? "hover:bg-ink/10" : "hover:bg-white/15";
   const base = variant === "paper" ? "/" : "";
 
+  const links = [
+    { href: `${base}#work`, label: "Work" },
+    { href: `${base}#about`, label: "About" },
+    { href: `${base}#contact`, label: "Contact" },
+    { href: "/interview", label: "Interview" },
+  ];
+
   return (
     <header
       ref={headerRef}
@@ -81,48 +94,84 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
         SV
       </a>
       {/* Concentric pill: uniform 4px inset all around (p-1), so the hover
-          pill reads as the same shape as its container. Below md: four
-          items don't fit next to the logo at mobile widths, so the pill
-          becomes a horizontal scroll rail in normal flow (same pattern as
-          the interview page's suggestion chips) instead of the absolute-
-          centered overlay, which was covering the logo entirely. md: and
-          up is untouched. */}
+          pill reads as the same shape as its container. md+ only. */}
       <nav
         aria-label="Main"
-        className={`${glass} scroll-rail min-w-0 flex-1 overflow-x-auto p-1 transition-colors duration-300 md:flex-none md:absolute md:left-1/2 md:-translate-x-1/2 md:overflow-visible`}
+        className={`${glass} hidden p-1 transition-colors duration-300 md:absolute md:left-1/2 md:block md:-translate-x-1/2`}
       >
         <ul className={`flex items-center text-sm font-medium transition-colors duration-300 ${text}`}>
-          <li className="shrink-0">
-            <a href={`${base}#work`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
-              Work
-            </a>
-          </li>
-          <li className="shrink-0">
-            <a href={`${base}#about`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
-              About
-            </a>
-          </li>
-          <li className="shrink-0">
-            <a href={`${base}#contact`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
-              Contact
-            </a>
-          </li>
-          <li className="shrink-0">
-            <a
-              href="/interview"
-              className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}
-            >
-              Interview
-            </a>
-          </li>
+          {links.map((l) => (
+            <li key={l.label} className="shrink-0">
+              <a
+                href={l.href}
+                className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
-      <a
-        href={`${base}#contact`}
-        className={`${glass} ${text} hidden px-5 py-2.5 text-sm font-medium transition-colors duration-300 sm:block ${hover}`}
-      >
-        Get in touch
-      </a>
+      <div className="flex items-center gap-3">
+        <a
+          href={`${base}#contact`}
+          className={`${glass} ${text} hidden px-5 py-2.5 text-sm font-medium transition-colors duration-300 md:block ${hover}`}
+        >
+          Get in touch
+        </a>
+        <button
+          type="button"
+          onClick={() => menuRef.current?.showModal()}
+          aria-haspopup="dialog"
+          className={`${glass} ${text} px-4 py-2 text-sm font-medium transition-colors duration-300 md:hidden ${hover}`}
+        >
+          Menu
+        </button>
+      </div>
+
+      <dialog ref={menuRef} className="menu-sheet" aria-label="Menu">
+        <div className="laid-paper flex h-full flex-col px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-7">
+          <div className="flex items-center justify-between">
+            <span aria-hidden className="font-medium tracking-tight">
+              SV
+            </span>
+            <button
+              type="button"
+              onClick={() => menuRef.current?.close()}
+              className="rounded-[var(--radius-ticket)] border border-ink/20 bg-ink/5 px-4 py-2 text-sm font-medium"
+            >
+              Close
+            </button>
+          </div>
+          <nav aria-label="Menu" className="mt-14">
+            <ul className="border-y border-shadow-ink/15">
+              {links.map((l, i) => (
+                <li
+                  key={l.label}
+                  className="menu-in border-t border-shadow-ink/15 first:border-t-0"
+                  style={{ "--i": i } as React.CSSProperties}
+                >
+                  <a
+                    href={l.href}
+                    onClick={() => menuRef.current?.close()}
+                    className="block py-4 font-serif text-[2rem] italic leading-tight"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <p
+            className="menu-in mt-auto flex items-baseline justify-between text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink"
+            style={{ "--i": links.length } as React.CSSProperties}
+          >
+            <span>Santiago Vittor</span>
+            <span>Buenos Aires, AR</span>
+          </p>
+        </div>
+        <Grain className="absolute inset-0" />
+      </dialog>
     </header>
   );
 }

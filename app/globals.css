@@ -199,6 +199,51 @@ body {
   padding-bottom: 0;
 }
 
+/* Mobile menu: the magazine's contents page. A full-screen paper sheet in
+   the top layer (native <dialog>: focus containment + Esc for free), big
+   italic entries over hairline rules. Only reachable below md — the
+   trigger button is md:hidden. */
+.menu-sheet {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  overscroll-behavior: contain;
+}
+.menu-sheet::backdrop {
+  background: transparent;
+}
+body:has(.menu-sheet[open]) {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .menu-sheet[open] {
+    animation: menu-fade 240ms var(--ease-out-quart);
+  }
+  .menu-sheet[open] .menu-in {
+    animation: menu-rise 480ms var(--ease-out-quart) both;
+    animation-delay: calc(var(--i) * 55ms);
+  }
+}
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
 /* DESIGN.md → Scroll transition: hero pinned in a 200vh stage, the work
    sheet (-mt-[100svh], z-10) slides up over it. Cover completes exactly
    when the hero unpins. */
@@ -623,64 +668,59 @@ body {
   border-bottom-color: var(--color-poppy);
 }
 
-/* Interview suggestions: index-card notes in the margin, slightly tilted,
-   paper shadow, hairline warms to poppy on hover. */
+/* Interview suggestions. Mobile: a printed question index — full-width
+   hairline rows in the transcript's own typography, zero card chrome.
+   md+: index-card notes in the margin, slightly tilted, paper shadow,
+   hairline warms to poppy on hover. */
 .interview-note {
   --tilt: 0deg;
-  max-width: 15rem;
-  padding: 12px 14px;
+  width: 100%;
+  padding: 14px 2px;
   text-align: left;
-  background: color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
-  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
-  box-shadow:
-    0 1px 2px rgba(20, 18, 16, 0.08),
-    0 5px 14px rgba(20, 18, 16, 0.09);
   transition:
     translate 300ms var(--ease-out-quart),
     border-color 300ms var(--ease-out-quart),
-    box-shadow 300ms var(--ease-out-quart);
-}
-.interview-note:hover:not(:disabled),
-.interview-note:focus-visible {
-  translate: 0 -3px;
-  border-color: var(--color-poppy);
-  box-shadow:
-    0 2px 4px rgba(20, 18, 16, 0.1),
-    0 10px 22px rgba(20, 18, 16, 0.12);
-}
-.interview-note:focus-visible {
-  outline: none;
-  box-shadow:
-    inset 0 0 0 2px var(--color-poppy),
-    0 2px 4px rgba(20, 18, 16, 0.1);
+    box-shadow 300ms var(--ease-out-quart),
+    color 300ms var(--ease-out-quart);
 }
 .interview-note:disabled {
   opacity: 0.5;
+}
+.interview-note:active:not(:disabled) {
+  color: var(--color-poppy);
+}
+@media (min-width: 768px) {
+  .interview-note {
+    width: auto;
+    max-width: 15rem;
+    padding: 12px 14px;
+    background: color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
+    border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+    box-shadow:
+      0 1px 2px rgba(20, 18, 16, 0.08),
+      0 5px 14px rgba(20, 18, 16, 0.09);
+    rotate: var(--tilt);
+  }
+  .interview-note:hover:not(:disabled),
+  .interview-note:focus-visible {
+    translate: 0 -3px;
+    border-color: var(--color-poppy);
+    box-shadow:
+      0 2px 4px rgba(20, 18, 16, 0.1),
+      0 10px 22px rgba(20, 18, 16, 0.12);
+  }
+  .interview-note:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 0 0 2px var(--color-poppy),
+      0 2px 4px rgba(20, 18, 16, 0.1);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .interview-note,
   .interview-input {
     transition: none;
   }
-}
-/* Tilt is a desktop editorial flourish. On mobile the notes are a single-
-   row scroll rail (.scroll-rail below), where a rotated bounding box just
-   eats extra width for no visual gain. */
-@media (min-width: 768px) {
-  .interview-note {
-    rotate: var(--tilt);
-  }
-}
-
-/* Single-row native scroll, no visible scrollbar (same hidden-scrollbar
-   treatment as .transcript-scroll). Used for the mobile suggestion-chip
-   row and the mobile nav pill, both of which revert to their untouched
-   desktop layout at md:. */
-.scroll-rail {
-  scrollbar-width: none;
-}
-.scroll-rail::-webkit-scrollbar {
-  display: none;
 }
 
 /* Interview: the transcript scrolls like a chat inside a viewport-locked

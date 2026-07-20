@@ -19,7 +19,7 @@ export default function InterviewPage() {
   return (
     <>
       <Nav variant="paper" />
-      <main className="laid-paper relative isolate flex h-svh flex-col overflow-hidden border-b border-shadow-ink/15 bg-paper px-5 pb-3 pt-28 md:px-16 md:pt-32">
+      <main className="laid-paper relative isolate flex h-svh flex-col overflow-hidden border-b border-shadow-ink/15 bg-paper px-5 pb-3 pt-24 md:px-16 md:pt-32">
         <span aria-hidden className="ghost-numeral -z-10">
           03
         </span>
@@ -29,11 +29,13 @@ export default function InterviewPage() {
           </p>
           <h1
             data-text="Interview with Santiago Vittor"
-            className="register mt-3 text-[clamp(1.75rem,4vw,3rem)] font-medium leading-[1.02] tracking-tight"
+            className="register mt-2 text-balance text-[clamp(1.75rem,4vw,3rem)] font-medium leading-[1.02] tracking-tight md:mt-3"
           >
             Interview with Santiago Vittor
           </h1>
-          <p className="mt-3 font-serif italic text-shadow-ink">
+          {/* Below md this line is cut for chat room; the empty-state scene
+              line in the transcript carries the AI disclosure instead. */}
+          <p className="mt-3 hidden font-serif italic text-shadow-ink md:block">
             Conducted live, by you. Answers by an AI stand-in, grounded in
             Santiago&apos;s own words.
           </p>

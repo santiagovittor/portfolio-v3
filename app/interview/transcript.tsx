@@ -158,6 +158,14 @@ const stampFormat = new Intl.DateTimeFormat("en-US", {
   hour12: false,
 });
 
+// The time a question hit the tape (visitor's clock). Lazy state
+// initializer runs once on mount, so the stamp is fixed per message
+// without reading a ref during render.
+function Stamp() {
+  const [t] = useState(() => stampFormat.format(new Date()));
+  return <>{t}</>;
+}
+
 function renderPart(part: InterviewMessage["parts"][number]) {
   if (part.type === "tool-show_project" && part.state === "output-available") {
     return <ProjectCard slug={(part.output as { slug: string }).slug} />;
@@ -233,20 +241,12 @@ export function Transcript() {
   const scrollRef = useRef<HTMLDivElement>(null);
   // pinned-to-bottom like a real chat; scrolling up releases the pin
   const stickRef = useRef(true);
-  const stampsRef = useRef(new Map<string, string>());
   const { messages, sendMessage, status, error } = useChat<InterviewMessage>({
     transport: new DefaultChatTransport({ api: "/api/interview" }),
   });
 
   const busy = status === "submitted" || status === "streaming";
   const notes = SUGGESTIONS.slice(0, 3);
-
-  // the time each question hit the tape (visitor's clock, set once per id)
-  const stampFor = (id: string) => {
-    const m = stampsRef.current;
-    if (!m.has(id)) m.set(id, stampFormat.format(new Date()));
-    return m.get(id)!;
-  };
 
   // idle placeholder cycles like the room is waiting
   useEffect(() => {
@@ -283,20 +283,29 @@ export function Transcript() {
           stickRef.current =
             el.scrollHeight - el.scrollTop - el.clientHeight < 120;
         }}
-        className="transcript-scroll min-h-0 flex-1 overflow-y-auto pb-6 pt-8"
+        className="transcript-scroll min-h-0 flex-1 overflow-y-auto pb-6 pt-5 md:pt-8"
       >
         {messages.length === 0 && (
           <>
-            <p className="border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink max-w-[65ch]">
+            {/* Mobile gets one scene-setting line that also carries the AI
+                disclosure (the masthead subtitle is hidden below md); desktop
+                keeps the fuller greeting. */}
+            <p className="hidden max-w-[65ch] border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink md:block">
               The subject is at the table, coffee in hand. Ask anything: the
               work, this site, the record player.
             </p>
+            <p className="font-serif italic text-shadow-ink md:hidden">
+              He&apos;s at the table. An AI stand-in answers, in his own words.
+            </p>
             <ul
-              className="scroll-rail mt-10 flex snap-x snap-mandatory items-start gap-3 overflow-x-auto pr-5 md:flex-wrap md:gap-4 md:overflow-visible md:snap-none md:pr-0"
+              className="mt-6 flex flex-col border-b border-shadow-ink/15 md:mt-10 md:flex-row md:flex-wrap md:items-start md:gap-4 md:border-b-0"
               aria-label="Suggested questions"
             >
               {notes.map((s, i) => (
-                <li key={s} className="shrink-0 snap-start">
+                <li
+                  key={s}
+                  className="border-t border-shadow-ink/15 md:border-t-0"
+                >
                   <button
                     type="button"
                     onClick={() => ask(s)}
@@ -306,10 +315,18 @@ export function Transcript() {
                       { "--tilt": `${[-2, 1.5, 2.5][i % 3]}deg` } as React.CSSProperties
                     }
                   >
-                    <span className="block text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink">
+                    <span className="hidden text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink md:block">
                       Ask about
                     </span>
-                    <span className="mt-1 block font-serif italic">{s}</span>
+                    <span className="block font-serif italic md:mt-1">
+                      <span
+                        aria-hidden
+                        className="mr-2 font-sans text-sm font-medium not-italic text-shadow-ink md:hidden"
+                      >
+                        Q.
+                      </span>
+                      {s}
+                    </span>
                   </button>
                 </li>
               ))}
@@ -336,7 +353,7 @@ export function Transcript() {
                     aria-hidden
                     className="shrink-0 text-[10px] font-medium uppercase tracking-[0.08em] tabular-nums text-shadow-ink"
                   >
-                    {stampFor(message.id)}
+                    <Stamp />
                   </span>
                 </p>
               </div>

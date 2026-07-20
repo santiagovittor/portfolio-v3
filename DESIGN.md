@@ -157,6 +157,11 @@ scroll-jacking, native scroll always works.
   120ms apart, 400ms ease-out). Once. No re-triggering on scroll-up.
 - Nav: transparent glass on hero (`backdrop-blur`, white/12% fill, 1px
   white/25% border) → on paper it flips to ink-on-glass. One smooth swap.
+- Below md the centered link pill doesn't fit: the nav collapses to SV +
+  a Menu button opening a full-screen paper "contents page" (native
+  `<dialog>`: Esc + focus containment for free) — big Newsreader-italic
+  entries over hairline rules, staggered rise on open, static under
+  reduced motion. Desktop nav is unchanged from md: up.
 - Case study navigation morphs via the View Transitions API (M8): the card
   cover and title morph into the case study hero and `<h1>`; reduced motion
   serves instant navigation.
@@ -195,8 +200,9 @@ what they do: "See the work", "Get in touch", "Read case study".
 - Carousels, tilt-on-hover cards, cursor followers, scroll-jacking. This
   targets autoplaying/JS-driven decorative carousels that hijack scroll —
   it does NOT cover a native `overflow-x: auto` + `scroll-snap-type: x`
-  row (mobile suggestion chips, mobile nav pill): user-driven, no autoplay,
-  no JS, standard OS momentum scrolling, same mechanism as a horizontally-
-  scrollable tab bar.
+  row: user-driven, no autoplay, no JS, standard OS momentum scrolling,
+  same mechanism as a horizontally-scrollable tab bar. (No such row is
+  currently in use — the mobile nav and mobile suggestion chips both moved
+  to vertical layouts — but the mechanism stays permitted.)
 - More than one shader, more than one poppy accent per viewport
 - Centered long-form text; measure > 70ch; gray-on-gray text below 4.5:1
