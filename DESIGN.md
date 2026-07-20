@@ -1,14 +1,18 @@
 # DESIGN.md — Visual system
 
-Concept: **vintage editorial meets live shader.** A 1970s magazine spread that
-happens to be alive — one saturated photographic subject warped by a paper-
-shaders effect, oversized grotesque type, film grain over everything, and a
-disciplined Swiss grid underneath keeping it from tipping into chaos.
-Reference: full-bleed orange poppy on sky blue, sliced/displaced by the shader,
-glassy pill nav, headline pinned bottom-left.
+Concept: **1970s analog photography, art-directed.** A faded Kodachrome
+still — the kind of frame a film director or photographer would put on a
+title card or monograph cover. Melancholic, classy, restrained: warm-faded
+color, quiet italic type, film grain over everything, and a disciplined
+Swiss grid underneath keeping it from tipping into whimsy.
+Reference: Robert Frank's *The Americans*, a Kodachrome-faded film still,
+Godard/Antonioni title cards. Full-bleed poppy field duotone-graded toward
+warm/cool split-tone, glassy pill nav, headline pinned bottom-left.
 
-The one aesthetic risk lives in the hero shader. Everything after the fold is
-quiet, precise, and grid-locked. Spend the boldness once.
+The hero carries the one bold photographic treatment on the site. Everything
+after the fold is quiet, precise, and grid-locked. Spend the boldness once.
+No live shader on the hero (or anywhere) — the poster is static from first
+paint, permanently; see Shader rules below.
 
 ## Tokens
 
@@ -28,13 +32,19 @@ decoration — the only gradient-adjacent thing on the site is the shader.
 
 ### Typography
 
-- **Display:** Archivo (variable — use width + weight axes). Headlines set
-  tight: weight 500–560, tracking -0.02em to -0.04em, line-height 0.95–1.02.
-  Hero headline: `clamp(2.75rem, 8vw, 7rem)`.
+- **Display:** Archivo (variable — use width + weight axes) for all display
+  type EXCEPT the hero headline (see below). Headlines set tight: weight
+  500–560, tracking -0.02em to -0.04em, line-height 0.95–1.02.
+- **Hero headline:** the one exception to Archivo. Set in Newsreader Italic
+  (the same face used for the editorial accent below) at
+  `clamp(2.25rem, 6.2vw, 5.5rem)`, weight 500, line-height 1.05, tracking
+  -0.01em, flat color (`--white`) — no outline, drop-shadow, or stroke
+  layers. Reads as a film title card, not a logo lockup.
 - **Body:** Archivo 400, 16–18px, line-height 1.55, max measure 65ch.
-- **Editorial accent:** Newsreader Italic — used ONLY for image captions,
-  pull-quotes in case studies, and the year/role metadata. This is the
-  vintage note; keep it rare so it stays special.
+- **Editorial accent:** Newsreader Italic — used for image captions,
+  pull-quotes in case studies, the year/role metadata, and the hero
+  headline. This is the vintage note; keep it rare elsewhere so it stays
+  special.
 - **Mono/labels:** Archivo 500 uppercase, 11–12px, tracking +0.08em, for
   eyebrows, tags, nav items.
 - Load all via `next/font/google`, `display: swap`, subsets latin.
@@ -116,21 +126,21 @@ text ≥ 4.5:1 (worst case here ≈ 13:1, ink on paper + all layers + grain).
 
 ## Shader rules (@paper-design/shaders-react)
 
-- **Read the package first.** Inspect its exports and prop types in
-  node_modules before writing any code. Do not guess the API.
-- One *live* shader per viewport. The hero owns the sky; work plates may
-  each mount a `HalftoneCmyk` filter, but they are static renders (speed 0),
-  pause offscreen, and degrade to the plain photo. Prefer an effect that can
-  distort/displace an image (the reference's sliced-warp look). If the
-  library's components are color-field-only in the installed version, layer:
-  hero photo (bottom) → shader with transparent/blended regions (top) →
-  headline (above). Choose whichever composition gets closest to the
-  reference with the least code.
-- Motion should be SLOW — barely alive, like heat shimmer. Think 0.1–0.3
-  speed factors, not a screensaver.
-- Constraints (restate of CLAUDE.md hard rules): static poster fallback,
-  reduced-motion serves the poster, pause offscreen, DPR ≤ 2, and the poster
-  image is the preloaded LCP element so the shader never blocks paint.
+- **The hero does not run a live shader.** It previously mounted
+  `PaperTexture` behind an interaction-or-6s-timeout gate; that gate made
+  the hero visibly change look a few seconds after load, which read as
+  broken. The hero is now a static, permanently-treated poster (CSS filter
+  + duotone grade, see `.hero-poster` / `.hero-grade` in `globals.css`) —
+  the same frame at first paint as one second, five seconds, or a minute
+  later. No runtime transformation.
+- If a live shader is reintroduced anywhere on the site: **read the
+  package first** (inspect its exports/prop types in node_modules before
+  writing code), keep it to one live shader per viewport, motion must be
+  SLOW (0.1–0.3 speed factors, not a screensaver), and it must mount
+  immediately (no wake-on-interaction gating) with a static fallback,
+  reduced-motion support, offscreen pause, and DPR ≤ 2 — restating
+  CLAUDE.md's hard rules. Work plates may mount a static (speed 0)
+  `HalftoneCmyk` filter under this same discipline.
 
 ## Scroll transition (hero → work)
 

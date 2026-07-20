@@ -18,6 +18,9 @@ export function Hero() {
           sizes="100vw"
           className="hero-poster object-cover"
         />
+        {/* Duotone grade: warm-faded analog color, same mechanism as the
+            vignette below (mix-blend-mode over the static image) */}
+        <div aria-hidden className="hero-grade absolute inset-0" />
         {/* Card-scoped grain matches the poster's fiber */}
         <Grain className="absolute inset-0" />
         {/* Second, heavier grain layer: the 0.06 site-wide pass reads too
@@ -26,24 +29,17 @@ export function Hero() {
         {/* Vignette: darkens toward the corners like a physical print */}
         <div aria-hidden className="hero-vignette absolute inset-0" />
 
-        {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type */}
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-ink/60 to-transparent"
-        />
+        {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type.
+            Multi-stop and full-height because the analog grade brightens
+            the poppy highlights the headline sits over, and on mobile the
+            wrapped headline reaches roughly halfway up the card - measured
+            against the graded image, not assumed. */}
+        <div aria-hidden className="hero-scrim absolute inset-0" />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
-        <h1 className="hero-headline hero-noir flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
-          <span className="noir-line noir-line-1">
-            <span className="noir-line-shadow" aria-hidden="true">Designing interfaces.</span>
-            <span className="noir-line-outline" aria-hidden="true">Designing interfaces.</span>
-            <span className="noir-line-fill">Designing interfaces.</span>
-          </span>
-          <span className="noir-line noir-line-2">
-            <span className="noir-line-shadow" aria-hidden="true">Engineering the rest.</span>
-            <span className="noir-line-outline" aria-hidden="true">Engineering the rest.</span>
-            <span className="noir-line-fill">Engineering the rest.</span>
-          </span>
+        <h1 className="hero-headline flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
+          <span className="hero-line">Designing interfaces.</span>{" "}
+          <span className="hero-line hero-line-2">Engineering the rest.</span>
         </h1>
         <div className="max-w-xs shrink-0">
           <p className="font-serif text-lg italic text-white/90">

@@ -1,5 +1,10 @@
 # Hero Noir-Lettering Headline Implementation Plan
 
+> **Superseded** by `docs/slices/2026-07-20-hero-analog-redirect.md`. This
+> plan was executed faithfully and still read as a kids'-movie/logo lockup
+> at hero scale, not the analog-photography look intended — kept here for
+> history only, not current.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Give the hero `<h1>` a hand-painted 1940s noir-door-lettering treatment (white fill, thick ink outline, ink cast shadow, brush-grain texture, brush-wipe entrance) while leaving every other part of the site's type system untouched.

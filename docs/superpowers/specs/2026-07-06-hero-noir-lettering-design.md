@@ -1,5 +1,10 @@
 # Hero Headline: Hand-Painted Noir Door Lettering — Design
 
+> **Superseded** by `docs/slices/2026-07-20-hero-analog-redirect.md`. This
+> design was implemented faithfully and still read as a kids'-movie/logo
+> lockup at hero scale, not the analog-photography look intended — kept
+> here for history only, not current.
+
 Source brief: `.claude/docs/slices/hero-font.md`.
 
 ## Scope

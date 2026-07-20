@@ -240,9 +240,34 @@ body {
   }
 }
 
-/* Poster grade lives here — see Task 3 art direction. */
+.hero-scrim {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-ink) 88%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 70%, transparent) 35%,
+    color-mix(in srgb, var(--color-ink) 40%, transparent) 60%,
+    transparent 90%
+  );
+}
+
+/* Analog grade: warm-faded, lifted blacks, desaturated - a Kodachrome
+   still, not a saturated commercial poster. */
 .hero-poster {
-  filter: contrast(1.05) brightness(1.02) saturate(0.97);
+  filter: sepia(0.2) saturate(0.68) contrast(0.85) brightness(0.98);
+}
+
+/* Duotone wash over the graded photo, same mechanism as .hero-vignette
+   (mix-blend-mode over the static image) - cools the sky toward the top,
+   keeps the poppies' warmth toward the bottom, so the split-tone reads
+   faded/analog without bleaching the poppy field to yellow. */
+.hero-grade {
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--color-shadow-ink) 45%, transparent) 0%,
+    color-mix(in srgb, var(--color-poppy) 30%, transparent) 100%
+  );
+  mix-blend-mode: color;
+  opacity: 0.45;
 }
 
 /* Scroll reveal: sections rise onto the sheet once (see reveal.tsx).
@@ -263,124 +288,39 @@ body {
   }
 }
 
-/* Hero noir lettering (docs/superpowers/specs/2026-07-06-hero-noir-lettering-design.md).
-   Fill+outline come from one element via background-clip + text-stroke;
-   the cast shadow is a ::before duplicate. Brush texture reuses the
-   feTurbulence/feDisplacementMap technique from grain.tsx. */
-.hero-noir {
-  position: relative;
-  isolation: isolate;
-  font-family: var(--font-noir);
-  font-weight: 400;
-  /* Rye's descenders (and the added outline/shadow bulk around them)
-     need more room than the original Archivo headline's 0.98 tight
-     leading - at 0.98, wrapped lines sit close enough that a 'g' tail
-     visually collides with the line below it. */
-  line-height: 1.15;
+/* Hero headline: flat editorial serif italic, no outline/shadow/stroke
+   layers - Newsreader Italic (DESIGN.md's existing "vintage note" face)
+   at hero scale instead of a dedicated display face. */
+.hero-headline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.05;
   letter-spacing: -0.01em;
+  color: var(--color-white);
 }
 
-.hero-noir::before {
-  content: "";
-  position: absolute;
-  inset: -20% -10%;
-  z-index: -2;
-  background: radial-gradient(
-    ellipse at 30% 60%,
-    color-mix(in srgb, var(--color-poppy) 4%, transparent),
-    transparent 70%
-  );
-  pointer-events: none;
-}
-
-/* Three genuinely separate layers - shadow, outline, fill - each using
-   exactly one simple, well-supported technique. Combining text-stroke or
-   text-shadow together with background-clip:text on the SAME element is
-   what caused the banding/blackout artifacts; keeping every element to a
-   single technique renders consistently across real browsers. */
-.noir-line {
-  position: relative;
-  display: block;
-  isolation: isolate;
-}
-
-.noir-line-shadow,
-.noir-line-outline {
-  position: absolute;
-  inset: 0;
+.hero-line {
   display: block;
 }
 
-.noir-line-shadow {
-  z-index: 1;
-  color: var(--color-ink);
-  transform: translate(clamp(3px, 0.6vw, 8px), clamp(3px, 0.6vw, 8px));
-}
-
-.noir-line-outline {
-  z-index: 2;
-  color: transparent;
-  -webkit-text-stroke: clamp(3px, 0.7vw, 8px) var(--color-ink);
-}
-
-.noir-line-fill {
-  position: relative;
-  z-index: 3;
-  display: block;
-  color: transparent;
-  background: linear-gradient(to bottom, var(--color-white) 55%, #fff9ee 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  /* background-clip:text only paints glyphs where the gradient box exists.
-     The box is exactly line-height tall, so Rye's descenders fall below it
-     and render transparent - a flat-cut 'g'/'y' fill (the solid-color
-     shadow/outline layers underneath still show their tails, which is why
-     it looked like only the fill was sliced). Extend the paint box down
-     past the descenders; the matching negative margin keeps layout intact
-     so line spacing is unchanged. */
-  padding-bottom: 0.35em;
-  margin-bottom: -0.35em;
-}
-
-/* Left-to-right reveal via clip-path inset. The previous feTurbulence
-   displacement mask was scrapped: its vertical frequency striped the left
-   edges of the D/E, and its coverage flat-clipped Rye's descenders no
-   matter how far the mask was stretched. A plain inset wipe cannot do
-   either - the top/bottom insets are pinned negative (region extends well
-   beyond the glyph box) so ascenders, descenders, the offset shadow and
-   the stroke outline are ALL outside the clip and can never be sliced.
-   Only the right inset animates, sweeping the reveal seam leftward. */
-.noir-line-1,
-.noir-line-2 {
-  clip-path: inset(-60% 100% -60% -8%);
-  filter: blur(10px);
-  animation:
-    noir-wipe 700ms var(--ease-out-quart) forwards,
-    noir-focus 700ms var(--ease-out-quart) forwards;
-}
-
-.noir-line-2 {
-  animation-delay: 180ms;
-}
-
-@keyframes noir-wipe {
-  to {
-    clip-path: inset(-60% -8% -60% -8%);
+/* Page load: lines reveal with a short stagger, once, under 900ms total
+   (DESIGN.md -> Motion rules). */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-line {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: hero-line-in 600ms var(--ease-out-quart) forwards;
+  }
+  .hero-line-2 {
+    animation-delay: 120ms;
   }
 }
 
-@keyframes noir-focus {
+@keyframes hero-line-in {
   to {
-    filter: blur(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .noir-line-1,
-  .noir-line-2 {
-    clip-path: inset(-60% -8% -60% -8%);
-    filter: none;
-    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
