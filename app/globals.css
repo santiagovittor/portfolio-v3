@@ -240,25 +240,7 @@ body {
   }
 }
 
-/* Shader handoff: mounted invisible, crossfaded in only after its first
-   frame has actually painted (hero-shader.tsx). The treated poster stays
-   beneath forever as the no-WebGL / slow-device / reduced-motion floor. */
-.hero-shader {
-  opacity: 0;
-  transition: opacity 500ms var(--ease-out-quart);
-}
-.hero-shader.is-ready {
-  opacity: 1;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-shader {
-    transition: none;
-  }
-}
-
-/* Poster pre-matched to the shader's treated output (PaperTexture
-   "details" preset) so the crossfade reads as nothing happening.
-   Tuned by eye against the shader's first frame. */
+/* Poster grade lives here — see Task 3 art direction. */
 .hero-poster {
   filter: contrast(1.05) brightness(1.02) saturate(0.97);
 }

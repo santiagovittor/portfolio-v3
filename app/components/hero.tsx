@@ -1,7 +1,6 @@
 import Image from "next/image";
 import poppies from "@/public/images/hero/poppies.jpg";
 import { Grain } from "./grain";
-import { HeroShader } from "./hero-shader";
 import { Magnet } from "./magnet";
 
 export function Hero() {
@@ -19,9 +18,8 @@ export function Hero() {
           sizes="100vw"
           className="hero-poster object-cover"
         />
-        {/* Card-scoped grain matches the shader's fiber so the swap is silent */}
+        {/* Card-scoped grain matches the poster's fiber */}
         <Grain className="absolute inset-0" />
-        <HeroShader image="/images/hero/poppies-1920.jpg" />
         {/* Second, heavier grain layer: the 0.06 site-wide pass reads too
             subtle at hero scale on its own (validated against renders). */}
         <Grain className="absolute inset-0" opacity={0.15} />
