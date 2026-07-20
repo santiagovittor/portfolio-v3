@@ -627,7 +627,6 @@ body {
    paper shadow, hairline warms to poppy on hover. */
 .interview-note {
   --tilt: 0deg;
-  rotate: var(--tilt);
   max-width: 15rem;
   padding: 12px 14px;
   text-align: left;
@@ -663,6 +662,25 @@ body {
   .interview-input {
     transition: none;
   }
+}
+/* Tilt is a desktop editorial flourish. On mobile the notes are a single-
+   row scroll rail (.scroll-rail below), where a rotated bounding box just
+   eats extra width for no visual gain. */
+@media (min-width: 768px) {
+  .interview-note {
+    rotate: var(--tilt);
+  }
+}
+
+/* Single-row native scroll, no visible scrollbar (same hidden-scrollbar
+   treatment as .transcript-scroll). Used for the mobile suggestion-chip
+   row and the mobile nav pill, both of which revert to their untouched
+   desktop layout at md:. */
+.scroll-rail {
+  scrollbar-width: none;
+}
+.scroll-rail::-webkit-scrollbar {
+  display: none;
 }
 
 /* Interview: the transcript scrolls like a chat inside a viewport-locked

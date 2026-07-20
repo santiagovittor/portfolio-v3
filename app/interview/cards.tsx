@@ -8,7 +8,7 @@ export function ProjectCard({ slug }: { slug: string }) {
   const cs = caseStudies.find((c) => c.slug === slug);
   if (!cs) return null; // unknown slug: render nothing, never crash
   return (
-    <figure className="plate mt-6 max-w-md bg-white/40">
+    <figure className="plate mt-6 bg-white/40 md:max-w-md">
       <Image
         src={cs.cover.src}
         alt={cs.cover.alt}
@@ -35,7 +35,7 @@ export function TasteCard({ category }: { category: TasteCategory }) {
   const t = tastes[category];
   if (!t) return null;
   return (
-    <figure className="plate mt-6 max-w-md bg-white/40 p-4">
+    <figure className="plate mt-6 bg-white/40 p-4 md:max-w-md">
       <figcaption className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
         {t.title}
       </figcaption>
@@ -61,7 +61,7 @@ export function ContactCard() {
     { label: "Services site", href: links.store, note: "for business projects" },
   ];
   return (
-    <div className="plate mt-6 max-w-md bg-white/40 p-4">
+    <div className="plate mt-6 bg-white/40 p-4 md:max-w-md">
       <p className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
         Reach the real one
       </p>

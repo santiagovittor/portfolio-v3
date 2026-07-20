@@ -156,7 +156,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
   const leadActive = activeTrack?.id === display.id && isPlaying;
 
   return (
-    <figure className="plate q-in mt-6 max-w-md bg-white/40 p-4">
+    <figure className="plate q-in mt-6 bg-white/40 p-4 md:max-w-md">
       {/* eyebrow: small-caps label + live dot, b-side tag on the right */}
       <figcaption className="flex items-baseline justify-between gap-4">
         <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">

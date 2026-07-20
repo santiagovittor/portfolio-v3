@@ -292,11 +292,11 @@ export function Transcript() {
               work, this site, the record player.
             </p>
             <ul
-              className="mt-10 flex flex-wrap items-start gap-4"
+              className="scroll-rail mt-10 flex snap-x snap-mandatory items-start gap-3 overflow-x-auto pr-5 md:flex-wrap md:gap-4 md:overflow-visible md:snap-none md:pr-0"
               aria-label="Suggested questions"
             >
               {notes.map((s, i) => (
-                <li key={s}>
+                <li key={s} className="shrink-0 snap-start">
                   <button
                     type="button"
                     onClick={() => ask(s)}

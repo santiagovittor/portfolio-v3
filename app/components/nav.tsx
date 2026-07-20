@@ -71,38 +71,43 @@ export function Nav({ variant = "hero" }: { variant?: "hero" | "paper" }) {
   return (
     <header
       ref={headerRef}
-      className="nav-frame fixed inset-x-0 top-0 z-40 flex items-center justify-between transition-colors duration-300"
+      className="nav-frame fixed inset-x-0 top-0 z-40 flex items-center justify-between gap-3 transition-colors duration-300"
     >
       <a
         href={`${base}#top`}
-        className={`font-medium tracking-tight transition-colors duration-300 ${text}`}
+        className={`shrink-0 font-medium tracking-tight transition-colors duration-300 ${text}`}
         aria-label="SV, Santiago Vittor, home"
       >
         SV
       </a>
       {/* Concentric pill: uniform 4px inset all around (p-1), so the hover
-          pill reads as the same shape as its container */}
+          pill reads as the same shape as its container. Below md: four
+          items don't fit next to the logo at mobile widths, so the pill
+          becomes a horizontal scroll rail in normal flow (same pattern as
+          the interview page's suggestion chips) instead of the absolute-
+          centered overlay, which was covering the logo entirely. md: and
+          up is untouched. */}
       <nav
         aria-label="Main"
-        className={`${glass} absolute left-1/2 -translate-x-1/2 p-1 transition-colors duration-300`}
+        className={`${glass} scroll-rail min-w-0 flex-1 overflow-x-auto p-1 transition-colors duration-300 md:flex-none md:absolute md:left-1/2 md:-translate-x-1/2 md:overflow-visible`}
       >
         <ul className={`flex items-center text-sm font-medium transition-colors duration-300 ${text}`}>
-          <li>
+          <li className="shrink-0">
             <a href={`${base}#work`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               Work
             </a>
           </li>
-          <li>
+          <li className="shrink-0">
             <a href={`${base}#about`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               About
             </a>
           </li>
-          <li>
+          <li className="shrink-0">
             <a href={`${base}#contact`} className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}>
               Contact
             </a>
           </li>
-          <li>
+          <li className="shrink-0">
             <a
               href="/interview"
               className={`block rounded-[var(--radius-ticket)] px-4 py-2 transition-colors duration-200 sm:rounded-full ${hover}`}

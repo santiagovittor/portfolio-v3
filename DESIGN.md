@@ -192,6 +192,11 @@ what they do: "See the work", "Get in touch", "Read case study".
 - AI-default looks: cream + terracotta serif combo, black + acid green,
   purple/pink AI gradients
 - Emoji as icons (use inline SVG / Lucide-style hand-picked SVGs)
-- Carousels, tilt-on-hover cards, cursor followers, scroll-jacking
+- Carousels, tilt-on-hover cards, cursor followers, scroll-jacking. This
+  targets autoplaying/JS-driven decorative carousels that hijack scroll —
+  it does NOT cover a native `overflow-x: auto` + `scroll-snap-type: x`
+  row (mobile suggestion chips, mobile nav pill): user-driven, no autoplay,
+  no JS, standard OS momentum scrolling, same mechanism as a horizontally-
+  scrollable tab bar.
 - More than one shader, more than one poppy accent per viewport
 - Centered long-form text; measure > 70ch; gray-on-gray text below 4.5:1
