@@ -7,7 +7,7 @@ import { Reveal } from "./components/reveal";
 import { LocalTime } from "./components/local-time";
 import { CircularText } from "./components/circular-text";
 import { PaperArtifacts } from "./components/paper-artifacts";
-import portrait from "@/public/images/about/portrait-4x5.jpg";
+import portrait from "@/public/images/about/pp.jpg";
 import { links } from "./links";
 
 const contactIndex = [
@@ -57,13 +57,13 @@ export default function Home() {
               02
             </span>
             <Reveal className="grid items-start gap-10 md:grid-cols-12 md:gap-6">
-              <figure className="reveal-item relative md:col-span-4">
+              <figure className="reveal-item relative md:col-span-4 md:max-w-[400px]">
                 <div className="plate overflow-hidden">
                   <Image
                     src={portrait}
-                    alt="Santiago Vittor, portrait in a museum gallery"
-                    sizes="(min-width: 768px) 33vw, 90vw"
-                    className="aspect-[4/5] object-cover"
+                    alt="Santiago Vittor, headshot against a green hedge"
+                    sizes="(min-width: 768px) min(33vw, 400px), 90vw"
+                    className="aspect-[4/5] object-cover object-center"
                   />
                 </div>
                 <CircularText
@@ -71,7 +71,7 @@ export default function Home() {
                   className="absolute -right-5 -top-5 h-24 w-24 md:-right-7 md:-top-7 md:h-28 md:w-28"
                 />
                 <figcaption className="mt-3 font-serif italic text-shadow-ink">
-                  Somewhere in Europe, 2025.
+                  {"{{SV:confirm — caption for pp.jpg: location/date, or drop the caption entirely if none applies}}"}
                 </figcaption>
               </figure>
               <div
