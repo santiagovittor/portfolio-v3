@@ -70,9 +70,6 @@ export default function Home() {
                   text="SANTIAGO VITTOR · BUENOS AIRES · "
                   className="absolute -right-5 -top-5 h-24 w-24 md:-right-7 md:-top-7 md:h-28 md:w-28"
                 />
-                <figcaption className="mt-3 font-serif italic text-shadow-ink">
-                  {"{{SV:confirm — caption for pp.jpg: location/date, or drop the caption entirely if none applies}}"}
-                </figcaption>
               </figure>
               <div
                 className="reveal-item md:col-span-7 md:col-start-6"
