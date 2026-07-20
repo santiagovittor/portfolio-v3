@@ -131,7 +131,7 @@ function StageDirection() {
     return () => clearInterval(id);
   }, []);
   return (
-    <p key={i} aria-hidden className="stage-in mt-6 font-serif italic text-shadow-ink">
+    <p key={i} aria-hidden className="tape-caption stage-in mt-6">
       {STAGE_DIRECTIONS[i]}
     </p>
   );
@@ -226,7 +226,7 @@ function Answer({
         )
       )}
       {sources.length > 0 && (
-        <p className="mt-3 font-serif text-sm italic text-shadow-ink">
+        <p className="tape-caption mt-3 text-sm">
           Sources: {sources.map((s) => s.label).join(" · ")}
         </p>
       )}
@@ -287,18 +287,14 @@ export function Transcript() {
       >
         {messages.length === 0 && (
           <>
-            {/* Mobile gets one scene-setting line that also carries the AI
-                disclosure (the masthead subtitle is hidden below md); desktop
-                keeps the fuller greeting. */}
-            <p className="hidden max-w-[65ch] border-t border-shadow-ink/20 pt-6 text-lg text-shadow-ink md:block">
-              The subject is at the table, coffee in hand. Ask anything: the
-              work, this site, the record player.
-            </p>
-            <p className="font-serif italic text-shadow-ink md:hidden">
-              He&apos;s at the table. An AI stand-in answers, in his own words.
+            {/* The suggestions are questions, so they wear the transcript's
+                own question style, one size down. No label above them: a
+                question mark already says what they are. */}
+            <p className="tape-label border-t border-shadow-ink/20 pt-5">
+              Suggested questions
             </p>
             <ul
-              className="mt-6 flex flex-col border-b border-shadow-ink/15 md:mt-10 md:flex-row md:flex-wrap md:items-start md:gap-4 md:border-b-0"
+              className="mt-4 flex flex-col border-b border-shadow-ink/15 md:mt-6 md:flex-row md:flex-wrap md:items-start md:gap-4 md:border-b-0"
               aria-label="Suggested questions"
             >
               {notes.map((s, i) => (
@@ -310,23 +306,15 @@ export function Transcript() {
                     type="button"
                     onClick={() => ask(s)}
                     disabled={busy}
-                    className="interview-note"
+                    className="interview-note font-serif italic"
                     style={
                       { "--tilt": `${[-2, 1.5, 2.5][i % 3]}deg` } as React.CSSProperties
                     }
                   >
-                    <span className="hidden text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink md:block">
-                      Ask about
+                    <span aria-hidden className="mr-2 text-shadow-ink">
+                      Q.
                     </span>
-                    <span className="block font-serif italic md:mt-1">
-                      <span
-                        aria-hidden
-                        className="mr-2 font-sans text-sm font-medium not-italic text-shadow-ink md:hidden"
-                      >
-                        Q.
-                      </span>
-                      {s}
-                    </span>
+                    {s}
                   </button>
                 </li>
               ))}
@@ -344,14 +332,14 @@ export function Transcript() {
                 <p className="flex items-baseline justify-between gap-4">
                   <span className="max-w-[56ch] font-serif text-xl italic leading-snug">
                     <span className="sr-only">Question: </span>
-                    <span aria-hidden className="font-sans font-medium not-italic">
-                      Q.{" "}
+                    <span aria-hidden className="mr-1 text-shadow-ink">
+                      Q.
                     </span>
                     {message.parts.find((p) => p.type === "text")?.text}
                   </span>
                   <span
                     aria-hidden
-                    className="shrink-0 text-[10px] font-medium uppercase tracking-[0.08em] tabular-nums text-shadow-ink"
+                    className="shrink-0 text-xs tabular-nums text-shadow-ink"
                   >
                     <Stamp />
                   </span>
@@ -382,16 +370,13 @@ export function Transcript() {
         }}
       >
         <div className="flex items-baseline justify-between">
-          <label
-            htmlFor="interview-question"
-            className="block text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink"
-          >
+          <label htmlFor="interview-question" className="tape-label block">
             {busy ? "Hold, he's answering" : "Your question"}
           </label>
           {busy && (
             <span
               aria-hidden
-              className="flex items-center gap-2 text-[10px] font-medium uppercase tracking-[0.08em] text-shadow-ink"
+              className="tape-label flex items-center gap-2"
             >
               <span className="rec-dot" />
               Recording

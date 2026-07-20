@@ -24,7 +24,7 @@ export default function InterviewPage() {
           03
         </span>
         <header className="mx-auto w-full max-w-[72ch] flex-none">
-          <p className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
+          <p className="tape-label">
             In conversation, Buenos Aires · <LocalTime />
           </p>
           <h1
@@ -33,11 +33,10 @@ export default function InterviewPage() {
           >
             Interview with Santiago Vittor
           </h1>
-          {/* Below md this line is cut for chat room; the empty-state scene
-              line in the transcript carries the AI disclosure instead. */}
-          <p className="mt-3 hidden font-serif italic text-shadow-ink md:block">
-            Conducted live, by you. Answers by an AI stand-in, grounded in
-            Santiago&apos;s own words.
+          {/* One standfirst, both breakpoints. The transcript's empty state
+              used to repeat this in a second paragraph; it doesn't now. */}
+          <p className="tape-caption mt-3">
+            Conducted by you. Answered by an AI stand-in, in his own words.
           </p>
         </header>
         <Transcript />

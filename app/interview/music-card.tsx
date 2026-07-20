@@ -157,14 +157,17 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
 
   return (
     <figure className="plate q-in mt-6 bg-white/40 p-4 md:max-w-md">
-      {/* eyebrow: small-caps label + live dot, b-side tag on the right */}
+      {/* eyebrow: one label voice at both ends, so the row reads as a
+          masthead rule rather than two competing treatments */}
       <figcaption className="flex items-baseline justify-between gap-4">
-        <span className="flex items-center gap-2 text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
+        <span className="tape-label flex shrink-0 items-center gap-2">
           <span className="bside-dot" data-playing={spinning} aria-hidden />
           {label}
           {spinning && <span className="sr-only">, playing</span>}
         </span>
-        <span className="font-serif text-xs italic text-shadow-ink">{eyebrowRight}</span>
+        {/* provenance, not the card's name: two labels don't fit one line at
+            card width on mobile, and this is the one that can go */}
+        <span className="tape-label hidden md:block">{eyebrowRight}</span>
       </figcaption>
 
       {/* lead row: the turntable. Art shows the active track, spins on play. */}
@@ -179,7 +182,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
         </div>
         <div className="min-w-0 flex-1">
           <p className="truncate font-medium">{display.name}</p>
-          <p className="truncate font-serif text-sm italic text-shadow-ink">
+          <p className="tape-caption truncate text-sm">
             {display.artists.join(", ")} · {display.album}
           </p>
         </div>
@@ -188,7 +191,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
           onClick={() => toggle(display)}
           aria-pressed={leadActive}
           aria-label={leadActive ? `Pause ${display.name}` : `Play ${display.name}`}
-          className="bside-play shrink-0 text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink"
+          className="bside-play tape-label shrink-0"
         >
           {leadActive ? "❚❚ pause" : "▸ play"}
         </button>
@@ -201,7 +204,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
 
       {rotation.length > 0 && (
         <>
-          <p className="mt-4 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.12em] text-shadow-ink">
+          <p className="tape-label mt-4 flex items-center gap-3">
             <span className="h-px flex-1 bg-shadow-ink/20" />
             recent rotation
             <span className="h-px flex-1 bg-shadow-ink/20" />
@@ -218,14 +221,12 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
                     aria-label={active ? `Pause ${t.name}` : `Play ${t.name}`}
                     className="bside-row flex w-full items-baseline gap-3 py-2 text-left"
                   >
-                    <span
-                      aria-hidden
-                      className="w-6 shrink-0 font-serif text-xs italic text-shadow-ink"
-                    >
+                    {/* track marker is data, not voice: sans, tabular */}
+                    <span aria-hidden className="tape-label w-6 shrink-0 tabular-nums">
                       {active ? "▸" : `B${i + 1}`}
                     </span>
                     <span className="min-w-0 flex-1 truncate text-sm font-medium">{t.name}</span>
-                    <span className="shrink-0 truncate font-serif text-sm italic text-shadow-ink">
+                    <span className="tape-caption shrink-0 truncate text-sm">
                       {t.artists.join(", ")}
                     </span>
                   </button>
@@ -246,7 +247,7 @@ export function MusicCard({ snapshot }: { snapshot: MusicCardData }) {
           open in spotify ↗
         </a>
         {snap && (
-          <span className="font-serif italic tabular-nums text-shadow-ink">
+          <span className="tabular-nums text-shadow-ink">
             fetched {timeFmt.format(new Date(snap.fetchedAt))} ART
           </span>
         )}

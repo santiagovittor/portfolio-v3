@@ -645,6 +645,32 @@ body:has(.menu-sheet[open]) {
   }
 }
 
+/* Interview typography: two accent voices, and that is the whole list.
+   Anything not wearing one of these classes is plain Archivo at body size.
+   The page had drifted to ten uppercase labels across two sizes and two
+   trackings, and italic serif standing in for "muted text" in thirteen
+   places, which is why it read as noise. One definition each, here.
+
+   1. .tape-label — the document labelling itself: dateline, input label,
+      card titles, track markers. One size, one weight, one tracking.
+   2. .tape-caption — an annotation beside a thing: the standfirst, a year,
+      a note, an artist, a stage direction. Newsreader italic, muted.
+
+   Machine data (clock stamps, counts) is sans tabular, not italic: it is
+   read, not spoken. Never nest one of these inside the other. */
+.tape-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-shadow-ink);
+}
+.tape-caption {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-shadow-ink);
+}
+
 /* Interview input: a bare baseline rule, not a pill. Focus warms the
    baseline to poppy instead of drawing an outline box around a rule. */
 .interview-input {
@@ -690,9 +716,9 @@ body:has(.menu-sheet[open]) {
   color: var(--color-poppy);
 }
 @media (min-width: 768px) {
+  /* fixed, not max-, so three notes of unequal copy still read as a set */
   .interview-note {
-    width: auto;
-    max-width: 15rem;
+    width: 15rem;
     padding: 12px 14px;
     background: color-mix(in srgb, var(--color-white) 70%, var(--color-paper));
     border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);

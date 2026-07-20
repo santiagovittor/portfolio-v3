@@ -18,7 +18,7 @@ export function ProjectCard({ slug }: { slug: string }) {
       <figcaption className="p-4">
         <p className="flex items-baseline justify-between gap-4">
           <span className="font-medium">{cs.name}</span>
-          <span className="font-serif italic text-shadow-ink">{cs.year}</span>
+          <span className="tape-caption">{cs.year}</span>
         </p>
         <p className="mt-1 text-sm text-shadow-ink">{cs.summary}</p>
         <p className="mt-3 text-sm">
@@ -36,16 +36,12 @@ export function TasteCard({ category }: { category: TasteCategory }) {
   if (!t) return null;
   return (
     <figure className="plate mt-6 bg-white/40 p-4 md:max-w-md">
-      <figcaption className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
-        {t.title}
-      </figcaption>
+      <figcaption className="tape-label">{t.title}</figcaption>
       <ul className="mt-3 space-y-2">
         {t.items.map((item) => (
           <li key={item.name} className="flex items-baseline justify-between gap-4">
             <span className="font-medium">{item.name}</span>
-            <span className="text-right font-serif text-sm italic text-shadow-ink">
-              {item.note}
-            </span>
+            <span className="tape-caption text-right text-sm">{item.note}</span>
           </li>
         ))}
       </ul>
@@ -62,9 +58,7 @@ export function ContactCard() {
   ];
   return (
     <div className="plate mt-6 bg-white/40 p-4 md:max-w-md">
-      <p className="text-xs font-medium uppercase tracking-[0.08em] text-shadow-ink">
-        Reach the real one
-      </p>
+      <p className="tape-label">Reach the real one</p>
       <ul className="mt-2">
         {rows.map((r) => (
           <li key={r.label} className="border-t border-shadow-ink/15 first:border-t-0">
@@ -73,9 +67,7 @@ export function ContactCard() {
               className="flex items-baseline justify-between gap-4 py-2.5"
             >
               <span className="link-draw text-sm font-medium">{r.label}</span>
-              <span className="font-serif text-sm italic text-shadow-ink">
-                {r.note}
-              </span>
+              <span className="tape-caption text-sm">{r.note}</span>
             </a>
           </li>
         ))}

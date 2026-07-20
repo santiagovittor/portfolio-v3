@@ -45,9 +45,29 @@ decoration — the only gradient-adjacent thing on the site is the shader.
   pull-quotes in case studies, the year/role metadata, and the hero
   headline. This is the vintage note; keep it rare elsewhere so it stays
   special.
-- **Mono/labels:** Archivo 500 uppercase, 11–12px, tracking +0.08em, for
-  eyebrows, tags, nav items.
+- **Mono/labels:** Archivo 500 uppercase, 12px, tracking +0.08em, for
+  eyebrows, tags, nav items. One size, one tracking. A second label size
+  (10px) or a second tracking (0.12em) is drift, not hierarchy.
 - Load all via `next/font/google`, `display: swap`, subsets latin.
+
+### The two accent voices (`.tape-label` / `.tape-caption`)
+
+The interview surface had drifted to ten uppercase labels across two sizes
+and two trackings, with italic serif standing in for "muted text" in
+thirteen places — which is exactly how the editorial accent stops being
+special. The allowed voices are now defined once in `globals.css` and
+nothing on that surface sets them inline:
+
+- `.tape-label` — the document labelling itself: dateline, input label,
+  card titles, track markers.
+- `.tape-caption` — an annotation beside a thing: the standfirst, a year,
+  a note, an artist name, a stage direction.
+- Everything else is Archivo at body size. **Machine data (clock stamps,
+  counts, track numbers) is sans tabular, never italic** — it is read, not
+  spoken. Never nest one accent class inside the other.
+
+If a new element on that page seems to need a third voice, it almost
+certainly needs one of these two plus a color or size it already has.
 
 ### Grid & spacing (Vignelli discipline — this replaces any external grid skill)
 
