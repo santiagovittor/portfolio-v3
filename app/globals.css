@@ -133,14 +133,14 @@ body {
   user-select: none;
 }
 
-/* Editorial link: resting hairline, poppy underline draws over it on hover. */
+/* Editorial link: resting hairline, poppy underline draws over it on hover.
+   --rule-ink is the resting hairline; the nav rail overrides it to white
+   where the rule sits on the photograph instead of on paper. */
 .link-draw {
+  --rule-ink: color-mix(in srgb, var(--color-ink) 30%, transparent);
   background-image:
     linear-gradient(var(--color-poppy), var(--color-poppy)),
-    linear-gradient(
-      color-mix(in srgb, var(--color-ink) 30%, transparent),
-      color-mix(in srgb, var(--color-ink) 30%, transparent)
-    );
+    linear-gradient(var(--rule-ink), var(--rule-ink));
   background-repeat: no-repeat;
   background-position:
     0 100%,
@@ -237,6 +237,170 @@ body {
 .nav-frame {
   padding: calc(var(--hero-inset) + 12px);
   padding-bottom: 0;
+}
+
+/* ── Masthead rail ──────────────────────────────────────────────────────
+   The nav is page furniture, not a floating pill: a struck press mark, a
+   numbered contents rail on one hairline rule, a rubber-stamped CTA. No
+   backdrop-blur, no rounded-full, no fill. */
+
+/* The rail lost its glass, so over the photograph the type needs its own
+   ground. A soft band, not a bar — it must not read as a second surface. */
+.nav-scrim {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: -1;
+  height: 160px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-ink) 42%, transparent) 0%,
+    color-mix(in srgb, var(--color-ink) 22%, transparent) 45%,
+    transparent 100%
+  );
+}
+
+/* Registration hit: sky and poppy print off-register and snap into
+   alignment. Reuses @keyframes register-align (M9 headings) — the site has
+   one misregistration idiom and this is it. Struck, never spun. */
+.pm-ghost {
+  opacity: 0;
+  pointer-events: none;
+}
+.pm-sky {
+  color: var(--color-sky);
+  --register-offset: 1.1px 0.7px;
+}
+.pm-poppy {
+  color: var(--color-poppy);
+  --register-offset: -1.1px -0.7px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .press-link:hover .pm-ghost,
+  .press-link:focus-visible .pm-ghost {
+    animation: register-align 180ms var(--ease-out-quart);
+  }
+}
+
+/* Contents rail. Each entry carries its own segment of the rule (via
+   .link-draw), so the segments abut into one continuous hairline the way a
+   contents page rules its columns. Vertical hairlines divide the entries. */
+.nav-rail .link-draw {
+  --rule-ink: color-mix(in srgb, currentColor 35%, transparent);
+}
+/* .tape-label hard-codes shadow-ink; in the masthead the label has to ride
+   the theme flip instead. */
+.nav-frame .tape-label,
+.nav-frame .tape-caption {
+  color: inherit;
+}
+/* The name is the masthead's second voice, not a link. */
+.press-link .tape-label {
+  opacity: 0.75;
+}
+.nav-rail > li + li .nav-entry {
+  border-left: 1px solid color-mix(in srgb, currentColor 30%, transparent);
+}
+.nav-entry {
+  transition: opacity 200ms var(--ease-out-quart);
+}
+/* Machine data: the section number is read, not spoken (DESIGN.md → the two
+   voices). Sans, tabular, one size below the label. Separated from the label
+   by size and weight rather than opacity — a dimmed entry already carries a
+   0.7 multiplier, and stacking a second one drops 11px type below 4.5:1. */
+.nav-num {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* The grease-pencil ring: a chinagraph loop around the live entry, the way a
+   photo editor marks a frame on a contact sheet. Deliberately overshoots its
+   entry's box — no ancestor may clip it. */
+.grease-ring {
+  position: absolute;
+  inset: -6px -10px;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0.85;
+}
+.grease-ring path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .grease-ring path {
+    animation: ring-draw 420ms var(--ease-out-quart) both;
+  }
+  /* The outgoing ring erases itself before the next one is drawn. */
+  .grease-ring[data-off="true"] path {
+    animation: ring-draw 260ms var(--ease-out-quart) reverse both;
+  }
+}
+@keyframes ring-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* The CTA is a rubber stamp: die-cut corners, a double rule, and a resting
+   tilt — the tell that a human placed it by hand. Poppy only on hover, so
+   the ring stays the single poppy element at rest (DESIGN.md → Color). */
+/* No `display` here: this rule is unlayered and would beat Tailwind's
+   `md:hidden` on the mobile trigger, leaving CONTENTS on screen at desktop. */
+.nav-stamp {
+  position: relative;
+  padding: 8px 14px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-ticket);
+  rotate: -1.5deg;
+  transition:
+    rotate 200ms var(--ease-out-quart),
+    background-color 200ms var(--ease-out-quart),
+    color 200ms var(--ease-out-quart),
+    box-shadow 200ms var(--ease-out-quart);
+}
+.nav-stamp::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border: 1px solid currentColor;
+  border-radius: 1px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.nav-stamp:hover,
+.nav-stamp:focus-visible {
+  rotate: 0deg;
+  background: var(--color-poppy);
+  border-color: var(--color-poppy);
+  color: var(--color-white);
+  /* The plate sinks into the paper — .btn-letterpress:active's treatment. */
+  box-shadow:
+    inset 0 3px 4px color-mix(in srgb, var(--color-ink) 40%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--color-white) 15%, transparent);
+}
+/* Touch targets: the stamp is the only control below md. */
+@media (max-width: 767px) {
+  /* 15px + 15px + a 14px line box clears 44px without needing a flex box. */
+  .nav-stamp {
+    padding: 15px 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Colour only. The resting tilt stays: it is composition, not motion. */
+  .nav-stamp,
+  .nav-entry {
+    transition: none;
+  }
+  .nav-stamp:hover,
+  .nav-stamp:focus-visible {
+    rotate: -1.5deg;
+  }
 }
 
 /* Mobile menu: the magazine's contents page. A full-screen paper sheet in

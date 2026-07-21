@@ -32,7 +32,7 @@ export default async function CaseStudyPage({
 
   return (
     <>
-      <Nav variant="paper" />
+      <Nav variant="paper" runningHead={cs.name} />
 
       <main className="mx-auto max-w-[1440px] px-5 pb-24 pt-32 md:px-16">
         <header className="max-w-3xl">

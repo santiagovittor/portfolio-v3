@@ -68,7 +68,15 @@ export function Work() {
         </div>
       </div>
 
-      <section id="work" aria-label="Work" className="relative px-5 py-16 md:px-16 md:py-32">
+      <section
+        id="work"
+        aria-label="Work"
+        className="relative isolate overflow-hidden px-5 py-16 md:px-16 md:py-32"
+      >
+        {/* Ghost numeral: the section's number in the contents rail */}
+        <span aria-hidden className="ghost-numeral -z-10">
+          01
+        </span>
         <Reveal className="flex items-baseline justify-between">
           <h2
             data-text="Selected work"

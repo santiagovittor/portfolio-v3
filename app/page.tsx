@@ -107,8 +107,11 @@ export default function Home() {
           <section
             id="contact"
             aria-label="Contact"
-            className="relative px-5 py-16 md:px-16 md:py-32"
+            className="relative isolate overflow-hidden px-5 py-16 md:px-16 md:py-32"
           >
+            <span aria-hidden className="ghost-numeral -z-10">
+              04
+            </span>
             <Reveal>
               <h2
                 data-text="Let's talk"

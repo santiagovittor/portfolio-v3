@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function InterviewPage() {
   return (
     <>
-      <Nav variant="paper" />
+      <Nav variant="paper" runningHead="Interview" />
       <main className="laid-paper relative isolate flex h-svh flex-col overflow-hidden border-b border-shadow-ink/15 bg-paper px-5 pb-3 pt-24 md:px-16 md:pt-32">
         <span aria-hidden className="ghost-numeral -z-10">
           03
