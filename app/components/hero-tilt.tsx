@@ -9,13 +9,13 @@ gsap.registerPlugin(useGSAP);
 /* Ceiling for the whole interaction: if a visitor consciously notices "an
    animation", it is too much. */
 const MAX_TILT = 2; // deg
-const MAX_DRIFT = 6; // px the type drifts against the photo
 const SWEEP_TRAVEL = 22; // percent of the sweep layer's own width
 
 /**
- * The hero print responds to the hand: it leans a few degrees toward the
- * cursor, the type drifts against the photo, and a soft specular band
- * tracks across the emulsion.
+ * The hero print responds to the hand: the whole card leans a couple of
+ * degrees toward the cursor, with a soft specular band tracking across the
+ * emulsion. Nothing moves *inside* the card - a print is one stiff object,
+ * and internal parallax is exactly what gives away a fake one.
  *
  * The rotation lives on this wrapper, never on .hero-card — the card
  * already runs `hero-exit` off the scroll timeline, and a CSS animation's
@@ -44,7 +44,6 @@ export function HeroTilt({ children }: { children: ReactNode }) {
           const card = el?.parentElement;
           if (!el || !card) return;
           const sweep = el.querySelector<HTMLElement>(".hero-sweep");
-          const depth = el.querySelector<HTMLElement>(".hero-depth");
 
           const rx = gsap.quickTo(el, "rotationX", {
             duration: 0.6,
@@ -56,12 +55,6 @@ export function HeroTilt({ children }: { children: ReactNode }) {
           });
           const sx = sweep
             ? gsap.quickTo(sweep, "xPercent", { duration: 0.9, ease: "power3" })
-            : null;
-          const dx = depth
-            ? gsap.quickTo(depth, "x", { duration: 0.6, ease: "power3" })
-            : null;
-          const dy = depth
-            ? gsap.quickTo(depth, "y", { duration: 0.6, ease: "power3" })
             : null;
 
           const onMove = (e: PointerEvent) => {
@@ -75,18 +68,12 @@ export function HeroTilt({ children }: { children: ReactNode }) {
             // The face turns toward the cursor: the near edge dips away.
             ry(nx * MAX_TILT);
             rx(-ny * MAX_TILT);
-            // Type drifts with the lean, so it reads as sitting proud of the
-            // emulsion rather than printed flat onto it.
-            dx?.(nx * MAX_DRIFT);
-            dy?.(ny * MAX_DRIFT);
             sx?.(nx * SWEEP_TRAVEL);
           };
 
           const onLeave = () => {
             rx(0);
             ry(0);
-            dx?.(0);
-            dy?.(0);
             sx?.(0);
           };
 

@@ -187,13 +187,6 @@ body {
   background-color: var(--color-sky);
   will-change: transform;
 }
-/* Type drifts a few px against the photo when the card leans — 2D, driven
-   by hero-tilt.tsx. Not translateZ: .hero-tilt's own `overflow: hidden`
-   computes any preserve-3d chain flat, and at this amplitude the two are
-   visually identical. */
-.hero-depth {
-  will-change: transform;
-}
 /* Specular sweep: soft-light band tracking the cursor, like glancing light
    on a glossy print. Wider than the card so its edges never enter frame. */
 .hero-sweep {

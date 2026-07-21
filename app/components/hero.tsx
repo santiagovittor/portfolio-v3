@@ -48,7 +48,7 @@ export function Hero() {
               there, and a static sheen is just a smudge. */}
           <div aria-hidden className="hero-sweep" />
 
-          <div className="hero-depth absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
+          <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
             <HeroHeadline />
             <div className="max-w-sm shrink-0">
               {/* Credit block: letterspaced caps, no prose, no rules. The role
