@@ -4,7 +4,10 @@ import {
   createUIMessageStreamResponse, stepCountIs, streamText,
   type UIMessage,
 } from "ai";
+import { after } from "next/server";
 import { z } from "zod";
+import { EVENTS } from "@/lib/analytics/events";
+import { trackServer, visitorId } from "@/lib/analytics/server";
 import {
   createRateLimiter, detectLanguage, isOffTheRecord,
   looksLikeInjection, trimWindow,
@@ -89,14 +92,51 @@ export async function POST(req: Request) {
   const language = detectLanguage(texts[0] ?? "");
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
-  if (!perMinute(ip) || !perHour(ip)) return refusalStream(REFUSALS.rate[language]);
-  if (looksLikeInjection(lastUserText)) return refusalStream(REFUSALS.injection[language]);
+  // The browser hands over its cookieless PostHog ids in headers, so these
+  // server events land on the same person and session as the click.
+  const who = visitorId(req);
+
+  if (!perMinute(ip) || !perHour(ip)) {
+    after(trackServer(EVENTS.interviewRefused, who, { reason: "rate_limit", language }));
+    return refusalStream(REFUSALS.rate[language]);
+  }
+  if (looksLikeInjection(lastUserText)) {
+    after(
+      trackServer(EVENTS.interviewRefused, who, {
+        reason: "injection",
+        language,
+        question: lastUserText,
+      }),
+    );
+    return refusalStream(REFUSALS.injection[language]);
+  }
 
   const offTheRecord = isOffTheRecord([lastUserText]);
+  after(
+    trackServer(EVENTS.interviewRequestReceived, who, {
+      question: lastUserText,
+      question_length: lastUserText.length,
+      language,
+      off_the_record: offTheRecord,
+      turn: texts.length,
+    }),
+  );
 
   try {
+    const retrievalStart = Date.now();
     const chunks = await retrieve(lastUserText);
     const sources = [...new Set(chunks.map((c) => c.source))].map((label) => ({ label }));
+    after(
+      trackServer(EVENTS.interviewRetrieval, who, {
+        question: lastUserText,
+        sources: sources.map((s) => s.label),
+        chunk_count: chunks.length,
+        // A question the corpus can't answer is the single most useful
+        // signal here: it says what to write next.
+        no_match: chunks.length === 0,
+        latency_ms: Date.now() - retrievalStart,
+      }),
+    );
 
     const windowed = trimWindow(messages);
     const truncatedWindowed = windowed.map((m, i) =>
@@ -130,6 +170,12 @@ export async function POST(req: Request) {
     // Missing key, embedding/model outage, etc. — fail as a normal request
     // error (client already renders "the line dropped"), not a raw 500.
     console.error("interview route: upstream failure", err);
+    after(
+      trackServer(EVENTS.interviewUpstreamFailed, who, {
+        question: lastUserText,
+        error: err instanceof Error ? err.message : String(err),
+      }),
+    );
     return Response.json({ error: "upstream unavailable" }, { status: 503 });
   }
 }

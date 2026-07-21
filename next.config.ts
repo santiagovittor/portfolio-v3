@@ -9,6 +9,24 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "*.spotifycdn.com" },
     ],
   },
+  // PostHog is served from this origin under /ingest so the analytics
+  // requests are first-party: ad blockers and tracker-blocking browsers stop
+  // eating them, and no third-party host has to be allowed in a CSP.
+  // Region-specific: swap us-assets/us.i for eu-assets/eu.i if the project
+  // lives in PostHog EU Cloud (TUTORIAL.md → "Choosing a region").
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      { source: "/ingest/:path*", destination: "https://us.i.posthog.com/:path*" },
+    ];
+  },
+  // PostHog's API is sensitive to the trailing slash Next would otherwise
+  // redirect away.
+  skipTrailingSlashRedirect: true,
+
   // The services site moved from santiagovittor.store to santiagovittor.com,
   // so its case study slug moved with it. Anything already shared at the old
   // URL keeps working.

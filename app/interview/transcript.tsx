@@ -1,9 +1,11 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { DefaultChatTransport } from "ai";
 import { useChat } from "@ai-sdk/react";
+import { analyticsHeaders, track } from "@/lib/analytics/client";
+import { EVENTS } from "@/lib/analytics/events";
 import type { InterviewMessage } from "@/lib/interview/types";
 import { ContactCard, ProjectCard, TasteCard } from "./cards";
 import { MusicCard, type MusicCardData } from "./music-card";
@@ -241,8 +243,26 @@ export function Transcript() {
   const scrollRef = useRef<HTMLDivElement>(null);
   // pinned-to-bottom like a real chat; scrolling up releases the pin
   const stickRef = useRef(true);
+  // The question currently in flight, so the answer event can report what it
+  // was answering and how long the visitor waited for it.
+  const pendingRef = useRef<{
+    text: string;
+    source: "typed" | "suggestion";
+    at: number;
+  } | null>(null);
+  const turnRef = useRef(0);
+  const transport = useMemo(
+    () =>
+      new DefaultChatTransport<InterviewMessage>({
+        api: "/api/interview",
+        // Resolved per request: PostHog's ids only exist after init, and the
+        // session id rotates.
+        headers: () => analyticsHeaders(),
+      }),
+    [],
+  );
   const { messages, sendMessage, status, error } = useChat<InterviewMessage>({
-    transport: new DefaultChatTransport({ api: "/api/interview" }),
+    transport,
   });
 
   const busy = status === "submitted" || status === "streaming";
@@ -263,16 +283,79 @@ export function Transcript() {
     if (el && stickRef.current) el.scrollTop = el.scrollHeight;
   }, [messages, status]);
 
-  const ask = (text: string) => {
+  // An answer landed: report what it cost and what it contained.
+  useEffect(() => {
+    if (status !== "ready") return;
+    const pending = pendingRef.current;
+    const last = messages.at(-1);
+    if (!pending || last?.role !== "assistant") return;
+    pendingRef.current = null;
+    const answer = last.parts
+      .filter((p): p is { type: "text"; text: string } => p.type === "text")
+      .map((p) => p.text)
+      .join(" ");
+    track(EVENTS.interviewAnswerReceived, {
+      question: pending.text,
+      source: pending.source,
+      turn: turnRef.current,
+      latency_ms: Date.now() - pending.at,
+      answer_length: answer.length,
+      sources: last.metadata?.sources?.map((s) => s.label) ?? [],
+      // which tool cards the model chose to render, e.g. ["show_project"]
+      cards: last.parts
+        .filter((p) => p.type.startsWith("tool-"))
+        .map((p) => p.type.slice("tool-".length)),
+      off_the_record: Boolean(last.metadata?.offTheRecord),
+    });
+  }, [status, messages]);
+
+  useEffect(() => {
+    if (!error) return;
+    const pending = pendingRef.current;
+    pendingRef.current = null;
+    track(EVENTS.interviewAnswerFailed, {
+      question: pending?.text,
+      turn: turnRef.current,
+      latency_ms: pending ? Date.now() - pending.at : undefined,
+      error: error.message,
+    });
+  }, [error]);
+
+  // Left mid-answer. Distinguishes "the answer was bad" from "the wait was
+  // too long", which no other event can tell apart.
+  useEffect(() => {
+    const onHide = () => {
+      const pending = pendingRef.current;
+      if (!pending) return;
+      track(EVENTS.interviewAbandoned, {
+        question: pending.text,
+        turn: turnRef.current,
+        waited_ms: Date.now() - pending.at,
+      });
+    };
+    window.addEventListener("pagehide", onHide);
+    return () => window.removeEventListener("pagehide", onHide);
+  }, []);
+
+  const ask = useCallback((text: string, source: "typed" | "suggestion" = "typed") => {
     const q = text.trim();
     if (!q || busy) return;
+    if (turnRef.current === 0) track(EVENTS.interviewStarted, { source });
+    turnRef.current += 1;
+    pendingRef.current = { text: q, source, at: Date.now() };
+    track(EVENTS.interviewQuestionAsked, {
+      question: q,
+      question_length: q.length,
+      source,
+      turn: turnRef.current,
+    });
     stickRef.current = true;
     sendMessage({ text: q });
     setInput("");
     // A clicked note unmounts (notes hide once the interview starts),
     // taking focus with it. Land the keyboard back on the input, not <body>.
     inputRef.current?.focus();
-  };
+  }, [busy, sendMessage]);
 
   return (
     <div className="mx-auto mt-6 flex min-h-0 w-full max-w-[72ch] flex-1 flex-col">
@@ -304,7 +387,7 @@ export function Transcript() {
                 >
                   <button
                     type="button"
-                    onClick={() => ask(s)}
+                    onClick={() => ask(s, "suggestion")}
                     disabled={busy}
                     className="interview-note font-serif italic"
                     style={

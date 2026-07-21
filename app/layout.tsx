@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Archivo, Newsreader } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Grain } from "./components/grain";
 import { SmoothScroll } from "./components/smooth-scroll";
+import { PageSignals, PostHogProvider } from "./analytics/posthog-provider";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -50,9 +52,13 @@ export default function RootLayout({
       className={`${archivo.variable} ${newsreader.variable} antialiased`}
     >
       <body>
-        <SmoothScroll />
-        {children}
+        <PostHogProvider>
+          <SmoothScroll />
+          {children}
+          <PageSignals />
+        </PostHogProvider>
         <Grain />
+        <SpeedInsights />
         <script
           dangerouslySetInnerHTML={{
             __html: `console.log("%cSantiago Vittor%c\\nDesigned and built by hand. The repo is part of the portfolio:\\nhttps://github.com/santiagovittor/portfolio-v3","font:600 16px Archivo,sans-serif;color:#e86a17","font:14px Archivo,sans-serif;color:#2a2e33")`,
