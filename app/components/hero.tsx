@@ -42,20 +42,15 @@ export function Hero() {
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
         <HeroHeadline />
         <div className="max-w-xs shrink-0">
-          {/* Credit block: the structure a film title card uses - ruled
-              rows, letterspaced caps, no prose. Wording is Santiago's to
-              write; the slots below stay empty until he fills them. */}
+          {/* Credit block: letterspaced caps, no prose, no rules. The role
+              and location lines are Santiago's to write (SV:confirm) - until
+              they exist this is just the live clock, because empty ruled
+              rows read as a rendering fault, not as structure. */}
           <dl className="hero-credit">
-            {/* SV:confirm — role line */}
-            <div className="hero-credit-row" />
-            {/* SV:confirm — location line */}
-            <div className="hero-credit-row" />
-            <div className="hero-credit-row">
-              <dt className="sr-only">Local time in Buenos Aires</dt>
-              <dd>
-                <LocalTime />
-              </dd>
-            </div>
+            <dt className="sr-only">Local time in Buenos Aires</dt>
+            <dd>
+              <LocalTime />
+            </dd>
           </dl>
           <div className="mt-6 flex gap-3">
             <Magnet>

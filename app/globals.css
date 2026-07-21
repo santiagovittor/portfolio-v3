@@ -404,22 +404,14 @@ body:has(.menu-sheet[open]) {
    not an invisible <h1>. */
 
 
-/* Credit block: film title card, not a paragraph. Ruled rows, letterspaced
-   caps, no prose. Rows hold their height while empty so the typographic
-   structure is visible before the copy lands. */
+/* Credit block: film title card, not a paragraph. Letterspaced caps, no
+   prose. No rules - they were carrying empty rows and read as a rendering
+   fault rather than as structure. */
 .hero-credit {
-  border-top: 1px solid color-mix(in srgb, var(--color-white) 30%, transparent);
   font-size: 0.6875rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: color-mix(in srgb, var(--color-white) 85%, transparent);
-}
-.hero-credit-row {
-  min-height: 2.25rem;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--color-white) 18%, transparent);
 }
 
 /* Reactbits CircularText: letterpress seal, one slow revolution per 40s. */
