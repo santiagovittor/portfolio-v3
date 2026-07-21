@@ -7,7 +7,7 @@ color, quiet italic type, film grain over everything, and a disciplined
 Swiss grid underneath keeping it from tipping into whimsy.
 Reference: Robert Frank's *The Americans*, a Kodachrome-faded film still,
 Godard/Antonioni title cards. Full-bleed poppy field duotone-graded toward
-warm/cool split-tone, glassy pill nav, headline pinned bottom-left.
+warm/cool split-tone, masthead rail nav, headline pinned bottom-left.
 
 The hero carries the one bold photographic treatment on the site. Everything
 after the fold is quiet, precise, and grid-locked. Spend the boldness once.
@@ -82,12 +82,18 @@ certainly needs one of these two plus a color or size it already has.
 - Radii: exactly two shapes site-wide. Print/photographic surfaces (photos,
   covers, plates, and the hero card) are square-cornered with a 1px
   ink/15% hairline (`.plate`), like plates mounted on a magazine page;
-  interactive elements (nav, buttons, tags) are full pills (999px) —
-  except the hero CTAs, which use `--radius-ticket: 3px` instead, a
-  documented, named exception: a full pill at button size reads as
-  default rounded UI, the small radius reads as a printed ticket/stamp
-  label instead. Nested pills keep a uniform inset (nav container `p-1`)
-  so curvature reads concentric.
+  interactive elements (buttons, tags) are full pills (999px) — with two
+  documented, named exceptions, both for the same reason: **a full pill at
+  button size reads as default rounded UI**, while `--radius-ticket: 3px`
+  reads as a printed ticket/stamp label.
+  1. The hero CTAs use `--radius-ticket`.
+  2. **The nav is not a pill at all.** It was a centered glass pill —
+     `backdrop-blur`, `bg-white/12`, `rounded-full` — which is the default
+     2020s SaaS nav and the only surface on the site borrowing nothing from
+     the print metaphor. It is now the masthead rail (see Scroll transition):
+     no fill, no blur, no radius on the rail itself; the press mark and the
+     CTA stamp use `--radius-ticket`. Tags, chips and in-page buttons are
+     still pills.
 
 ## The grain (site-wide signature texture)
 
@@ -204,10 +210,34 @@ scroll-jacking, native scroll always works.
   stable).
 - Work cards enter with a small stagger (translateY 24px → 0, opacity,
   120ms apart, 400ms ease-out). Once. No re-triggering on scroll-up.
-- Nav: transparent glass on hero (`backdrop-blur`, white/12% fill, 1px
-  white/25% border) → on paper it flips to ink-on-glass. One smooth swap.
-- Below md the centered link pill doesn't fit: the nav collapses to SV +
-  a Menu button opening a full-screen paper "contents page" (native
+- **Nav: the masthead rail.** Not a bar bolted on top — the top of a printed
+  page. Left: the SV press mark, a ligatured monoline SV die-cut into a
+  ticket rectangle (`press-mark.tsx`, hand-authored path data, `currentColor`),
+  followed at `lg:` by the letterspaced name. Middle: a numbered contents
+  rail, `01 WORK · 02 ABOUT · 03 INTERVIEW · 04 CONTACT`, each entry a
+  tabular number plus a `.tape-label`, sitting on one hairline rule assembled
+  from the entries' own `.link-draw` segments and divided by vertical
+  hairlines. Right: the CTA as a rubber stamp (`--radius-ticket`, double
+  rule, resting `-1.5deg`, poppy only on hover).
+  The numbers are the sections' own ghost numerals, not a private sequence.
+- **The running head.** A second IntersectionObserver (separate from the
+  theme observer — different targets, different meaning) marks which
+  `main section[id]` owns the top band of the viewport. That entry gets
+  `aria-current` plus a **grease-pencil ring**: a chinagraph loop whose ends
+  cross past each other, drawn on over 420ms via `stroke-dashoffset`, the
+  outgoing one erasing in reverse first so there are never two. The other
+  entries drop to 55% opacity — the live one is the running head, the rest
+  are the contents list it came from. Under reduced motion the ring is
+  present instantly: it is information, only its drawing is motion.
+  Paper pages (`/interview`, `/work/[slug]`) have no section list, so they
+  print their own running head in `.tape-caption` after the mark, passed as
+  a prop.
+- Theme: over anything `data-nav-theme="dark"` the rail is white type on a
+  soft top scrim (`.nav-scrim`, ~42% ink fading out over 160px — the rail
+  has no fill of its own, so the type needs a ground); on paper it is plain
+  ink and needs nothing. One smooth swap, content-aware.
+- Below md the rail doesn't fit: the nav collapses to the mark +
+  a CONTENTS button opening a full-screen paper "contents page" (native
   `<dialog>`: Esc + focus containment for free) — big Newsreader-italic
   entries over hairline rules, staggered rise on open, static under
   reduced motion. Desktop nav is unchanged from md: up.
