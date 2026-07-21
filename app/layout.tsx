@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Newsreader } from "next/font/google";
 import { Grain } from "./components/grain";
+import { SmoothScroll } from "./components/smooth-scroll";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={`${archivo.variable} ${newsreader.variable} antialiased`}
     >
       <body>
+        <SmoothScroll />
         {children}
         <Grain />
         <script

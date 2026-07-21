@@ -66,7 +66,7 @@ export function Hero() {
                     frame advancing, the label crossfading ink to paper. */}
                 <a
                   href="#work"
-                  className="btn btn-letterpress btn-shutter block whitespace-nowrap rounded-[var(--radius-ticket)] px-6 py-2.5 text-sm font-medium uppercase tracking-[0.06em]"
+                  className="btn btn-letterpress btn-shutter block whitespace-nowrap rounded-[var(--radius-ticket)] px-6 py-3 text-sm font-medium uppercase tracking-[0.06em]"
                 >
                   See the work
                 </a>
@@ -74,7 +74,7 @@ export function Hero() {
                     drawn along its bottom edge. */}
                 <a
                   href="#contact"
-                  className="btn btn-stub block whitespace-nowrap rounded-[var(--radius-ticket)] border border-white/25 bg-white/12 px-6 py-2.5 text-sm font-medium uppercase tracking-[0.06em] text-white backdrop-blur-md hover:bg-white/20"
+                  className="btn btn-stub block whitespace-nowrap rounded-[var(--radius-ticket)] border border-white/25 bg-white/12 px-6 py-3 text-sm font-medium uppercase tracking-[0.06em] text-white backdrop-blur-md hover:bg-white/20"
                 >
                   Get in touch{" "}
                   <span aria-hidden className="tile-arrow">
