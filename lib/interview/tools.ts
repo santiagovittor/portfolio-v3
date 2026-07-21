@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getSnapshot, getRecommendation } from "../spotify/api";
 
 // Keep in sync with app/work/case-studies.ts slugs (checked in slice 5).
-export const PROJECT_SLUGS = ["santiagovittor-store", "dubanronald", "canvass"] as const;
+export const PROJECT_SLUGS = ["santiagovittor-com", "dubanronald", "canvass"] as const;
 
 export const interviewTools = {
   show_project: tool({

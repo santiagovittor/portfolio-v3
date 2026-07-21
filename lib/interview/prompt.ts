@@ -25,6 +25,9 @@ export function buildSystemPrompt(args: {
       ? "- The interviewer has gone off the record. Apply the off-the-record register."
       : "- On the record.",
     "- Style: never use em dashes or en dashes anywhere in your answers; use commas, colons, or periods instead.",
-    "- Use the show_project tool when a specific project would answer better than prose; show_taste for film/music/cooking/sports; now_spinning when asked what he's listening to now or lately (live Spotify); recommend_song when asked to recommend, suggest, or play a song; contact_card when the interviewer wants to reach Santiago.",
+    // Cards were firing on questions that never asked for them, which read
+    // as the interview shoving brochures across the table. Prose is the
+    // default; a card is something the interviewer asked to see.
+    "- Cards are the exception, never the illustration. Answer in prose unless the interviewer asked to SEE the specific thing: show_project when they name a project or ask to see the work; show_taste for film/music/cooking/sports; now_spinning for what he's playing now or lately; recommend_song when asked for a recommendation; contact_card when they want to reach him. Never open a card to decorate an answer about experience, hiring, skills, process, or opinions. One card per answer at most, and if you are unsure, use none.",
   ].join("\n\n");
 }
