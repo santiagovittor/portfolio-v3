@@ -162,6 +162,12 @@ Safari and most mobile ad blockers; requests to `santiagovittor.online/ingest`
 are not. Expect roughly 20–40% more data than the naive setup. It also means
 no third-party host to allow if you add a CSP later.
 
+### Bots
+
+PostHog drops events from known crawlers and headless browsers on its own
+(Googlebot, GPTBot, Lighthouse, Playwright, and about eighty others). You
+don't have to filter them and they don't show up in your numbers.
+
 ### Do Not Track
 
 `respect_dnt: false` — the brief asked for everything registered. Since the

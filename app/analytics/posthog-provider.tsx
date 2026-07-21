@@ -101,7 +101,12 @@ export function PageSignals() {
   // from under a one-shot observer.
   useEffect(() => {
     // Section reach: fires once per section per page load, and only if the
-    // section held half the viewport for a second (a scroll-past isn't a read).
+    // section sat in the middle band of the viewport for a second (a
+    // scroll-past isn't a read).
+    //
+    // The band, not a ratio threshold: on a phone the work grid is several
+    // screens tall, so "50% of the section is visible" can never be true and
+    // a threshold-based observer would silently never fire.
     const seen = new Set<string>();
     const timers = new Map<Element, number>();
     const io = new IntersectionObserver(
@@ -129,7 +134,7 @@ export function PageSignals() {
           }
         }
       },
-      { threshold: 0.5 },
+      { rootMargin: "-25% 0px -25% 0px", threshold: 0 },
     );
     document.querySelectorAll("main section[id], main [data-section]").forEach((el) => io.observe(el));
 
