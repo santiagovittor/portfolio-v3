@@ -28,9 +28,11 @@ software professionally. That is why I design first and build second.
 
 ## Hours and timezone
 
-My hours flex. Buenos Aires, GMT-3, and I move earlier or later when a
-team needs it. Remote since 2022, so this is habit rather than an
-experiment.
+My hours flex. Buenos Aires, GMT-3: my afternoon covers the UK day and
+still overlaps the US East Coast working day, and I move earlier or later
+when a team needs it. Remote since 2022, so this is habit rather than an
+experiment. I have worked with UK teams, not US ones, but the overlap is
+there if you're on the East Coast.
 
 ## Before that — Prosegur
 
@@ -44,7 +46,8 @@ behave when software confuses them — useful scar tissue for design work.
 Frontend: React, Next.js, TypeScript, Tailwind. AI: LLM workflows, RAG
 systems, prompt engineering, the Vercel AI SDK, Gemini and Claude APIs.
 Automation: Apps Script, Zapier/Make, REST APIs. I work in English
-(advanced) and Spanish (native), from Buenos Aires.
+(advanced) and Spanish (native), from Buenos Aires — timezone overlap
+with the US East Coast is most of my afternoon.
 
 ## What I'm looking for
 

@@ -12,8 +12,10 @@ svittordev@gmail.com gets answered first.
 
 ## Where and when
 
-Buenos Aires, Argentina (GMT-3). Remote with US and UK teams since 2022;
-my afternoon overlaps the US East Coast working day. I'll be moving to Valencia, Spain, in October 2026.
+Buenos Aires, Argentina (GMT-3). Remote with UK teams since 2022. My
+afternoon also overlaps the US East Coast working day, so US hours are
+covered even though I haven't worked for a US team. I'll be moving to
+Valencia, Spain, in October 2026.
 
 ## Can you build me one of these?
 

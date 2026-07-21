@@ -86,8 +86,8 @@ export default function Home() {
                   at FoodStyles: I train teams on LLM workflows, run our
                   analytics program, and built the RAG assistant they use
                   daily. Nights and weekends I design and build sites like
-                  this one. Based in Buenos Aires, working remote with teams
-                  in the US and UK since 2022.
+                  this one. Based in Buenos Aires, working remote with UK
+                  teams since 2022, on US East Coast hours.
                 </p>
                 <ul className="mt-8 grid max-w-md grid-cols-2 gap-x-6 gap-y-2 text-sm font-medium uppercase tracking-[0.08em] text-shadow-ink">
                   <li>Product design</li>
