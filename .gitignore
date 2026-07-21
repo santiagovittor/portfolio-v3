@@ -46,3 +46,6 @@ next-env.d.ts
 
 # local claude settings overrides
 .claude/settings.local.json
+
+# cloned claude plugin repo, carries its own .git
+i-have-adhd/
