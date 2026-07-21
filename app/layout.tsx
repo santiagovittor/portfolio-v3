@@ -17,7 +17,8 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://santiagovittor.online"), // TODO(sv): santiagovittor.com at launch
+  // .com is the services site; this portfolio's home is .online.
+  metadataBase: new URL("https://santiagovittor.online"),
   title: {
     default: "Santiago Vittor, designer-engineer",
     template: "%s · Santiago Vittor",

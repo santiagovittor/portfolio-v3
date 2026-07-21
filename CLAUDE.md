@@ -1,7 +1,9 @@
-# CLAUDE.md — Portfolio v3 (santiagovittor.com)
+# CLAUDE.md — Portfolio v3 (santiagovittor.online)
 
 Personal portfolio for Santiago Vittor. Editorial, vintage-grain, shader-driven.
-Deployed to Vercel → santiagovittor.online (staging) → santiagovittor.com (prod swap later).
+Deployed to Vercel → santiagovittor.online. **santiagovittor.com is the
+services site** (formerly santiagovittor.store), a separate property — this
+portfolio links out to it and never claims that domain.
 
 ## Source of truth (in order of authority)
 

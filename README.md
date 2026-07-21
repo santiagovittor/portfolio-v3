@@ -1,4 +1,4 @@
-# santiagovittor.com
+# santiagovittor.online
 
 My portfolio. A 1970s print magazine that happens to be alive: a shader-driven
 hero, film grain, a Swiss grid, and an interview you can actually talk to.
@@ -65,6 +65,6 @@ npx tsc --noEmit   # typecheck
 
 ## Elsewhere
 
-- Services and business work: [santiagovittor.store](https://santiagovittor.store)
+- Services and business work: [santiagovittor.com](https://santiagovittor.com)
 - LinkedIn: [santiago-vittor](https://www.linkedin.com/in/santiago-vittor/)
 - Email: svittordev@gmail.com

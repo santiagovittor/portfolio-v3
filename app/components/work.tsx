@@ -20,13 +20,13 @@ type Project = {
 
 const projects: Project[] = [
   {
-    slug: "santiagovittor-store",
-    name: "santiagovittor.store",
+    slug: "santiagovittor-com",
+    name: "santiagovittor.com",
     outcome:
       "Services site with an AI assistant that qualifies leads and books calls.",
     tags: ["Positioning", "AI assistant", "Conversion copy"],
     cover: storeLanding,
-    alt: "Homepage of santiagovittor.store",
+    alt: "Homepage of santiagovittor.com",
     year: "2025",
     dark: true,
   },

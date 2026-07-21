@@ -28,8 +28,8 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
-    slug: "santiagovittor-store",
-    name: "santiagovittor.store",
+    slug: "santiagovittor-com",
+    name: "santiagovittor.com",
     summary:
       "Bilingual services site with an embedded AI assistant that qualifies leads, books calls and hands off to WhatsApp.",
     role: "Positioning, copy, design, build",
@@ -37,7 +37,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ["Next.js", "Tailwind v4", "Vercel AI SDK", "Gemini"],
     cover: {
       src: storeLanding,
-      alt: "santiagovittor.store landing: 'I build web & AI products' over a starfield",
+      alt: "santiagovittor.com landing: 'I build web & AI products' over a starfield",
     },
     problem:
       "Small businesses do not buy development. They buy a site that brings clients, an assistant that answers at 2am, hours saved on repetitive work. My old services page listed technologies and got silence. It needed to speak in outcomes and route interested people into a conversation instead of a form they abandon.",
@@ -47,7 +47,7 @@ export const caseStudies: CaseStudy[] = [
         body: "The landing leads with what the client gets. Tech stack appears once, small, near the end. Every section ends with the same question a client would ask next, and answers it. English at the root, Argentine Spanish at /ar: same argument, native register in both.",
         image: {
           src: storeLanding,
-          alt: "Landing headline of santiagovittor.store",
+          alt: "Landing headline of santiagovittor.com",
         },
       },
       {
@@ -55,7 +55,7 @@ export const caseStudies: CaseStudy[] = [
         body: "The chat in the corner is the product demo. One streaming endpoint routes three tools: book a call through an inline Cal.com embed, send a contact request through Resend, or hand off to WhatsApp. Language detection drives a bilingual system prompt, injection patterns are matched before the model ever sees a message, and a sliding ten-turn window is trimmed so it never orphans a tool call. A client asking 'can you build a chatbot?' gets the answer by talking to one.",
         image: {
           src: storeServices,
-          alt: "Services grid of santiagovittor.store, including the AI and chatbot development card",
+          alt: "Services grid of santiagovittor.com, including the AI and chatbot development card",
         },
       },
       {

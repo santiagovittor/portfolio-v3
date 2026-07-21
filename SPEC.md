@@ -7,7 +7,7 @@ engineer with real taste in July 2026: shader-driven hero, vintage editorial
 grain, disciplined grid, fast. The site itself is the proof of skill.
 
 Audience: hiring managers, agencies, and SMB clients (they arrive from
-santiagovittor.store, LinkedIn, or cold outreach). Single job of the page:
+santiagovittor.com, LinkedIn, or cold outreach). Single job of the page:
 make them open a case study or hit "Get in touch."
 
 ## Pages & structure
@@ -36,7 +36,7 @@ make them open a case study or hit "Get in touch."
    cover image, project name, one-line outcome, stack tags. Click → /work/[slug].
 3. **About (compact).** Two-column: portrait or grainy photo left; right, a
    ~60-word bio + capabilities list (Product design, Frontend engineering,
-   AI integration, Chatbots & automation) + link out to santiagovittor.store
+   AI integration, Chatbots & automation) + link out to santiagovittor.com
    labeled "Hiring for a business project? → my services site".
 4. **Contact.** Oversized "Let's talk" + mailto link + WhatsApp link +
    GitHub / LinkedIn. No form at launch (no backend = nothing to break).
@@ -53,7 +53,7 @@ Structure per case study — problem → decisions → outcome, ~300 words + ima
 - Next/prev case study navigation
 
 Launch content (TODO(sv): verify facts, supply images):
-1. **santiagovittor.store** — services site: positioning, conversion copy, WhatsApp funnel
+1. **santiagovittor.com** — services site: positioning, conversion copy, WhatsApp funnel
 2. **dubanronald.com** — client project
 3. **Portfolio AI assistant** — the RAG chatbot from portfolio v2, now live at
    /interview (see M10); this case study, when written, should link to it
@@ -63,7 +63,7 @@ Launch content (TODO(sv): verify facts, supply images):
 - Name: Santiago Vittor. Title: pick ONE framing and hold it —
   "Designer-engineer" (recommended) or "Full-stack & AI engineer".
 - Location: Buenos Aires, Argentina (worth showing — timezone overlap with US).
-- Links: github.com/santiagovittor, santiagovittor.store, LinkedIn TODO(sv),
+- Links: github.com/santiagovittor, santiagovittor.com, LinkedIn TODO(sv),
   email TODO(sv), WhatsApp TODO(sv).
 - All copy in English at launch. i18n is a non-goal.
 
@@ -101,7 +101,7 @@ Launch content (TODO(sv): verify facts, supply images):
 - **M10 — The Interview.** ✅ Shipped. `/interview`: magazine-interview
   chatbot, RAG over `content/bible` with build-time embeddings, retrieval
   sources shown as footnotes, three tools, guardrails ported from
-  santiagovittor.store. Spec:
+  santiagovittor.com. Spec:
   docs/superpowers/specs/2026-07-16-interview-chatbot-design.md
 
 ## Acceptance criteria (launch)
