@@ -38,10 +38,20 @@ export function HeroHeadline() {
       mm.add("(prefers-reduced-motion: no-preference)", () => {
         let split: SplitText | undefined;
 
+        // Hide synchronously (useGSAP runs before paint) so the headline
+        // never paints visible, snaps hidden, then reveals. Set from GSAP,
+        // not CSS: without JS none of this runs and the h1 stays visible.
+        gsap.set(ref.current, { autoAlpha: 0 });
+
         // Split after fonts settle: measuring line breaks against the
-        // fallback face gives masks that don't match the final type.
-        document.fonts.ready.then(() => {
+        // fallback face gives masks that don't match the final type. Capped
+        // — a font that never resolves must not leave an invisible <h1>.
+        Promise.race([
+          document.fonts.ready,
+          new Promise((r) => setTimeout(r, 1000)),
+        ]).then(() => {
           if (!ref.current) return;
+          gsap.set(ref.current, { autoAlpha: 1 });
           split = SplitText.create(ref.current, {
             type: "lines",
             mask: "lines",
