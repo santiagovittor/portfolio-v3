@@ -2,6 +2,8 @@ import Image from "next/image";
 import poppies from "@/public/images/hero/poppies.jpg";
 import { Grain } from "./grain";
 import { Magnet } from "./magnet";
+import { HeroHeadline } from "./hero-headline";
+import { LocalTime } from "./local-time";
 
 export function Hero() {
   return (
@@ -18,34 +20,43 @@ export function Hero() {
           sizes="100vw"
           className="hero-poster object-cover"
         />
-        {/* Duotone grade: warm-faded analog color, same mechanism as the
-            vignette below (mix-blend-mode over the static image) */}
+        {/* Split-tone grade: cool shadows, warm highlights, over the photo's
+            own color rather than replacing it */}
         <div aria-hidden className="hero-grade absolute inset-0" />
+        {/* Halation: warm bloom off the poppy field, the analog tell */}
+        <div aria-hidden className="hero-halation absolute inset-0" />
+        {/* Laid-paper stock, blended into the emulsion */}
+        <div aria-hidden className="hero-fiber absolute inset-0" />
         {/* Card-scoped grain matches the poster's fiber */}
         <Grain className="absolute inset-0" />
-        {/* Second, heavier grain layer: the 0.06 site-wide pass reads too
-            subtle at hero scale on its own (validated against renders). */}
-        <Grain className="absolute inset-0" opacity={0.15} />
         {/* Vignette: darkens toward the corners like a physical print */}
         <div aria-hidden className="hero-vignette absolute inset-0" />
 
         {/* Contrast scrim, not decoration: guarantees 4.5:1 for white type.
-            Multi-stop and full-height because the analog grade brightens
-            the poppy highlights the headline sits over, and on mobile the
-            wrapped headline reaches roughly halfway up the card - measured
-            against the graded image, not assumed. */}
+            Multi-stop and full-height because the grade brightens the poppy
+            highlights the headline sits over, and on mobile the wrapped
+            headline reaches roughly halfway up the card - measured against
+            the graded image, not assumed. */}
         <div aria-hidden className="hero-scrim absolute inset-0" />
 
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-10 p-6 pb-8 md:flex-row md:items-end md:justify-between md:px-10 md:pb-10">
-        <h1 className="hero-headline flex-1 text-[clamp(2.25rem,6.2vw,5.5rem)]">
-          <span className="hero-line">Designing interfaces.</span>{" "}
-          <span className="hero-line hero-line-2">Engineering the rest.</span>
-        </h1>
+        <HeroHeadline />
         <div className="max-w-xs shrink-0">
-          <p className="font-serif text-lg italic text-white/90">
-            I design products and build them: interfaces, frontends, and the
-            AI behind them. Buenos Aires, working US hours.
-          </p>
+          {/* Credit block: the structure a film title card uses - ruled
+              rows, letterspaced caps, no prose. Wording is Santiago's to
+              write; the slots below stay empty until he fills them. */}
+          <dl className="hero-credit">
+            {/* SV:confirm — role line */}
+            <div className="hero-credit-row" />
+            {/* SV:confirm — location line */}
+            <div className="hero-credit-row" />
+            <div className="hero-credit-row">
+              <dt className="sr-only">Local time in Buenos Aires</dt>
+              <dd>
+                <LocalTime />
+              </dd>
+            </div>
+          </dl>
           <div className="mt-6 flex gap-3">
             <Magnet>
               <a

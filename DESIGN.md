@@ -102,6 +102,35 @@ repeat it — do not run a live filter per frame.
 Optionally add a very subtle vignette on the hero only (radial, 4–6% black at
 edges) to sell the vintage-photo look.
 
+## Hero grade (the print stack)
+
+The hero photo is treated as a **film print**, not a faded scan. An earlier
+pass stacked `sepia()` + `saturate(0.68)` + `contrast(0.85)` under a
+full-frame `mix-blend-mode: color` wash and described itself as
+"desaturated Kodachrome" — three desaturations at once, and Kodachrome was
+famously *saturated*. It read as brown mud and was rejected. The current
+stack, bottom to top:
+
+1. **`.hero-poster`** — `saturate(1.04) contrast(1.1) brightness(0.94)
+   hue-rotate(6deg)`. Saturation up, blacks deep. The **positive**
+   hue-rotate matters: negative values push the sky into electric teal, the
+   modern blockbuster grade, which is the opposite of the intended look.
+2. **`.hero-grade`** — split-tone at `soft-light`, cool shadows → warm
+   highlights. Never `color` blending: that replaces the photo's own hue
+   across the whole frame and is what killed the previous version.
+3. **`.hero-halation`** — warm bloom off the poppy field, `screen` +
+   `blur(28px)`. Analog film blooms around bright warm subjects; digital
+   images don't. This is the layer that reads as "alive" — remove it and
+   the frame goes back to looking scanned.
+4. **`.hero-fiber`** — laid-paper weave *inside* the print, `overlay`. Fine
+   horizontal chain lines plus widely-spaced vertical laid lines. The
+   cross-hatch is load-bearing: horizontal lines alone read as CRT
+   scanlines, not stock.
+5. `<Grain />`, `.hero-vignette`, then `.hero-scrim` (contrast, not
+   decoration — it is what guarantees 4.5:1 for the white type).
+
+Tune these against a real render, never against the values on this page.
+
 ## Paper artifacts (the sheet's background system)
 
 The paper after the hero is printed stock, not a flat fill
@@ -150,7 +179,7 @@ text ≥ 4.5:1 (worst case here ≈ 13:1, ink on paper + all layers + grain).
   `PaperTexture` behind an interaction-or-6s-timeout gate; that gate made
   the hero visibly change look a few seconds after load, which read as
   broken. The hero is now a static, permanently-treated poster (CSS filter
-  + duotone grade, see `.hero-poster` / `.hero-grade` in `globals.css`) —
+  + blend-mode stack, see "Hero grade" above) —
   the same frame at first paint as one second, five seconds, or a minute
   later. No runtime transformation.
 - If a live shader is reintroduced anywhere on the site: **read the
@@ -198,8 +227,10 @@ scroll-jacking, native scroll always works.
 - Sections rise 24px once on first view (IntersectionObserver + CSS,
   `reveal.tsx`); the ticker strip between hero and work loops at 36s,
   static under reduced motion.
-- Page load: headline lines reveal with a 60ms stagger (clip-path or
-  translateY), once, under 900ms total. Nothing else animates on load.
+- Page load: headline lines rise from behind per-line masks with a 60ms
+  stagger, once, under 900ms total (GSAP SplitText, `hero-headline.tsx`).
+  Nothing else animates on load. The hidden state is set by GSAP, never in
+  CSS — without JS the headline must render as plain visible type.
 - Section headings print with a brief CMYK misregistration that resolves to
   ink as they enter view (M9). End state is always the plain ink heading;
   the fringe never persists.

@@ -295,24 +295,66 @@ body:has(.menu-sheet[open]) {
   );
 }
 
-/* Analog grade: warm-faded, lifted blacks, desaturated - a Kodachrome
-   still, not a saturated commercial poster. */
+/* Film-print grade: saturation up, blacks deep, highlights warm. The
+   previous pass stacked sepia + saturate(0.68) + contrast(0.85) under a
+   full-frame `mix-blend-mode: color` wash - three desaturations that read
+   as a faded photocopy, not a print. A Kodachrome still is *saturated*.
+
+   Values tuned against the render, not the spec sheet: a negative
+   hue-rotate pushed the sky into electric teal (modern blockbuster grade,
+   the opposite of the brief) - +6deg holds it at a true deep blue while
+   the poppies keep their warmth. */
 .hero-poster {
-  filter: sepia(0.2) saturate(0.68) contrast(0.85) brightness(0.98);
+  filter: saturate(1.04) contrast(1.1) brightness(0.94) hue-rotate(6deg);
 }
 
-/* Duotone wash over the graded photo, same mechanism as .hero-vignette
-   (mix-blend-mode over the static image) - cools the sky toward the top,
-   keeps the poppies' warmth toward the bottom, so the split-tone reads
-   faded/analog without bleaching the poppy field to yellow. */
+/* Split-tone, not a hue replacement: soft-light keeps the photo's own
+   color and pushes shadows cool / highlights warm. `color` blending here
+   was the single largest cause of the sepia flatness - it overwrote the
+   poppies' orange with the gradient's hue across the whole frame. */
 .hero-grade {
   background: linear-gradient(
     155deg,
-    color-mix(in srgb, var(--color-shadow-ink) 45%, transparent) 0%,
-    color-mix(in srgb, var(--color-poppy) 30%, transparent) 100%
+    color-mix(in srgb, var(--color-shadow-ink) 60%, transparent) 0%,
+    color-mix(in srgb, var(--color-poppy) 45%, transparent) 100%
   );
-  mix-blend-mode: color;
-  opacity: 0.45;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+}
+
+/* Halation: analog film blooms around bright warm subjects, digital-flat
+   images never do. Sits over the poppy field, under the scrim. This is the
+   "alive" cue - remove it and the frame goes back to looking scanned. */
+.hero-halation {
+  background: radial-gradient(
+    ellipse 75% 45% at 50% 76%,
+    color-mix(in srgb, var(--color-poppy) 18%, transparent) 0%,
+    transparent 70%
+  );
+  mix-blend-mode: screen;
+  filter: blur(28px);
+  opacity: 0.5;
+}
+
+/* Paper fiber inside the print. .laid-paper's own ink/3% ribbing is
+   invisible over a photograph (checked - it read as nothing), and raising
+   only its contrast turned the flat sky into CRT scanlines. Laid stock is
+   a *weave*: fine horizontal chain lines plus widely-spaced vertical laid
+   lines. The cross-hatch is what stops it reading as a scanline comb.
+   Overlay puts it in the emulsion rather than striping it on top. */
+.hero-fiber {
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-ink) 7%, transparent) 0 1px,
+      transparent 1px 5px
+    ),
+    repeating-linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-white) 5%, transparent) 0 1px,
+      transparent 1px 28px
+    );
+  mix-blend-mode: overlay;
 }
 
 /* Scroll reveal: sections rise onto the sheet once (see reveal.tsx).
@@ -340,33 +382,44 @@ body:has(.menu-sheet[open]) {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 500;
-  line-height: 1.05;
+  /* 1.16, not the tighter 1.05 this had: SplitText's line masks are
+     overflow:hidden boxes sized to the line box, so any ascender or
+     descender that overflows it gets sliced - visible on the "g" of
+     "Engineering". Padding the masks instead inflates them past the card's
+     bottom edge; giving the glyphs a line box they actually fit in is the
+     fix that has no second effect. */
+  line-height: 1.16;
   letter-spacing: -0.01em;
   color: var(--color-white);
 }
 
+/* The composition's deliberate break. SplitText measures visual lines, so
+   these blocks survive the split and narrow widths add lines below them. */
 .hero-line {
   display: block;
 }
 
-/* Page load: lines reveal with a short stagger, once, under 900ms total
-   (DESIGN.md -> Motion rules). */
-@media (prefers-reduced-motion: no-preference) {
-  .hero-line {
-    opacity: 0;
-    transform: translateY(16px);
-    animation: hero-line-in 600ms var(--ease-out-quart) forwards;
-  }
-  .hero-line-2 {
-    animation-delay: 120ms;
-  }
-}
+/* Load reveal lives in hero-headline.tsx (GSAP SplitText). Deliberately no
+   CSS hidden state: without JS the headline must render as visible type,
+   not an invisible <h1>. */
 
-@keyframes hero-line-in {
-  to {
-    opacity: 1;
-    transform: none;
-  }
+
+/* Credit block: film title card, not a paragraph. Ruled rows, letterspaced
+   caps, no prose. Rows hold their height while empty so the typographic
+   structure is visible before the copy lands. */
+.hero-credit {
+  border-top: 1px solid color-mix(in srgb, var(--color-white) 30%, transparent);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-white) 85%, transparent);
+}
+.hero-credit-row {
+  min-height: 2.25rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-white) 18%, transparent);
 }
 
 /* Reactbits CircularText: letterpress seal, one slow revolution per 40s. */
